@@ -350,6 +350,35 @@ html,body{margin:0;background:#07080b;}
   .bc-fin-f { font-size: 11px; gap: 2px 8px; }
   .bc-fin-f b { font-size: 13px; }
 }
+.bc-fin-card { display: grid; gap: 12px; }
+.bc-fin-pick { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 2px 2px 4px; position: relative; z-index: 1; scroll-behavior: smooth; }
+.bc-fin-pick::-webkit-scrollbar { display: none; }
+.bc-fin-pick button { flex: none; font: inherit; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; background: #0b0c10; color: var(--bc-muted); border: 1px solid var(--bc-line2); border-radius: 999px; padding: 3px 10px 3px 4px; cursor: pointer; transition: color .15s, border-color .15s, box-shadow .15s; }
+.bc-fin-pick button .bc-badge { width: 22px; height: 22px; font-size: 10px; }
+.bc-fin-pick button em { font-style: normal; font-family: var(--bc-cond); font-size: 13px; font-weight: 700; color: #6f7684; }
+.bc-fin-pick button:hover { color: #fff; }
+.bc-fin-pick button[aria-checked="true"] { color: #fff; border-color: var(--chip); background: linear-gradient(180deg, color-mix(in srgb, var(--chip) 28%, #14171e), #0e1015); box-shadow: 0 0 0 1px var(--chip), 0 0 16px color-mix(in srgb, var(--chip) 35%, transparent); }
+.bc-fin-pick button[aria-checked="true"] em { color: #fff; }
+.bc-fin-pick button:focus-visible { outline: 2px solid var(--bc-gold); outline-offset: 2px; }
+.bc-fin-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; position: relative; z-index: 1; }
+.bc-fin-stats { display: flex; align-items: flex-end; gap: 6px 22px; flex-wrap: wrap; flex: 1; min-width: 0; }
+.bc-fs-who { display: flex; align-items: center; gap: 10px; font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 30px; text-transform: uppercase; line-height: 1; }
+.bc-fs { display: grid; line-height: 1; }
+.bc-fs b { font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 28px; background: var(--g-chrome); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 3px; }
+.bc-fs.gold b { background: var(--g-gold); -webkit-background-clip: text; background-clip: text; }
+.bc-fs.bad b { background: none; color: #ff4d5e; -webkit-text-fill-color: #ff4d5e; }
+.bc-fs span { font-family: var(--bc-cond); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bc-muted); margin-top: 3px; }
+#fin-vs { font-family: var(--bc-cond); font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; background: #0b0c10; color: var(--bc-fg); border: 1px solid var(--bc-line2); border-radius: 4px; padding: 7px 10px; }
+.bc-fin-chart2 { min-height: 15rem; }
+.bc-fin-foot { margin: 0; }
+#fin-note { color: var(--bc-fg); font-weight: 600; }
+@media (max-width: 620px) {
+  .bc-fs-who { font-size: 24px; width: 100%; }
+  .bc-fin-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 12px; }
+  .bc-fs-who { grid-column: 1 / -1; }
+  .bc-fs b { font-size: 22px; }
+  #fin-vs { width: 100%; }
+}
 </style>
 
 <div class="bc">
@@ -497,8 +526,15 @@ html,body{margin:0;background:#07080b;}
     </section>
     <section class="bc-seg">
       <div class="bc-seg-h"><h2>Where everyone finished</h2><p>Final placing every season</p></div>
-      <p class="bc-note bc-fin-note">Every GM's final placing each season, 1st at the top, all on the same scale. Sorted by average finish. The grey band shows how many teams there were that year, from 6 in 2014 to 12 since 2018. Gold dot is a title, red ring is last place.</p>
-      <div class="bc-fin-grid" id="fin-grid" data-source="season_table"></div>
+      <div class="bc-card bc-fin-card">
+        <div class="bc-fin-pick" id="fin-pick" role="radiogroup" aria-label="Pick a GM" data-source="season_table"></div>
+        <div class="bc-fin-top">
+          <div class="bc-fin-stats" id="fin-stats" data-source="season_table"></div>
+          <select id="fin-vs" aria-label="Compare with another GM"></select>
+        </div>
+        <div class="bc-chart bc-fin-chart2" id="fin-chart" data-source="season_table"></div>
+        <p class="bc-note bc-fin-foot"><span id="fin-note"></span><br>Grey lines are everyone else. The shaded columns show how many teams there were that year (6 in 2014, 12 since 2018). Gold is a title, red ring is last place. GMs are listed best average finish first.</p>
+      </div>
     </section>
     <section class="bc-seg">
       <div class="bc-seg-h"><h2>Scoring average</h2><p>Who puts up points, all time</p></div>
@@ -1592,7 +1628,7 @@ dash.calc('rivalries', {
   }
 
   // ---------- HISTORY ----------
-  const hist = {focus: null, ppgMode: 'ppg', heat: 'final_rank', season: null, book: 'high', vsA: null, vsB: null};
+  const hist = {finA: null, finB: null, focus: null, ppgMode: 'ppg', heat: 'final_rank', season: null, book: 'high', vsA: null, vsB: null};
   const ord = (n) => n + (n % 10 === 1 && n % 100 !== 11 ? 'st' : n % 10 === 2 && n % 100 !== 12 ? 'nd' : n % 10 === 3 && n % 100 !== 13 ? 'rd' : 'th');
   const pressGroup = (id, attr, value, cb) => {
     const g = document.getElementById(id);
@@ -1602,80 +1638,120 @@ dash.calc('rivalries', {
     });
   };
 
-  // Where everyone finished: one small chart per GM on a shared scale, sorted by average finish.
-  function drawFinishGrid(grid, rows) {
+  // Where everyone finished: one chart. Every GM sits in the background in grey; the picked GM (and an optional rival) light up.
+  function finishData(rows) {
     const done = rows.filter((r) => r.final_rank != null);
     const seasons = [...new Set(done.map((r) => r.season))].sort();
     const size = {};
     seasons.forEach((s) => { size[s] = done.filter((r) => r.season === s).length; });
-    const maxN = d3.max(Object.values(size));
     const by = {};
     done.forEach((r) => (by[r.gm] || (by[r.gm] = [])).push(r));
-    const stats = Object.entries(by).map(([gm, list]) => {
+    const stats = {};
+    Object.entries(by).forEach(([gm, list]) => {
       list.sort((a, b) => Number(a.season) - Number(b.season));
-      const pctl = d3.mean(list, (r) => (size[r.season] > 1 ? (r.final_rank - 1) / (size[r.season] - 1) : 0.5));
-      return {gm, list, avg: d3.mean(list, (r) => r.final_rank), pctl, titles: list.filter((r) => r.final_rank === 1).length,
-        top3: list.filter((r) => r.final_rank <= 3).length, lasts: list.filter((r) => r.final_rank === size[r.season]).length,
+      stats[gm] = {gm, list, avg: d3.mean(list, (r) => r.final_rank), titles: list.filter((r) => r.final_rank === 1).map((r) => r.season),
+        top3: list.filter((r) => r.final_rank <= 3).length, lasts: list.filter((r) => r.final_rank === size[r.season]).map((r) => r.season),
         best: d3.min(list, (r) => r.final_rank), worst: d3.max(list, (r) => r.final_rank)};
-    }).sort((a, b) => a.avg - b.avg || a.pctl - b.pctl);
-
-    grid.replaceChildren(...stats.map((s) => {
-      const c = el('div', 'bc-fin');
-      c.style.setProperty('--gm', gmColor(s.gm));
-      const h = el('div', 'bc-fin-h');
-      const nm = el('div', 'bc-fin-nm'); nm.append(badge(s.gm), el('span', null, s.gm), szn(s.gm));
-      const avg = el('div', 'bc-fin-avg'); avg.append(el('b', null, f1(s.avg)), el('span', null, 'avg finish'));
-      h.append(nm, avg);
-      const chart = el('div', 'bc-fin-chart');
-      const foot = el('div', 'bc-fin-f');
-      const stat = (k, v, cls) => { const x = el('span', cls); x.append(el('b', null, String(v)), document.createTextNode(' ' + k)); return x; };
-      foot.append(stat(s.titles === 1 ? 'title' : 'titles', s.titles, s.titles ? 'gold' : ''), stat('top 3', s.top3), stat('best', ord(s.best)), stat(s.lasts === 1 ? 'last place' : 'last places', s.lasts, s.lasts ? 'bad' : ''));
-      c.append(h, chart, foot);
-      c._s = s; c._chart = chart;
-      return c;
-    }));
-
-    grid.querySelectorAll('.bc-fin').forEach((c) => {
-      const s = c._s, elm = c._chart;
-      const W = Math.max(150, elm.clientWidth), H = 104, top = 8, bottom = 16, left = 22, right = 4;
-      const x = d3.scalePoint(seasons, [left + 6, W - right - 6]);
-      const y = d3.scaleLinear([1, maxN], [top, H - bottom]);
-      const col = gmColor(s.gm);
-      const svg = d3.select(elm).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img')
-        .attr('aria-label', `${s.gm}'s final placing each season: ` + s.list.map((r) => `${r.season} ${ord(r.final_rank)}`).join(', '));
-      const id = 'bc-fin-' + s.gm.replace(/\W/g, '');
-      const gr = svg.append('defs').append('linearGradient').attr('id', id).attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
-      gr.append('stop').attr('offset', 0).attr('stop-color', col).attr('stop-opacity', 0.38);
-      gr.append('stop').attr('offset', 1).attr('stop-color', col).attr('stop-opacity', 0);
-      // shaded band = places that existed that season (league had 6 to 12 teams)
-      const step = x.step();
-      seasons.forEach((se) => svg.append('rect').attr('x', x(se) - step / 2).attr('width', step).attr('y', y(1) - 5).attr('height', y(size[se]) - y(1) + 10).attr('fill', 'rgba(255,255,255,.035)'));
-      svg.append('line').attr('x1', left).attr('x2', W).attr('y1', y(1)).attr('y2', y(1)).attr('stroke', 'rgba(242,193,78,.35)').attr('stroke-dasharray', '2 3');
-      svg.append('text').attr('x', 0).attr('y', y(1) + 3).attr('font-size', 9).attr('font-weight', 800).attr('fill', 'rgba(242,193,78,.85)').text('1ST');
-      svg.append('text').attr('x', 0).attr('y', y(maxN) + 3).attr('font-size', 9).attr('font-weight', 700).attr('fill', '#5d6370').text(maxN + 'TH');
-      svg.append('text').attr('x', x(seasons[0])).attr('y', H - 3).attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', '#6f7684').text("'" + seasons[0].slice(2));
-      svg.append('text').attr('x', x(seasons[seasons.length - 1])).attr('y', H - 3).attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', '#6f7684').text("'" + seasons[seasons.length - 1].slice(2));
-      // split where a GM skipped seasons
-      const segs = []; let cur = [];
-      s.list.forEach((r, i) => { if (i && seasons.indexOf(r.season) - seasons.indexOf(s.list[i - 1].season) > 1) { segs.push(cur); cur = []; } cur.push(r); });
-      segs.push(cur);
-      const curve = d3.curveMonotoneX;
-      segs.forEach((sg) => {
-        if (sg.length > 1) {
-          svg.append('path').attr('d', d3.area().x((r) => x(r.season)).y0(H - bottom + 4).y1((r) => y(r.final_rank)).curve(curve)(sg)).attr('fill', `url(#${id})`);
-          svg.append('path').attr('d', d3.line().x((r) => x(r.season)).y((r) => y(r.final_rank)).curve(curve)(sg)).attr('fill', 'none').attr('stroke', col).attr('stroke-width', 2.5).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round');
-        }
-      });
-      const tip = d3.select(c).append('div').attr('class', 'bc-tip').style('opacity', 0);
-      s.list.forEach((r) => {
-        const title = r.final_rank === 1, last = r.final_rank === size[r.season];
-        svg.append('circle').attr('cx', x(r.season)).attr('cy', y(r.final_rank)).attr('r', title ? 4.5 : 3)
-          .attr('fill', title ? '#f2c14e' : last ? '#07080b' : col).attr('stroke', title ? '#fff3c4' : last ? '#ff4d5e' : '#07080b').attr('stroke-width', title || last ? 1.8 : 1.2);
-        svg.append('rect').attr('x', x(r.season) - step / 2).attr('width', step).attr('y', 0).attr('height', H).attr('fill', 'transparent')
-          .on('mousemove', (ev) => { tip.style('opacity', 1).html(''); tip.append('div').attr('class', 'bc-tip-k').text(r.season); tip.append('div').text(`${ord(r.final_rank)} of ${size[r.season]}${title ? ', champion' : last ? ', last place' : ''}`); tip.append('div').text(`${r.team} (${r.record})`); placeTip(tip, c, ev); })
-          .on('mouseleave', () => tip.style('opacity', 0));
-      });
     });
+    const order = Object.values(stats).sort((a, b) => a.avg - b.avg).map((s) => s.gm);
+    return {seasons, size, stats, order, maxN: d3.max(Object.values(size))};
+  }
+
+  function drawFinish(rows) {
+    const fd = finishData(rows);
+    if (!hist.finA || !fd.stats[hist.finA]) hist.finA = fd.order[0];
+    if (hist.finB && (!fd.stats[hist.finB] || hist.finB === hist.finA)) hist.finB = null;
+    const A = fd.stats[hist.finA], B = hist.finB ? fd.stats[hist.finB] : null;
+
+    // picker: pills in average-finish order
+    const pick = document.getElementById('fin-pick');
+    pick.replaceChildren(...fd.order.map((gm, i) => {
+      const b = el('button'); b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', String(gm === hist.finA)); b.tabIndex = gm === hist.finA ? 0 : -1;
+      b.style.setProperty('--chip', gmColor(gm));
+      b.append(badge(gm), el('span', null, gm), el('em', null, f1(fd.stats[gm].avg)));
+      b.title = `${gm}: average finish ${f1(fd.stats[gm].avg)}`;
+      b.addEventListener('click', () => { hist.finA = gm; if (hist.finB === gm) hist.finB = null; drawFinish(rows); });
+      b.addEventListener('keydown', (ev) => {
+        const d = ev.key === 'ArrowRight' || ev.key === 'ArrowDown' ? 1 : ev.key === 'ArrowLeft' || ev.key === 'ArrowUp' ? -1 : 0;
+        if (!d) return; ev.preventDefault();
+        hist.finA = fd.order[(i + d + fd.order.length) % fd.order.length]; drawFinish(rows);
+        pick.querySelector('[aria-checked="true"]').focus();
+      });
+      return b;
+    }));
+    const on = pick.querySelector('[aria-checked="true"]');
+    if (on && pick.scrollWidth > pick.clientWidth) pick.scrollLeft = on.offsetLeft - pick.clientWidth / 2 + on.offsetWidth / 2;
+
+    const vs = document.getElementById('fin-vs');
+    vs.replaceChildren(new Option('Compare with…', ''), ...fd.order.filter((g) => g !== hist.finA).map((g) => new Option(g, g)));
+    vs.value = hist.finB || '';
+    if (!vs._wired) { vs._wired = true; vs.addEventListener('change', () => { hist.finB = vs.value || null; drawFinish(dash.data('season_table').data); }); }
+
+    // stat strip
+    const stat = (k, v, cls) => { const s = el('div', 'bc-fs ' + (cls || '')); s.append(el('b', null, String(v)), el('span', null, k)); return s; };
+    const who = el('div', 'bc-fs-who'); who.append(badge(A.gm, true), el('span', null, A.gm), szn(A.gm));
+    document.getElementById('fin-stats').replaceChildren(who,
+      stat('avg finish', f1(A.avg)),
+      stat(A.titles.length === 1 ? 'title' : 'titles', A.titles.length, A.titles.length ? 'gold' : ''),
+      stat('top 3', A.top3),
+      stat('best', ord(A.best)),
+      stat('worst', ord(A.worst)),
+      stat(A.lasts.length === 1 ? 'last place' : 'last places', A.lasts.length, A.lasts.length ? 'bad' : ''));
+    const note = [];
+    if (A.titles.length) note.push('Titles: ' + A.titles.join(', '));
+    if (A.lasts.length) note.push('Last: ' + A.lasts.join(', '));
+    if (B) note.push(`${B.gm}: ${f1(B.avg)} avg, ${B.titles.length} title${B.titles.length === 1 ? '' : 's'}, best ${ord(B.best)}`);
+    document.getElementById('fin-note').textContent = note.join(' · ');
+
+    // chart
+    const elm = document.getElementById('fin-chart'); elm.replaceChildren();
+    const {seasons, size, maxN} = fd;
+    const W = Math.max(300, elm.clientWidth), narrow = W < 560;
+    const H = narrow ? 240 : 300, top = 14, bottom = 26, left = 38, right = 14;
+    const x = d3.scalePoint(seasons, [left + 12, W - right - 12]);
+    const y = d3.scaleLinear([1, maxN], [top, H - bottom]);
+    const svg = d3.select(elm).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img')
+      .attr('aria-label', `${A.gm}'s final placing each season: ` + A.list.map((r) => `${r.season} ${ord(r.final_rank)}`).join(', '));
+    const step = x.step();
+    seasons.forEach((s) => svg.append('rect').attr('x', x(s) - step / 2 + 1).attr('width', step - 2).attr('y', y(1) - 9).attr('height', y(size[s]) - y(1) + 18).attr('rx', 4).attr('fill', 'rgba(255,255,255,.03)'));
+    [1, Math.round(maxN / 2), maxN].forEach((t) => {
+      svg.append('line').attr('x1', left).attr('x2', W - right).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', t === 1 ? 'rgba(242,193,78,.35)' : 'rgba(255,255,255,.06)').attr('stroke-dasharray', t === 1 ? '3 4' : null);
+      svg.append('text').attr('x', left - 8).attr('y', y(t) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('font-weight', t === 1 ? 800 : 500).attr('fill', t === 1 ? '#f2c14e' : '#6f7684').text(ord(t));
+    });
+    svg.append('g').selectAll('text').data(seasons).join('text').attr('x', (s) => x(s)).attr('y', H - 8).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', '#7d8492').text((s) => (narrow ? "'" + s.slice(2) : s));
+    const segsOf = (list) => { const segs = []; let cur = []; list.forEach((r, i) => { if (i && seasons.indexOf(r.season) - seasons.indexOf(list[i - 1].season) > 1) { segs.push(cur); cur = []; } cur.push(r); }); segs.push(cur); return segs; };
+    const line = d3.line().x((r) => x(r.season)).y((r) => y(r.final_rank)).curve(d3.curveMonotoneX);
+    // everyone else, quietly
+    fd.order.filter((g) => g !== A.gm && (!B || g !== B.gm)).forEach((g) => segsOf(fd.stats[g].list).forEach((sg) => svg.append('path').attr('d', line(sg)).attr('fill', 'none').attr('stroke', 'rgba(255,255,255,.09)').attr('stroke-width', 1.5)));
+    const tip = d3.select(elm).append('div').attr('class', 'bc-tip').style('opacity', 0);
+    const drawOne = (S, main) => {
+      const col = gmColor(S.gm);
+      if (main) {
+        const id = 'bc-fin-grad';
+        const gr = svg.append('defs').append('linearGradient').attr('id', id).attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
+        gr.append('stop').attr('offset', 0).attr('stop-color', col).attr('stop-opacity', 0.3);
+        gr.append('stop').attr('offset', 1).attr('stop-color', col).attr('stop-opacity', 0);
+        segsOf(S.list).forEach((sg) => { if (sg.length > 1) svg.append('path').attr('d', d3.area().x((r) => x(r.season)).y0(H - bottom).y1((r) => y(r.final_rank)).curve(d3.curveMonotoneX)(sg)).attr('fill', `url(#${id})`); });
+      }
+      segsOf(S.list).forEach((sg) => svg.append('path').attr('d', line(sg)).attr('fill', 'none').attr('stroke', col).attr('stroke-width', main ? 3.5 : 2.5).attr('stroke-dasharray', main ? null : '6 4').attr('stroke-linecap', 'round'));
+      S.list.forEach((r) => {
+        const title = r.final_rank === 1, last = r.final_rank === size[r.season];
+        const R = main ? (narrow ? 9 : 11) : 5;
+        svg.append('circle').attr('cx', x(r.season)).attr('cy', y(r.final_rank)).attr('r', R)
+          .attr('fill', title ? '#f2c14e' : main ? col : '#07080b').attr('stroke', title ? '#fff3c4' : last ? '#ff4d5e' : main ? '#07080b' : col).attr('stroke-width', last ? 2.5 : 1.5);
+        if (main) svg.append('text').attr('x', x(r.season)).attr('y', y(r.final_rank) + (narrow ? 3.5 : 4)).attr('text-anchor', 'middle').attr('font-size', narrow ? 10 : 11).attr('font-weight', 800).attr('font-family', "'Barlow Condensed', sans-serif").attr('fill', title ? '#3a2500' : '#07080b').attr('pointer-events', 'none').text(r.final_rank);
+      });
+    };
+    if (B) drawOne(B, false);
+    drawOne(A, true);
+    // hover columns
+    seasons.forEach((s) => svg.append('rect').attr('x', x(s) - step / 2).attr('width', step).attr('y', 0).attr('height', H - bottom).attr('fill', 'transparent')
+      .on('mousemove', (ev) => {
+        tip.style('opacity', 1).html(''); tip.append('div').attr('class', 'bc-tip-k').text(`${s} · ${size[s]} teams`);
+        [A, B].filter(Boolean).forEach((S) => { const r = S.list.find((q) => q.season === s); tip.append('div').text(r ? `${S.gm}: ${ord(r.final_rank)}, ${r.team} (${r.record})` : `${S.gm}: not in the league`); });
+        placeTip(tip, elm, ev);
+      })
+      .on('mouseleave', () => tip.style('opacity', 0)));
   }
 
   function drawPpgChart(elm, rows, key) {
@@ -1864,9 +1940,9 @@ dash.calc('rivalries', {
     } else if (ch.status === 'error') failLine(cl);
 
     if (st.status === 'ok') {
-      drawFinishGrid(document.getElementById('fin-grid'), st.data);
+      drawFinish(st.data);
       if (ls.status === 'ok') { drawHeat(st.data, ls.data); drawLeagueChart(document.getElementById('chart-league'), ls.data, st.data); }
-    } else if (st.status === 'error') failLine(document.getElementById('fin-grid'));
+    } else if (st.status === 'error') failLine(document.getElementById('fin-chart'));
     if (ls.status === 'ok') drawReview(ls.data); else if (ls.status === 'error') failLine(document.getElementById('rev-card'));
     if (tm.status === 'ok') drawNames(tm.data);
   }
