@@ -322,6 +322,34 @@ html,body{margin:0;background:#07080b;}
 .bc-chips .bc-szn { margin-left: 0; font-size: 10px; padding: 0 4px; }
 .bc-table tr.bc-lead .bc-szn { color: #e9d49c; -webkit-text-fill-color: #e9d49c; border-color: rgba(242, 193, 78, .35); }
 @media (max-width: 620px) { .bc-table .bc-szn { font-size: 10px; padding: 0 3px; margin-left: 4px; } .bc-table .bc-szn-l { display: none; } }
+.bc-fin-note { margin: 0; }
+.bc-fin-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.bc-fin { position: relative; background: var(--g-steel); border: 1px solid var(--bc-line); border-radius: 6px; padding: 12px 14px 10px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 10px 30px rgba(0, 0, 0, .35); min-width: 0; overflow: hidden; }
+.bc-fin::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--gm); opacity: .9; }
+.bc-fin-h { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.bc-fin-nm { display: flex; align-items: center; gap: 8px; min-width: 0; font-family: var(--bc-cond); font-style: italic; font-weight: 800; font-size: 22px; text-transform: uppercase; }
+.bc-fin-nm > span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bc-fin-avg { margin-left: auto; text-align: right; line-height: 1; flex: none; }
+.bc-fin-avg b { display: block; font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 28px; background: var(--g-chrome); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 2px; }
+.bc-fin-avg span { font-family: var(--bc-cond); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bc-muted); }
+.bc-fin-chart { margin-top: 6px; }
+.bc-fin-chart svg { display: block; }
+.bc-fin-f { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; font-size: 12px; color: var(--bc-muted); }
+.bc-fin-f b { font-family: var(--bc-cond); font-size: 15px; font-weight: 800; color: var(--bc-fg); }
+.bc-fin-f .gold b { color: var(--bc-gold); }
+.bc-fin-f .bad b { color: #ff4d5e; }
+@media (max-width: 1100px) { .bc-fin-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) {
+  .bc-fin-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .bc-fin { padding: 10px 10px 8px; }
+  .bc-fin-nm { font-size: 18px; gap: 6px; }
+  .bc-fin-nm .bc-badge { width: 22px; height: 22px; font-size: 10px; }
+  .bc-fin-nm .bc-szn { display: none; }
+  .bc-fin-avg b { font-size: 22px; }
+  .bc-fin-avg span { font-size: 9px; }
+  .bc-fin-f { font-size: 11px; gap: 2px 8px; }
+  .bc-fin-f b { font-size: 13px; }
+}
 </style>
 
 <div class="bc">
@@ -469,11 +497,8 @@ html,body{margin:0;background:#07080b;}
     </section>
     <section class="bc-seg">
       <div class="bc-seg-h"><h2>Where everyone finished</h2><p>Final placing every season</p></div>
-      <div class="bc-card">
-        <p class="bc-note">Tap a name to follow one GM through the years. 1st is at the top. The league grew from 6 teams in 2014 to 12 from 2018, so the bottom of the chart only fills in later. Gold dots are titles.</p>
-        <div class="bc-chips" id="finish-legend" role="group" aria-label="Follow a GM" data-source="season_table"></div>
-        <div class="bc-chart bc-chart-tall" id="chart-finish" data-source="season_table"></div>
-      </div>
+      <p class="bc-note bc-fin-note">Every GM's final placing each season, 1st at the top, all on the same scale. Sorted by average finish. The grey band shows how many teams there were that year, from 6 in 2014 to 12 since 2018. Gold dot is a title, red ring is last place.</p>
+      <div class="bc-fin-grid" id="fin-grid" data-source="season_table"></div>
     </section>
     <section class="bc-seg">
       <div class="bc-seg-h"><h2>Scoring average</h2><p>Who puts up points, all time</p></div>
@@ -1577,42 +1602,79 @@ dash.calc('rivalries', {
     });
   };
 
-  function drawFinishChart(elm, rows) {
-    elm.replaceChildren();
+  // Where everyone finished: one small chart per GM on a shared scale, sorted by average finish.
+  function drawFinishGrid(grid, rows) {
     const done = rows.filter((r) => r.final_rank != null);
     const seasons = [...new Set(done.map((r) => r.season))].sort();
-    const gms = [...new Set(done.map((r) => r.gm))].sort();
-    const maxRank = d3.max(done, (r) => r.final_rank) || 12;
-    const W = Math.max(300, elm.clientWidth), narrow = W < 560;
-    const H = narrow ? 380 : 440, top = 16, bottom = 28, left = 34, right = narrow ? 12 : 70;
-    const svg = d3.select(elm).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Final placing of every GM in every season');
-    const x = d3.scalePoint(seasons, [left + 8, W - right]);
-    const y = d3.scaleLinear([1, maxRank], [top, H - bottom]);
-    svg.append('g').selectAll('line').data(d3.range(1, maxRank + 1)).join('line').attr('x1', left).attr('x2', W - right).attr('y1', (t) => y(t)).attr('y2', (t) => y(t)).attr('stroke', 'rgba(255,255,255,.06)');
-    svg.append('g').selectAll('text').data(d3.range(1, maxRank + 1)).join('text').attr('x', left - 8).attr('y', (t) => y(t) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', (t) => (t === 1 ? '#f2c14e' : '#9aa1ae')).attr('font-weight', (t) => (t === 1 ? 800 : 500)).text((t) => ord(t));
-    svg.append('g').selectAll('text').data(seasons).join('text').attr('x', (s) => x(s)).attr('y', H - 8).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', '#9aa1ae').text((s) => (narrow ? "'" + s.slice(2) : s));
-    const tip = d3.select(elm).append('div').attr('class', 'bc-tip').style('opacity', 0);
-    const focus = hist.focus;
-    const order = gms.slice().sort((a, b) => (a === focus) - (b === focus));
-    order.forEach((gm) => {
-      const pts = seasons.map((s) => done.find((r) => r.gm === gm && r.season === s)).filter(Boolean);
-      const on = !focus || focus === gm;
-      const col = gmColor(gm);
-      const g = svg.append('g').attr('opacity', focus ? (on ? 1 : 0.08) : (narrow ? 0.6 : 0.9)).style('cursor', 'pointer').on('click', () => { hist.focus = hist.focus === gm ? null : gm; drawHistoryPage(); });
-      // break the line where a GM skipped seasons
+    const size = {};
+    seasons.forEach((s) => { size[s] = done.filter((r) => r.season === s).length; });
+    const maxN = d3.max(Object.values(size));
+    const by = {};
+    done.forEach((r) => (by[r.gm] || (by[r.gm] = [])).push(r));
+    const stats = Object.entries(by).map(([gm, list]) => {
+      list.sort((a, b) => Number(a.season) - Number(b.season));
+      const pctl = d3.mean(list, (r) => (size[r.season] > 1 ? (r.final_rank - 1) / (size[r.season] - 1) : 0.5));
+      return {gm, list, avg: d3.mean(list, (r) => r.final_rank), pctl, titles: list.filter((r) => r.final_rank === 1).length,
+        top3: list.filter((r) => r.final_rank <= 3).length, lasts: list.filter((r) => r.final_rank === size[r.season]).length,
+        best: d3.min(list, (r) => r.final_rank), worst: d3.max(list, (r) => r.final_rank)};
+    }).sort((a, b) => a.avg - b.avg || a.pctl - b.pctl);
+
+    grid.replaceChildren(...stats.map((s) => {
+      const c = el('div', 'bc-fin');
+      c.style.setProperty('--gm', gmColor(s.gm));
+      const h = el('div', 'bc-fin-h');
+      const nm = el('div', 'bc-fin-nm'); nm.append(badge(s.gm), el('span', null, s.gm), szn(s.gm));
+      const avg = el('div', 'bc-fin-avg'); avg.append(el('b', null, f1(s.avg)), el('span', null, 'avg finish'));
+      h.append(nm, avg);
+      const chart = el('div', 'bc-fin-chart');
+      const foot = el('div', 'bc-fin-f');
+      const stat = (k, v, cls) => { const x = el('span', cls); x.append(el('b', null, String(v)), document.createTextNode(' ' + k)); return x; };
+      foot.append(stat(s.titles === 1 ? 'title' : 'titles', s.titles, s.titles ? 'gold' : ''), stat('top 3', s.top3), stat('best', ord(s.best)), stat(s.lasts === 1 ? 'last place' : 'last places', s.lasts, s.lasts ? 'bad' : ''));
+      c.append(h, chart, foot);
+      c._s = s; c._chart = chart;
+      return c;
+    }));
+
+    grid.querySelectorAll('.bc-fin').forEach((c) => {
+      const s = c._s, elm = c._chart;
+      const W = Math.max(150, elm.clientWidth), H = 104, top = 8, bottom = 16, left = 22, right = 4;
+      const x = d3.scalePoint(seasons, [left + 6, W - right - 6]);
+      const y = d3.scaleLinear([1, maxN], [top, H - bottom]);
+      const col = gmColor(s.gm);
+      const svg = d3.select(elm).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img')
+        .attr('aria-label', `${s.gm}'s final placing each season: ` + s.list.map((r) => `${r.season} ${ord(r.final_rank)}`).join(', '));
+      const id = 'bc-fin-' + s.gm.replace(/\W/g, '');
+      const gr = svg.append('defs').append('linearGradient').attr('id', id).attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
+      gr.append('stop').attr('offset', 0).attr('stop-color', col).attr('stop-opacity', 0.38);
+      gr.append('stop').attr('offset', 1).attr('stop-color', col).attr('stop-opacity', 0);
+      // shaded band = places that existed that season (league had 6 to 12 teams)
+      const step = x.step();
+      seasons.forEach((se) => svg.append('rect').attr('x', x(se) - step / 2).attr('width', step).attr('y', y(1) - 5).attr('height', y(size[se]) - y(1) + 10).attr('fill', 'rgba(255,255,255,.035)'));
+      svg.append('line').attr('x1', left).attr('x2', W).attr('y1', y(1)).attr('y2', y(1)).attr('stroke', 'rgba(242,193,78,.35)').attr('stroke-dasharray', '2 3');
+      svg.append('text').attr('x', 0).attr('y', y(1) + 3).attr('font-size', 9).attr('font-weight', 800).attr('fill', 'rgba(242,193,78,.85)').text('1ST');
+      svg.append('text').attr('x', 0).attr('y', y(maxN) + 3).attr('font-size', 9).attr('font-weight', 700).attr('fill', '#5d6370').text(maxN + 'TH');
+      svg.append('text').attr('x', x(seasons[0])).attr('y', H - 3).attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', '#6f7684').text("'" + seasons[0].slice(2));
+      svg.append('text').attr('x', x(seasons[seasons.length - 1])).attr('y', H - 3).attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', '#6f7684').text("'" + seasons[seasons.length - 1].slice(2));
+      // split where a GM skipped seasons
       const segs = []; let cur = [];
-      pts.forEach((p, i) => { if (i && seasons.indexOf(p.season) - seasons.indexOf(pts[i - 1].season) > 1) { segs.push(cur); cur = []; } cur.push(p); });
+      s.list.forEach((r, i) => { if (i && seasons.indexOf(r.season) - seasons.indexOf(s.list[i - 1].season) > 1) { segs.push(cur); cur = []; } cur.push(r); });
       segs.push(cur);
-      const line = d3.line().x((p) => x(p.season)).y((p) => y(p.final_rank)).curve(d3.curveMonotoneX);
-      segs.forEach((sg) => g.append('path').attr('d', line(sg)).attr('fill', 'none').attr('stroke', col).attr('stroke-width', focus === gm ? 4 : narrow ? 1.6 : 2.2).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round'));
-      pts.forEach((p) => {
-        const c = g.append('circle').attr('cx', x(p.season)).attr('cy', y(p.final_rank)).attr('r', focus === gm ? 7 : p.final_rank === 1 ? 5.5 : 3.5)
-          .attr('fill', p.final_rank === 1 ? '#f2c14e' : col).attr('stroke', p.final_rank === 1 ? '#fff3c4' : '#07080b').attr('stroke-width', p.final_rank === 1 ? 1.5 : 1);
-        c.on('mousemove', (ev) => { tip.style('opacity', 1).html(''); tip.append('div').attr('class', 'bc-tip-k').text(p.season); tip.append('div').text(`${gm}: ${ord(p.final_rank)}`); tip.append('div').text(`${p.team} (${p.record})`); placeTip(tip, elm, ev); }).on('mouseleave', () => tip.style('opacity', 0));
-        if (focus === gm) g.append('text').attr('x', x(p.season)).attr('y', y(p.final_rank) + 3.5).attr('text-anchor', 'middle').attr('font-size', 9).attr('font-weight', 800).attr('fill', '#07080b').attr('pointer-events', 'none').text(p.final_rank);
+      const curve = d3.curveMonotoneX;
+      segs.forEach((sg) => {
+        if (sg.length > 1) {
+          svg.append('path').attr('d', d3.area().x((r) => x(r.season)).y0(H - bottom + 4).y1((r) => y(r.final_rank)).curve(curve)(sg)).attr('fill', `url(#${id})`);
+          svg.append('path').attr('d', d3.line().x((r) => x(r.season)).y((r) => y(r.final_rank)).curve(curve)(sg)).attr('fill', 'none').attr('stroke', col).attr('stroke-width', 2.5).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round');
+        }
       });
-      const last = pts[pts.length - 1];
-      if (last && !narrow) g.append('text').attr('x', x(last.season) + 10).attr('y', y(last.final_rank) + 4).attr('font-size', 12).attr('font-weight', 700).attr('fill', col).text(gm);
+      const tip = d3.select(c).append('div').attr('class', 'bc-tip').style('opacity', 0);
+      s.list.forEach((r) => {
+        const title = r.final_rank === 1, last = r.final_rank === size[r.season];
+        svg.append('circle').attr('cx', x(r.season)).attr('cy', y(r.final_rank)).attr('r', title ? 4.5 : 3)
+          .attr('fill', title ? '#f2c14e' : last ? '#07080b' : col).attr('stroke', title ? '#fff3c4' : last ? '#ff4d5e' : '#07080b').attr('stroke-width', title || last ? 1.8 : 1.2);
+        svg.append('rect').attr('x', x(r.season) - step / 2).attr('width', step).attr('y', 0).attr('height', H).attr('fill', 'transparent')
+          .on('mousemove', (ev) => { tip.style('opacity', 1).html(''); tip.append('div').attr('class', 'bc-tip-k').text(r.season); tip.append('div').text(`${ord(r.final_rank)} of ${size[r.season]}${title ? ', champion' : last ? ', last place' : ''}`); tip.append('div').text(`${r.team} (${r.record})`); placeTip(tip, c, ev); })
+          .on('mouseleave', () => tip.style('opacity', 0));
+      });
     });
   }
 
@@ -1802,17 +1864,9 @@ dash.calc('rivalries', {
     } else if (ch.status === 'error') failLine(cl);
 
     if (st.status === 'ok') {
-      const gms = [...new Set(st.data.filter((r) => r.final_rank != null).map((r) => r.gm))].sort();
-      const lg = document.getElementById('finish-legend');
-      lg.replaceChildren(...gms.map((gm) => {
-        const b = el('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(hist.focus === gm)); b.style.setProperty('--chip', gmColor(gm));
-        b.append(badge(gm), document.createTextNode(gm), szn(gm));
-        b.addEventListener('click', () => { hist.focus = hist.focus === gm ? null : gm; drawHistoryPage(); });
-        return b;
-      }));
-      drawFinishChart(document.getElementById('chart-finish'), st.data);
+      drawFinishGrid(document.getElementById('fin-grid'), st.data);
       if (ls.status === 'ok') { drawHeat(st.data, ls.data); drawLeagueChart(document.getElementById('chart-league'), ls.data, st.data); }
-    } else if (st.status === 'error') failLine(document.getElementById('chart-finish'));
+    } else if (st.status === 'error') failLine(document.getElementById('fin-grid'));
     if (ls.status === 'ok') drawReview(ls.data); else if (ls.status === 'error') failLine(document.getElementById('rev-card'));
     if (tm.status === 'ok') drawNames(tm.data);
   }
