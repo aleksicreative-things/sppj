@@ -264,6 +264,64 @@ html,body{margin:0;background:#07080b;}
   @keyframes bc-shine { 0%, 100% { background-position: 0 0; } 50% { background-position: 0 100%; } }
 }
 @media (prefers-reduced-motion: reduce) { .bc-ticker-track { overflow-x: auto; scrollbar-width: thin; } }
+/* History extras */
+.bc-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; position: relative; z-index: 1; }
+.bc-chips button { font: inherit; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: #0b0c10; color: var(--bc-muted); border: 1px solid var(--bc-line2); border-radius: 999px; padding: 3px 10px 3px 4px; cursor: pointer; }
+.bc-chips button .bc-badge { width: 20px; height: 20px; font-size: 10px; }
+.bc-chips button[aria-pressed="true"] { color: #fff; border-color: var(--chip, #fff); box-shadow: 0 0 0 1px var(--chip, #fff), 0 0 14px color-mix(in srgb, var(--chip, #fff) 40%, transparent); }
+.bc-chips button:focus-visible { outline: 2px solid var(--bc-gold); outline-offset: 2px; }
+.bc-chart-tall { min-height: 26rem; }
+.bc-chart-short { min-height: 9rem; margin-bottom: 10px; }
+#ppg-mode, #heat-metric, #book-tabs { margin-bottom: 12px; position: relative; z-index: 1; }
+.bc-heat td { text-align: center; font-weight: 700; min-width: 46px; }
+.bc-heat td.bc-left { text-align: left; }
+.bc-heat td.bc-na { color: #3a3f4a; font-weight: 400; }
+.bc-heat td.bc-champ-cell { box-shadow: inset 0 0 0 2px var(--bc-gold); color: #fff; }
+.bc-review { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.bc-review .bc-award .bc-who { font-size: 22px; }
+.bc-review .bc-award.gold { box-shadow: inset 0 3px 0 var(--bc-gold), inset 0 4px 0 rgba(255, 255, 255, .1), 0 10px 30px rgba(0, 0, 0, .35); }
+.bc-review .bc-award.wide { grid-column: span 2; }
+.bc-names { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); gap: 10px; }
+.bc-name-card { position: relative; background: var(--g-steel); border: 1px solid var(--bc-line); border-radius: 6px; padding: 12px 14px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07); }
+.bc-name-card .bc-who { font-family: var(--bc-cond); font-style: italic; font-weight: 800; font-size: 22px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.bc-name-row { display: flex; gap: 10px; padding: 4px 0; border-top: 1px solid var(--bc-line); font-size: 13px; }
+.bc-name-row b { font-family: var(--bc-cond); font-size: 14px; color: var(--bc-gold); min-width: 72px; letter-spacing: .04em; }
+.bc-luckseasons { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; position: relative; z-index: 1; }
+.bc-luckseasons h4 { margin: 0 0 6px; font-family: var(--bc-cond); font-size: 16px; text-transform: uppercase; letter-spacing: .08em; }
+.bc-ls-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid var(--bc-line); font-size: 13px; }
+.bc-ls-row .bc-ls-v { margin-left: auto; font-family: var(--bc-cond); font-weight: 800; font-size: 17px; }
+.bc-vs-pick { align-items: center; }
+.bc-vs-pick select { font-family: var(--bc-cond); font-size: 18px; font-weight: 800; font-style: italic; text-transform: uppercase; padding: 6px 12px; }
+.bc-vs { font-family: var(--bc-cond); font-weight: 900; font-style: italic; font-size: 22px; color: var(--bc-red); }
+.bc-vs-sum { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 14px 0 18px; position: relative; z-index: 1; }
+.bc-vs-side { display: grid; gap: 4px; }
+.bc-vs-side.r { text-align: right; justify-items: end; }
+.bc-vs-side .bc-who { font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 30px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+.bc-vs-side .bc-s { margin: 0; }
+.bc-vs-score { font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 64px; line-height: 1; background: var(--g-chrome); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0 6px; text-align: center; }
+.bc-vs-score small { display: block; font-size: 14px; letter-spacing: .1em; -webkit-text-fill-color: var(--bc-muted); font-style: normal; font-weight: 700; margin-top: 4px; }
+.bc-nemesis { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: 10px; }
+.bc-nem { position: relative; background: var(--g-steel); border: 1px solid var(--bc-line); border-radius: 6px; padding: 12px 14px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07); }
+.bc-nem .bc-who { font-family: var(--bc-cond); font-style: italic; font-weight: 800; font-size: 22px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+.bc-nem-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 13px; }
+.bc-nem-row .bc-k { font-size: 12px; min-width: 64px; }
+.bc-nem-row b { margin-left: auto; font-family: var(--bc-cond); font-size: 17px; }
+@media (max-width: 980px) { .bc-review { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) {
+  .bc-luckseasons { grid-template-columns: 1fr; }
+  .bc-vs-sum { grid-template-columns: 1fr; text-align: center; }
+  .bc-vs-side, .bc-vs-side.r { justify-items: center; text-align: center; }
+  .bc-vs-side .bc-who { font-size: 24px; }
+  .bc-vs-score { font-size: 52px; }
+  .bc-review .bc-award.wide { grid-column: auto; }
+  .bc-review { grid-template-columns: minmax(0, 1fr); }
+}
+.bc-szn { display: inline-block; margin-left: 6px; padding: 1px 5px 0; border: 1px solid var(--bc-line2); border-radius: 3px; font-family: var(--bc-cond); font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .06em; line-height: 1.4; color: var(--bc-muted); background: rgba(255, 255, 255, .03); white-space: nowrap; vertical-align: middle; text-transform: uppercase; -webkit-text-fill-color: var(--bc-muted); cursor: help; }
+.bc-szn.rookie { color: var(--bc-gold); -webkit-text-fill-color: var(--bc-gold); border-color: rgba(242, 193, 78, .45); }
+.bc-who .bc-szn, .bc-vs-side .bc-szn { font-size: 12px; margin-left: 2px; }
+.bc-chips .bc-szn { margin-left: 0; font-size: 10px; padding: 0 4px; }
+.bc-table tr.bc-lead .bc-szn { color: #e9d49c; -webkit-text-fill-color: #e9d49c; border-color: rgba(242, 193, 78, .35); }
+@media (max-width: 620px) { .bc-table .bc-szn { font-size: 10px; padding: 0 3px; margin-left: 4px; } .bc-table .bc-szn-l { display: none; } }
 </style>
 
 <div class="bc">
@@ -296,6 +354,8 @@ html,body{margin:0;background:#07080b;}
     <button type="button" role="tab" data-page="trophies" aria-selected="false">Trophies</button>
     <button type="button" role="tab" data-page="standings" aria-selected="false">Standings</button>
     <button type="button" role="tab" data-page="history" aria-selected="false">History</button>
+    <button type="button" role="tab" data-page="records" aria-selected="false">Records</button>
+    <button type="button" role="tab" data-page="rivals" aria-selected="false">Rivals</button>
   </nav>
 
   <!-- THIS WEEK -->
@@ -399,7 +459,7 @@ html,body{margin:0;background:#07080b;}
       <div class="bc-tiles4" id="alltime-tiles">
         <div class="bc-stat" style="--accent: var(--bc-gold)"><div class="bc-k">Most titles</div><div class="bc-v dash-skeleton" id="t-titles" data-source="career" data-field="titles">…</div><div class="bc-s" id="t-titles-sub"></div></div>
         <div class="bc-stat" style="--accent: var(--bc-green)"><div class="bc-k">Best win % (3+ seasons)</div><div class="bc-v dash-skeleton" id="t-win" data-source="career" data-field="win_pct">…</div><div class="bc-s" id="t-win-sub"></div></div>
-        <div class="bc-stat" style="--accent: var(--bc-blue)"><div class="bc-k">Most points per game</div><div class="bc-v dash-skeleton" id="t-ppg" data-source="career" data-field="ppg">…</div><div class="bc-s" id="t-ppg-sub"></div></div>
+        <div class="bc-stat" style="--accent: var(--bc-blue)"><div class="bc-k">Highest scoring average</div><div class="bc-v dash-skeleton" id="t-ppg" data-source="scoring" data-field="ppg">…</div><div class="bc-s" id="t-ppg-sub"></div></div>
         <div class="bc-stat"><div class="bc-k">Unluckiest career</div><div class="bc-v dash-skeleton" id="t-luck" data-source="career" data-field="luck">…</div><div class="bc-s" id="t-luck-sub"></div></div>
       </div>
     </section>
@@ -408,36 +468,117 @@ html,body{margin:0;background:#07080b;}
       <div class="bc-champs" id="champ-list" data-source="champions"></div>
     </section>
     <section class="bc-seg">
-      <div class="bc-seg-h"><h2>Career</h2><p>Regular season only</p></div>
-      <div class="bc-card" id="career-card">
-        <p class="bc-note">Avg pts is per 14 games so short and long seasons compare fairly. Scoring changed over the years (2014 was whole points). Click a header to sort.</p>
-        <div class="bc-scroll"><table class="bc-table" id="tbl-career" data-source="career" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
+      <div class="bc-seg-h"><h2>Where everyone finished</h2><p>Final placing every season</p></div>
+      <div class="bc-card">
+        <p class="bc-note">Tap a name to follow one GM through the years. 1st is at the top. The league grew from 6 teams in 2014 to 12 from 2018, so the bottom of the chart only fills in later. Gold dots are titles.</p>
+        <div class="bc-chips" id="finish-legend" role="group" aria-label="Follow a GM" data-source="season_table"></div>
+        <div class="bc-chart bc-chart-tall" id="chart-finish" data-source="season_table"></div>
       </div>
     </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Scoring average</h2><p>Who puts up points, all time</p></div>
+      <div class="bc-grid2">
+        <div class="bc-card">
+          <h3>Points per game</h3>
+          <p class="bc-note">Every regular-season game since 2014. "Vs league" takes each game minus that season's league average, so the high-scoring years don't flatter anyone.</p>
+          <div class="bc-weeks" id="ppg-mode" role="group" aria-label="Scoring view">
+            <button type="button" data-mode="ppg" aria-pressed="true">Per game</button>
+            <button type="button" data-mode="above_avg" aria-pressed="false">Vs league</button>
+          </div>
+          <div class="bc-chart" id="chart-ppg" data-source="scoring"></div>
+        </div>
+        <div class="bc-card">
+          <h3>Boom and bust</h3>
+          <p class="bc-note">Weeks with the league's top score, weeks with the bottom score, 150-point games and sub-80 duds (2014 left out of the duds, it was whole points).</p>
+          <div class="bc-scroll"><table class="bc-table" id="tbl-boom" data-source="scoring weekly_kings" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
+        </div>
+      </div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Season by season</h2><p>Every GM, every year</p></div>
+      <div class="bc-card">
+        <div class="bc-weeks" id="heat-metric" role="group" aria-label="Heatmap metric">
+          <button type="button" data-metric="final_rank" aria-pressed="true">Finish</button>
+          <button type="button" data-metric="ppg" aria-pressed="false">Points per game</button>
+          <button type="button" data-metric="win_pct" aria-pressed="false">Win %</button>
+          <button type="button" data-metric="luck" aria-pressed="false">Luck</button>
+        </div>
+        <p class="bc-note" id="heat-note"></p>
+        <div class="bc-scroll"><table class="bc-table bc-heat" id="tbl-heat" data-source="season_table" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>League scoring</h2><p>How the points have changed</p></div>
+      <div class="bc-card">
+        <p class="bc-note">Average points per team per game each season, with the best and worst team's average as the band. 2014 was whole-point scoring.</p>
+        <div class="bc-chart" id="chart-league" data-source="league_seasons season_table"></div>
+      </div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Season in review</h2><p>Pick a year and remember</p></div>
+      <div class="bc-weeks" id="rev-tabs" role="group" aria-label="Pick a season" data-source="league_seasons"></div>
+      <div class="bc-review" id="rev-card" data-source="league_seasons"></div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Team name hall of fame</h2><p>Every name, every GM</p></div>
+      <div class="bc-names" id="names" data-source="teams"></div>
+    </section>
+  </div>
+
+  <!-- RECORDS -->
+  <div class="bc-page" id="page-records" role="tabpanel" hidden>
     <section class="bc-seg">
       <div class="bc-seg-h"><h2>League records</h2><p>Regular season games since 2014</p></div>
       <div class="bc-records" id="record-list" data-source="records"></div>
     </section>
     <section class="bc-seg">
-      <div class="bc-seg-h"><h2>Luck and extremes</h2><p>Who the football gods love</p></div>
+      <div class="bc-seg-h"><h2>Record book</h2><p>Top 10 lists</p></div>
+      <div class="bc-card">
+        <div class="bc-weeks" id="book-tabs" role="group" aria-label="Pick a list" data-source="record_book"></div>
+        <p class="bc-note" id="book-note"></p>
+        <div class="bc-scroll"><table class="bc-table" id="tbl-book" data-source="record_book" data-row-key="list,rank"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Streaks</h2><p>Hot runs and cold spells</p></div>
       <div class="bc-grid2">
-        <div class="bc-card" id="luck">
-          <h3>Real wins vs expected</h3>
-          <p class="bc-note">Above zero means more wins than the scoring earned.</p>
-          <div class="bc-chart" id="chart-luck" data-source="career"></div>
+        <div class="bc-card">
+          <h3>Longest streaks</h3>
+          <p class="bc-note">Regular season only, carried over between seasons. Current streak includes 2026.</p>
+          <div class="bc-scroll"><table class="bc-table" id="tbl-streaks" data-source="streaks" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
         </div>
-        <div class="bc-card" id="extras">
-          <h3>Podiums and extremes</h3>
-          <p class="bc-note">Title years, top-3 finishes, last places, and each GM's best and worst week ever.</p>
-          <div class="bc-scroll"><table class="bc-table" id="tbl-extra" data-source="career" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
+        <div class="bc-card">
+          <h3>Weekly kings and basement dwellers</h3>
+          <p class="bc-note">Times each GM had the league's highest score of the week (right) and the lowest (left).</p>
+          <div class="bc-chart" id="chart-kings" data-source="weekly_kings"></div>
         </div>
       </div>
     </section>
     <section class="bc-seg">
-      <div class="bc-seg-h"><h2>Head to head</h2><p>All time, regular season</p></div>
-      <div class="bc-card" id="h2h">
-        <p class="bc-note">Read across: the row GM's wins and losses against each column GM. Green means the row GM leads the series.</p>
-        <div class="bc-scroll"><table class="bc-table bc-h2h" id="tbl-h2h" data-source="h2h_grid" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
+      <div class="bc-seg-h"><h2>Luck</h2><p>Who the football gods love</p></div>
+      <div class="bc-grid2">
+        <div class="bc-card" id="luck">
+          <h3>Career: real wins vs expected</h3>
+          <p class="bc-note">Expected wins come from the all-play record: your score against every team that week. Above zero means more wins than the scoring earned.</p>
+          <div class="bc-chart" id="chart-luck" data-source="career"></div>
+        </div>
+        <div class="bc-card">
+          <h3>Luckiest and unluckiest seasons</h3>
+          <p class="bc-note">Single seasons where the record and the scoring disagreed the most.</p>
+          <div class="bc-luckseasons" id="luck-seasons" data-source="season_table"></div>
+        </div>
+      </div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Career</h2><p>Regular season totals</p></div>
+      <div class="bc-card" id="career-card">
+        <p class="bc-note">Avg pts is per 14 games so short and long seasons compare fairly. Click a header to sort.</p>
+        <div class="bc-scroll"><table class="bc-table" id="tbl-career" data-source="career" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
+      </div>
+      <div class="bc-card" id="extras">
+        <h3>Podiums and extremes</h3>
+        <p class="bc-note">Title years, top-3 finishes, last places, and each GM's best and worst week ever.</p>
+        <div class="bc-scroll"><table class="bc-table" id="tbl-extra" data-source="career" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
       </div>
     </section>
     <section class="bc-seg">
@@ -448,6 +589,40 @@ html,body{margin:0;background:#07080b;}
           <select id="season-pick" aria-label="Season"><option value="">All seasons</option></select>
         </div>
         <div class="bc-scroll"><table class="bc-table" id="tbl-season" data-source="season_table" data-row-key="season,gm"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- RIVALS -->
+  <div class="bc-page" id="page-rivals" role="tabpanel" hidden>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Head to head</h2><p>Pick any two GMs</p></div>
+      <div class="bc-card">
+        <div class="bc-tools bc-vs-pick">
+          <select id="vs-a" aria-label="First GM"></select>
+          <span class="bc-vs">VS</span>
+          <select id="vs-b" aria-label="Second GM"></select>
+        </div>
+        <div class="bc-vs-sum" id="vs-sum" data-source="games"></div>
+        <div class="bc-chart bc-chart-short" id="chart-vs" data-source="games"></div>
+        <div class="bc-scroll"><table class="bc-table" id="tbl-vs" data-source="games" data-row-key="season,week"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Nemesis and favorite victim</h2><p>At least 6 meetings</p></div>
+      <div class="bc-nemesis" id="nemesis" data-source="rivalries"></div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Biggest rivalries</h2><p>Most played series</p></div>
+      <div class="bc-card">
+        <div class="bc-scroll"><table class="bc-table" id="tbl-rivals" data-source="rivalries" data-row-key="a,b"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>The full grid</h2><p>All time, regular season</p></div>
+      <div class="bc-card" id="h2h">
+        <p class="bc-note">Read across: the row GM's wins and losses against each column GM. Green means the row GM leads the series.</p>
+        <div class="bc-scroll"><table class="bc-table bc-h2h" id="tbl-h2h" data-source="h2h_grid" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
       </div>
     </section>
   </div>
@@ -714,13 +889,184 @@ dash.calc('h2h_grid', {
 });
 
 
+dash.calc('league_seasons', {
+  inputs: ['games', 'season_table'],
+  title: 'Season in review',
+  description: 'One row per season: league size and scoring average, podium, last place, best record, most points, highest and lowest week, closest game and biggest blowout.',
+  fn: (games, season_table) => {
+    const by = {};
+    for (const r of season_table) (by[r.season] || (by[r.season] = {rows: [], games: []})).rows.push(r);
+    for (const g of games) { if (g.a === 'Other' || g.b === 'Other') continue; const s = by[String(g.season)]; if (s) s.games.push(g); }
+    const out = [];
+    for (const season of Object.keys(by).sort()) {
+      const {rows, games: gs} = by[season];
+      const ranked = rows.filter((r) => r.final_rank != null).sort((a, b) => a.final_rank - b.final_rank);
+      const pick = (k) => (ranked.find((r) => r.final_rank === k) || {}).gm || '';
+      const bestRec = rows.reduce((x, y) => (y.win_pct > x.win_pct || (y.win_pct === x.win_pct && y.pf > x.pf) ? y : x));
+      const mostPf = rows.reduce((x, y) => (y.ppg > x.ppg ? y : x));
+      const fewestPf = rows.reduce((x, y) => (y.ppg < x.ppg ? y : x));
+      let hi = null, lo = null, close = null, blow = null, total = 0, n = 0;
+      for (const g of gs) {
+        const a = Number(g.a_pts), b = Number(g.b_pts);
+        total += a + b; n += 2;
+        for (const [me, p, op] of [[g.a, a, g.b], [g.b, b, g.a]]) {
+          if (!hi || p > hi.pts) hi = {gm: me, pts: p, week: g.week, opp: op};
+          if (!lo || p < lo.pts) lo = {gm: me, pts: p, week: g.week, opp: op};
+        }
+        if (a === b) continue;
+        const m = Math.abs(a - b), w = a > b ? g.a : g.b, l = a > b ? g.b : g.a;
+        if (!close || m < close.m) close = {m, w, l, week: g.week};
+        if (!blow || m > blow.m) blow = {m, w, l, week: g.week};
+      }
+      out.push({
+        season, teams: rows.length, done: ranked.length > 0, platform: rows[0].platform,
+        league_ppg: n ? total / n : 0,
+        champion: pick(1), champion_team: (ranked[0] || {}).team || '', runner_up: pick(2), third: pick(3),
+        last: ranked.length ? ranked[ranked.length - 1].gm : '',
+        best_record_gm: bestRec.gm, best_record: bestRec.record,
+        most_pts_gm: mostPf.gm, most_ppg: mostPf.ppg, fewest_pts_gm: fewestPf.gm, fewest_ppg: fewestPf.ppg,
+        high_gm: hi ? hi.gm : '', high_pts: hi ? hi.pts : 0, high_week: hi ? String(hi.week) : '',
+        low_gm: lo ? lo.gm : '', low_pts: lo ? lo.pts : 0, low_week: lo ? String(lo.week) : '',
+        close_w: close ? close.w : '', close_l: close ? close.l : '', close_m: close ? close.m : 0, close_week: close ? String(close.week) : '',
+        blow_w: blow ? blow.w : '', blow_l: blow ? blow.l : '', blow_m: blow ? blow.m : 0, blow_week: blow ? String(blow.week) : ''
+      });
+    }
+    return out;
+  }
+});
+
+dash.calc('scoring', {
+  inputs: ['games'],
+  title: 'Scoring averages',
+  description: "Career points per game for each GM, plus an era-adjusted figure: each game's score minus that season's league average, averaged.",
+  fn: (games) => {
+    const seasonTot = {};
+    for (const g of games) {
+      if (g.a === 'Other' || g.b === 'Other') continue;
+      const s = seasonTot[g.season] || (seasonTot[g.season] = [0, 0]);
+      s[0] += Number(g.a_pts) + Number(g.b_pts); s[1] += 2;
+    }
+    const avg = {};
+    for (const k in seasonTot) avg[k] = seasonTot[k][0] / seasonTot[k][1];
+    const by = {};
+    for (const g of games) {
+      if (g.a === 'Other' || g.b === 'Other') continue;
+      for (const [me, p] of [[g.a, Number(g.a_pts)], [g.b, Number(g.b_pts)]]) {
+        const r = by[me] || (by[me] = {gm: me, games: 0, pts: 0, above: 0, g150: 0, g80: 0, seasons: new Set()});
+        r.games += 1; r.pts += p; r.above += p - avg[g.season]; r.seasons.add(g.season);
+        if (p >= 150) r.g150 += 1;
+        if (p < 80 && g.season !== '2014') r.g80 += 1;
+      }
+    }
+    return Object.values(by).map((r) => ({gm: r.gm, games: r.games, seasons: r.seasons.size, ppg: r.pts / r.games, above_avg: r.above / r.games, games_150: r.g150, games_sub80: r.g80}));
+  }
+});
+
+dash.calc('weekly_kings', {
+  inputs: ['games'],
+  title: 'Weekly top and bottom scores',
+  description: 'How many times each GM put up the highest and the lowest score of a week, all seasons.',
+  fn: (games) => {
+    const wk = {};
+    for (const g of games) {
+      if (g.a === 'Other' || g.b === 'Other') continue;
+      const k = g.season + '|' + g.week;
+      (wk[k] || (wk[k] = [])).push([g.a, Number(g.a_pts)], [g.b, Number(g.b_pts)]);
+    }
+    const by = {};
+    const row = (gm) => by[gm] || (by[gm] = {gm, tops: 0, bottoms: 0, weeks: 0});
+    for (const k in wk) {
+      const list = wk[k];
+      const mx = Math.max(...list.map((x) => x[1])), mn = Math.min(...list.map((x) => x[1]));
+      for (const [gm, p] of list) { const r = row(gm); r.weeks += 1; if (p === mx) r.tops += 1; if (p === mn) r.bottoms += 1; }
+    }
+    return Object.values(by);
+  }
+});
+
+dash.calc('streaks', {
+  inputs: ['games'],
+  title: 'Win and losing streaks',
+  description: 'Longest regular-season winning and losing streaks per GM, running across seasons, and the current streak.',
+  fn: (games) => {
+    const by = {};
+    const sorted = games.filter((g) => g.a !== 'Other' && g.b !== 'Other').slice().sort((x, y) => Number(x.season) - Number(y.season) || Number(x.week) - Number(y.week));
+    for (const g of sorted) {
+      const a = Number(g.a_pts), b = Number(g.b_pts);
+      for (const [me, res] of [[g.a, a > b ? 'W' : a < b ? 'L' : 'T'], [g.b, b > a ? 'W' : b < a ? 'L' : 'T']]) (by[me] || (by[me] = [])).push({res, when: 'Wk ' + g.week + ' ' + g.season});
+    }
+    const out = [];
+    for (const gm in by) {
+      const list = by[gm];
+      let best = {n: 0}, worst = {n: 0}, cur = {res: null, n: 0, from: ''};
+      for (const x of list) {
+        if (x.res === cur.res) cur.n += 1; else cur = {res: x.res, n: 1, from: x.when};
+        cur.to = x.when;
+        if (cur.res === 'W' && cur.n > best.n) best = {...cur};
+        if (cur.res === 'L' && cur.n > worst.n) worst = {...cur};
+      }
+      out.push({gm, win_streak: best.n, win_from: best.from || '', win_to: best.to || '', loss_streak: worst.n, loss_from: worst.from || '', loss_to: worst.to || '', current: cur.res === 'T' ? 'T1' : (cur.res || '') + cur.n, current_n: cur.res === 'W' ? cur.n : cur.res === 'L' ? -cur.n : 0});
+    }
+    return out;
+  }
+});
+
+dash.calc('record_book', {
+  inputs: ['games'],
+  title: 'Record book',
+  description: 'Top 10 lists across every regular-season game: highest and lowest scores, biggest blowouts, closest games, shootouts, heartbreakers and lucky wins.',
+  fn: (games) => {
+    const side = [], match = [];
+    for (const g of games) {
+      if (g.a === 'Other' || g.b === 'Other') continue;
+      const a = Number(g.a_pts), b = Number(g.b_pts), season = String(g.season), week = String(g.week);
+      side.push({gm: g.a, opp: g.b, pts: a, opp_pts: b, season, week}, {gm: g.b, opp: g.a, pts: b, opp_pts: a, season, week});
+      if (a !== b) { const w = a > b; match.push({gm: w ? g.a : g.b, opp: w ? g.b : g.a, pts: Math.max(a, b), opp_pts: Math.min(a, b), season, week}); }
+    }
+    const lists = [
+      ['high', 'Highest scores', side, (r) => r.pts, -1],
+      ['low', 'Lowest scores', side.filter((r) => r.season !== '2014'), (r) => r.pts, 1],
+      ['blowout', 'Biggest blowouts', match, (r) => r.pts - r.opp_pts, -1],
+      ['close', 'Closest games', match, (r) => r.pts - r.opp_pts, 1],
+      ['shootout', 'Shootouts', match, (r) => r.pts + r.opp_pts, -1],
+      ['heartbreak', 'Heartbreakers', side.filter((r) => r.pts < r.opp_pts), (r) => r.pts, -1],
+      ['lucky', 'Ugly wins', side.filter((r) => r.pts > r.opp_pts && r.season !== '2014'), (r) => r.pts, 1]
+    ];
+    const out = [];
+    for (const [key, label, rows, val, dir] of lists) {
+      rows.slice().sort((x, y) => (val(x) - val(y)) * dir).slice(0, 10).forEach((r, i) => out.push({list: key, list_label: label, rank: i + 1, gm: r.gm, opp: r.opp, pts: r.pts, opp_pts: r.opp_pts, value: Math.round(val(r) * 100) / 100, season: r.season, week: r.week}));
+    }
+    return out;
+  }
+});
+
+dash.calc('rivalries', {
+  inputs: ['games'],
+  title: 'Rivalries',
+  description: 'Every pair of GMs that has met: games, wins each way, points each way and the last meeting.',
+  fn: (games) => {
+    const by = {};
+    for (const g of games) {
+      if (g.a === 'Other' || g.b === 'Other') continue;
+      const [x, y] = [g.a, g.b].sort();
+      const xp = Number(x === g.a ? g.a_pts : g.b_pts), yp = Number(x === g.a ? g.b_pts : g.a_pts);
+      const r = by[x + '|' + y] || (by[x + '|' + y] = {a: x, b: y, games: 0, a_wins: 0, b_wins: 0, ties: 0, a_pts: 0, b_pts: 0, last: ''});
+      r.games += 1; r.a_pts += xp; r.b_pts += yp;
+      if (xp > yp) r.a_wins += 1; else if (yp > xp) r.b_wins += 1; else r.ties += 1;
+      const when = Number(g.season) * 100 + Number(g.week);
+      if (!r._w || when > r._w) { r._w = when; r.last = 'Wk ' + g.week + ' ' + g.season; }
+    }
+    return Object.values(by).map(({_w, ...r}) => ({...r, gap: Math.abs(r.a_wins - r.b_wins)}));
+  }
+});
+
 (function () {
   const f1 = d3.format('.1f'), f2 = d3.format('.2f'), pct = d3.format('.1%'), c1 = d3.format(',.1f');
   const signed = (v) => (v > 0 ? '+' : '') + f1(v);
   const signedInt = (v) => (v > 0 ? '+' : '') + v;
   const eur = (v) => v + '€';
   const sortState = {};
-  const PAGES = ['week', 'money', 'trophies', 'standings', 'history'];
+  const PAGES = ['week', 'money', 'trophies', 'standings', 'history', 'records', 'rivals'];
   const state = {week: null, q: '', season: '', page: 'week'};
   const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const FINE_COLORS = {goose_eur: '#f4b740', double_eur: '#e23a44', unfilled_eur: '#4f8cff', bench_eur: '#b678ff', season_eur: '#93a0c0'};
@@ -753,7 +1099,28 @@ dash.calc('h2h_grid', {
     if (lum < 0.5) { b.style.color = '#fff'; b.style.webkitTextFillColor = '#fff'; b.style.textShadow = '0 1px 1px rgba(0,0,0,.45)'; }
     return b;
   }
-  const withBadge = (g, lg) => { const s = el('span', 'bc-gmcell'); s.append(badge(g, lg), el('span', null, g)); return s; };
+  // Seasons in the league per GM (from the teams list), shown as a small tag next to names for context.
+  let vetCache = null;
+  function vet(g) {
+    if (!vetCache) {
+      const tm = dash.data('teams');
+      if (tm.status !== 'ok') return null;
+      vetCache = {};
+      tm.data.forEach((t) => { if (t.gm === 'Other') return; const v = vetCache[t.gm] || (vetCache[t.gm] = {n: 0, first: 9999, seasons: []}); v.n += 1; v.first = Math.min(v.first, Number(t.season)); v.seasons.push(Number(t.season)); });
+    }
+    return vetCache[g] || null;
+  }
+  function szn(g) {
+    const v = vet(g);
+    if (!v) return document.createTextNode('');
+    const s = el('span', 'bc-szn' + (v.n === 1 ? ' rookie' : ''));
+    if (v.n === 1) s.textContent = 'ROOKIE'; else s.append(document.createTextNode(String(v.n)), el('span', 'bc-szn-l', ' SZN'));
+    const gaps = v.seasons.length < (Math.max(...v.seasons) - v.first + 1) ? ', not every year' : '';
+    s.title = `In the league since ${v.first}: ${v.n} season${v.n === 1 ? '' : 's'}${gaps}`;
+    s.setAttribute('aria-label', s.title);
+    return s;
+  }
+  const withBadge = (g, lg) => { const s = el('span', 'bc-gmcell'); s.append(badge(g, lg), el('span', null, g), szn(g)); return s; };
   const gmCell = (td, v) => { td.textContent = ''; td.appendChild(withBadge(v)); };
 
   // Sortable table. opts.hl marks the leader row regardless of sort; c.d marks a detail column hidden on phones.
@@ -1199,20 +1566,328 @@ dash.calc('h2h_grid', {
     ], (r) => encodeURIComponent(r.season) + ',' + encodeURIComponent(r.gm), {key: 'season', dir: 'desc'});
   }
 
+  // ---------- HISTORY ----------
+  const hist = {focus: null, ppgMode: 'ppg', heat: 'final_rank', season: null, book: 'high', vsA: null, vsB: null};
+  const ord = (n) => n + (n % 10 === 1 && n % 100 !== 11 ? 'st' : n % 10 === 2 && n % 100 !== 12 ? 'nd' : n % 10 === 3 && n % 100 !== 13 ? 'rd' : 'th');
+  const pressGroup = (id, attr, value, cb) => {
+    const g = document.getElementById(id);
+    g.querySelectorAll('button').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b.dataset[attr] === value));
+      if (!b._wired) { b._wired = true; b.addEventListener('click', () => cb(b.dataset[attr])); }
+    });
+  };
+
+  function drawFinishChart(elm, rows) {
+    elm.replaceChildren();
+    const done = rows.filter((r) => r.final_rank != null);
+    const seasons = [...new Set(done.map((r) => r.season))].sort();
+    const gms = [...new Set(done.map((r) => r.gm))].sort();
+    const maxRank = d3.max(done, (r) => r.final_rank) || 12;
+    const W = Math.max(300, elm.clientWidth), narrow = W < 560;
+    const H = narrow ? 380 : 440, top = 16, bottom = 28, left = 34, right = narrow ? 12 : 70;
+    const svg = d3.select(elm).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Final placing of every GM in every season');
+    const x = d3.scalePoint(seasons, [left + 8, W - right]);
+    const y = d3.scaleLinear([1, maxRank], [top, H - bottom]);
+    svg.append('g').selectAll('line').data(d3.range(1, maxRank + 1)).join('line').attr('x1', left).attr('x2', W - right).attr('y1', (t) => y(t)).attr('y2', (t) => y(t)).attr('stroke', 'rgba(255,255,255,.06)');
+    svg.append('g').selectAll('text').data(d3.range(1, maxRank + 1)).join('text').attr('x', left - 8).attr('y', (t) => y(t) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', (t) => (t === 1 ? '#f2c14e' : '#9aa1ae')).attr('font-weight', (t) => (t === 1 ? 800 : 500)).text((t) => ord(t));
+    svg.append('g').selectAll('text').data(seasons).join('text').attr('x', (s) => x(s)).attr('y', H - 8).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', '#9aa1ae').text((s) => (narrow ? "'" + s.slice(2) : s));
+    const tip = d3.select(elm).append('div').attr('class', 'bc-tip').style('opacity', 0);
+    const focus = hist.focus;
+    const order = gms.slice().sort((a, b) => (a === focus) - (b === focus));
+    order.forEach((gm) => {
+      const pts = seasons.map((s) => done.find((r) => r.gm === gm && r.season === s)).filter(Boolean);
+      const on = !focus || focus === gm;
+      const col = gmColor(gm);
+      const g = svg.append('g').attr('opacity', focus ? (on ? 1 : 0.08) : (narrow ? 0.6 : 0.9)).style('cursor', 'pointer').on('click', () => { hist.focus = hist.focus === gm ? null : gm; drawHistoryPage(); });
+      // break the line where a GM skipped seasons
+      const segs = []; let cur = [];
+      pts.forEach((p, i) => { if (i && seasons.indexOf(p.season) - seasons.indexOf(pts[i - 1].season) > 1) { segs.push(cur); cur = []; } cur.push(p); });
+      segs.push(cur);
+      const line = d3.line().x((p) => x(p.season)).y((p) => y(p.final_rank)).curve(d3.curveMonotoneX);
+      segs.forEach((sg) => g.append('path').attr('d', line(sg)).attr('fill', 'none').attr('stroke', col).attr('stroke-width', focus === gm ? 4 : narrow ? 1.6 : 2.2).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round'));
+      pts.forEach((p) => {
+        const c = g.append('circle').attr('cx', x(p.season)).attr('cy', y(p.final_rank)).attr('r', focus === gm ? 7 : p.final_rank === 1 ? 5.5 : 3.5)
+          .attr('fill', p.final_rank === 1 ? '#f2c14e' : col).attr('stroke', p.final_rank === 1 ? '#fff3c4' : '#07080b').attr('stroke-width', p.final_rank === 1 ? 1.5 : 1);
+        c.on('mousemove', (ev) => { tip.style('opacity', 1).html(''); tip.append('div').attr('class', 'bc-tip-k').text(p.season); tip.append('div').text(`${gm}: ${ord(p.final_rank)}`); tip.append('div').text(`${p.team} (${p.record})`); placeTip(tip, elm, ev); }).on('mouseleave', () => tip.style('opacity', 0));
+        if (focus === gm) g.append('text').attr('x', x(p.season)).attr('y', y(p.final_rank) + 3.5).attr('text-anchor', 'middle').attr('font-size', 9).attr('font-weight', 800).attr('fill', '#07080b').attr('pointer-events', 'none').text(p.final_rank);
+      });
+      const last = pts[pts.length - 1];
+      if (last && !narrow) g.append('text').attr('x', x(last.season) + 10).attr('y', y(last.final_rank) + 4).attr('font-size', 12).attr('font-weight', 700).attr('fill', col).text(gm);
+    });
+  }
+
+  function drawPpgChart(elm, rows, key) {
+    elm.replaceChildren();
+    const data = rows.slice().sort((a, b) => b[key] - a[key]);
+    const W = Math.max(280, elm.clientWidth), barH = 20, gap = 8, top = 4, bottom = 6;
+    const H = top + data.length * (barH + gap) + bottom;
+    const svg = d3.select(elm).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', key === 'ppg' ? 'Career points per game' : 'Career points per game above league average');
+    const left = 124, valW = 50;
+    const lo = key === 'ppg' ? Math.floor((d3.min(data, (d) => d.ppg) - 6) / 5) * 5 : Math.min(0, d3.min(data, (d) => d.above_avg));
+    const hi = key === 'ppg' ? d3.max(data, (d) => d.ppg) : Math.max(0, d3.max(data, (d) => d.above_avg));
+    const x = d3.scaleLinear([lo, hi], [left, W - valW]);
+    const y = (i) => top + i * (barH + gap);
+    const base = key === 'ppg' ? lo : 0;
+    if (key !== 'ppg') svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 0).attr('y2', H).attr('stroke', 'rgba(255,255,255,.25)');
+    const defs = svg.append('defs');
+    data.forEach((d, i) => {
+      const id = 'bc-pg-' + key + i, col = gmColor(d.gm);
+      const gr = defs.append('linearGradient').attr('id', id).attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
+      gr.append('stop').attr('offset', 0).attr('stop-color', d3.color(col).brighter(0.6));
+      gr.append('stop').attr('offset', 0.5).attr('stop-color', col);
+      gr.append('stop').attr('offset', 0.52).attr('stop-color', d3.color(col).darker(0.6));
+      gr.append('stop').attr('offset', 1).attr('stop-color', col);
+      const v = d[key];
+      const g = svg.append('g');
+      g.append('circle').attr('cx', 8).attr('cy', y(i) + barH / 2).attr('r', 5).attr('fill', col);
+      g.append('text').attr('x', 20).attr('y', y(i) + barH / 2 + 4).attr('font-size', 13).attr('font-weight', 700).attr('fill', '#f3f5f8').text(d.gm);
+      const vv = vet(d.gm); if (vv) g.append('text').attr('x', left - 10).attr('y', y(i) + barH / 2 + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('font-weight', 700).attr('font-family', "'Barlow Condensed', sans-serif").attr('letter-spacing', '.06em').attr('fill', '#9aa1ae').text(vv.n + ' SZN').append('title').text('In the league since ' + vv.first);
+      g.append('rect').attr('x', Math.min(x(base), x(v))).attr('y', y(i)).attr('width', Math.max(2, Math.abs(x(v) - x(base)))).attr('height', barH).attr('rx', 3).attr('fill', `url(#${id})`);
+      g.append('text').attr('x', v >= base ? x(v) + 6 : x(v) - 6).attr('text-anchor', v >= base ? 'start' : 'end').attr('y', y(i) + barH / 2 + 5).attr('font-size', 15).attr('font-weight', 800).attr('font-style', 'italic').attr('font-family', "'Barlow Condensed', sans-serif").attr('fill', '#f3f5f8').text(key === 'ppg' ? f1(v) : signed(v));
+    });
+  }
+
+  function heatColor(metric, v, n) {
+    if (v == null) return null;
+    let t; // 0 = bad, 1 = good
+    if (metric === 'final_rank') t = n > 1 ? 1 - (v - 1) / (n - 1) : 0.5;
+    else if (metric === 'win_pct') t = v;
+    else if (metric === 'luck') t = Math.max(0, Math.min(1, 0.5 + v / 6));
+    else t = Math.max(0, Math.min(1, 0.5 + v / 30));
+    const c = t >= 0.5 ? '47, 213, 133' : '227, 18, 42';
+    return `rgba(${c}, ${(Math.abs(t - 0.5) * 2 * 0.75 + 0.06).toFixed(2)})`;
+  }
+
+  function drawHeat(st, ls) {
+    const metric = hist.heat;
+    const notes = {final_rank: 'Final placing each season. Green is near the top, red near the bottom. Gold outline is a title.', ppg: 'Points per game each season. Colour shows how far above or below that season\'s league average it was.', win_pct: 'Regular-season win percentage each season.', luck: 'Wins above or below what the scoring earned that season (all-play). Green got lucky, red got robbed.'};
+    document.getElementById('heat-note').textContent = notes[metric];
+    pressGroup('heat-metric', 'metric', metric, (m) => { hist.heat = m; drawHeat(dash.data('season_table').data, dash.data('league_seasons').data); });
+    const seasons = [...new Set(st.filter((r) => metric !== 'final_rank' || r.final_rank != null).map((r) => r.season))].sort();
+    const avg = {}, size = {};
+    ls.forEach((s) => { avg[s.season] = s.league_ppg; size[s.season] = s.teams; });
+    const by = {};
+    st.forEach((r) => { (by[r.gm] || (by[r.gm] = {gm: r.gm}))[r.season] = r; });
+    const car = dash.data('career');
+    const order = car.status === 'ok' ? Object.fromEntries(car.data.map((c) => [c.gm, c.win_pct])) : {};
+    const rows = Object.values(by).sort((a, b) => (order[b.gm] || 0) - (order[a.gm] || 0));
+    const fmt = (r) => (metric === 'final_rank' ? (r.final_rank == null ? '·' : String(r.final_rank)) : metric === 'ppg' ? f1(r.ppg) : metric === 'win_pct' ? Math.round(r.win_pct * 100) + '' : signed(r.luck));
+    const cols = [gmCol].concat(seasons.map((s) => ({
+      field: s, sortKey: s + '_v', label: "'" + s.slice(2), firstDir: metric === 'final_rank' ? 'asc' : 'desc',
+      cell: (td, r) => {
+        td.textContent = fmt(r);
+        const v = metric === 'ppg' ? r.ppg - avg[s] : metric === 'final_rank' ? r.final_rank : r[metric];
+        const bg = heatColor(metric, v, size[s]);
+        if (bg) td.style.background = bg;
+        if (r.final_rank === 1) td.classList.add('bc-champ-cell');
+        td.title = `${r.gm} ${s}: ${r.record}, ${f1(r.ppg)} per game${r.final_rank ? ', finished ' + ord(r.final_rank) : ''}`;
+      }
+    })));
+    const flat = rows.map((row) => { const o = {...row}; seasons.forEach((s) => { o[s + '_v'] = row[s] ? (metric === 'final_rank' ? row[s].final_rank ?? 99 : metric === 'ppg' ? row[s].ppg : row[s][metric]) : null; }); return o; });
+    const tbl = document.getElementById('tbl-heat');
+    drawTable(tbl, flat, cols, null, {key: 'gm', dir: 'asc'});
+    tbl.querySelectorAll('tbody td').forEach((td) => { if (td.textContent === '') td.classList.add('bc-na'); });
+  }
+
+  function drawLeagueChart(elm, ls, st) {
+    elm.replaceChildren();
+    const data = ls.map((s) => {
+      const rs = st.filter((r) => r.season === s.season);
+      return {season: s.season, avg: s.league_ppg, hi: d3.max(rs, (r) => r.ppg), lo: d3.min(rs, (r) => r.ppg), hiGm: rs.reduce((a, b) => (b.ppg > a.ppg ? b : a)).gm, loGm: rs.reduce((a, b) => (b.ppg < a.ppg ? b : a)).gm};
+    });
+    const W = Math.max(300, elm.clientWidth), H = 260, top = 16, bottom = 28, left = 40, right = 12;
+    const svg = d3.select(elm).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'League scoring average by season');
+    const x = d3.scalePoint(data.map((d) => d.season), [left + 10, W - right - 10]);
+    const y = d3.scaleLinear([Math.floor(d3.min(data, (d) => d.lo) / 10) * 10, Math.ceil(d3.max(data, (d) => d.hi) / 10) * 10], [H - bottom, top]);
+    y.ticks(5).forEach((t) => { svg.append('line').attr('x1', left).attr('x2', W - right).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', 'rgba(255,255,255,.06)'); svg.append('text').attr('x', left - 6).attr('y', y(t) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', '#9aa1ae').text(t); });
+    svg.append('g').selectAll('text').data(data).join('text').attr('x', (d) => x(d.season)).attr('y', H - 8).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', '#9aa1ae').text((d) => (W < 560 ? "'" + d.season.slice(2) : d.season));
+    svg.append('path').attr('d', d3.area().x((d) => x(d.season)).y0((d) => y(d.lo)).y1((d) => y(d.hi)).curve(d3.curveMonotoneX)(data)).attr('fill', 'rgba(242, 193, 78, .12)');
+    const defs = svg.append('defs'); const gr = defs.append('linearGradient').attr('id', 'bc-g-line').attr('x1', 0).attr('x2', 1);
+    gr.append('stop').attr('offset', 0).attr('stop-color', '#b8860b'); gr.append('stop').attr('offset', 0.5).attr('stop-color', '#fff3c4'); gr.append('stop').attr('offset', 1).attr('stop-color', '#f2c14e');
+    svg.append('path').attr('d', d3.line().x((d) => x(d.season)).y((d) => y(d.avg)).curve(d3.curveMonotoneX)(data)).attr('fill', 'none').attr('stroke', 'url(#bc-g-line)').attr('stroke-width', 3);
+    const tip = d3.select(elm).append('div').attr('class', 'bc-tip').style('opacity', 0);
+    data.forEach((d) => {
+      svg.append('circle').attr('cx', x(d.season)).attr('cy', y(d.avg)).attr('r', 4.5).attr('fill', '#f2c14e').attr('stroke', '#07080b');
+      svg.append('rect').attr('x', x(d.season) - 18).attr('y', top).attr('width', 36).attr('height', H - top - bottom).attr('fill', 'transparent')
+        .on('mousemove', (ev) => { tip.style('opacity', 1).html(''); tip.append('div').attr('class', 'bc-tip-k').text(d.season); tip.append('div').text(`League average ${f1(d.avg)}`); tip.append('div').text(`Best ${d.hiGm} ${f1(d.hi)}, worst ${d.loGm} ${f1(d.lo)}`); placeTip(tip, elm, ev); })
+        .on('mouseleave', () => tip.style('opacity', 0));
+    });
+  }
+
+  function drawReview(ls) {
+    const seasons = ls.map((s) => s.season);
+    if (!hist.season || !seasons.includes(hist.season)) hist.season = (ls.filter((s) => s.done).pop() || ls[ls.length - 1]).season;
+    const tabs = document.getElementById('rev-tabs');
+    tabs.replaceChildren(...seasons.map((s) => { const b = el('button', null, s); b.type = 'button'; b.setAttribute('aria-pressed', String(s === hist.season)); b.addEventListener('click', () => { hist.season = s; drawReview(ls); }); return b; }));
+    const s = ls.find((x) => x.season === hist.season);
+    const card = (k, gm, what, tone, wide) => { const d = el('div', 'bc-award ' + tone + (wide ? ' wide' : '')); const w = el('div', 'bc-who'); if (gm) w.append(badge(gm), el('span', null, gm)); else w.append(el('span', null, '–')); d.append(el('div', 'bc-k', k), w, el('div', 'bc-what', what)); return d; };
+    const out = [];
+    if (s.done) {
+      out.push(card('Champion', s.champion, s.champion_team, 'gold', true), card('Runner-up', s.runner_up, '2nd place', 'good'), card('Third', s.third, '3rd place', 'good'));
+    } else out.push(card('Season in progress', null, 'No champion yet. Check back in January.', 'gold', true));
+    out.push(
+      card('Best record', s.best_record_gm, s.best_record + ' in the regular season', 'good'),
+      card('Most points', s.most_pts_gm, f1(s.most_ppg) + ' per game', 'good'),
+      card('Highest week', s.high_gm, f2(s.high_pts) + ' in week ' + s.high_week, 'good'),
+      card('Lowest week', s.low_gm, f2(s.low_pts) + ' in week ' + s.low_week, 'bad'),
+      card('Fewest points', s.fewest_pts_gm, f1(s.fewest_ppg) + ' per game', 'bad'),
+      card('Closest game', s.close_w, 'Beat ' + s.close_l + ' by ' + f2(s.close_m) + ', week ' + s.close_week, 'good'),
+      card('Biggest blowout', s.blow_w, 'Buried ' + s.blow_l + ' by ' + f2(s.blow_m) + ', week ' + s.blow_week, 'bad')
+    );
+    if (s.done) out.push(card('Wooden spoon', s.last, 'Finished last', 'bad'));
+    const info = el('div', 'bc-award'); info.append(el('div', 'bc-k', 'The league'), el('div', 'bc-who', s.teams + ' teams'), el('div', 'bc-what', (s.platform === 'Sleeper' ? 'Played on Sleeper. ' : '') + 'League average ' + f1(s.league_ppg) + ' per team per game.'));
+    out.push(info);
+    document.getElementById('rev-card').replaceChildren(...out);
+  }
+
+  function drawNames(teams) {
+    const by = {};
+    teams.filter((t) => t.gm !== 'Other').forEach((t) => (by[t.gm] || (by[t.gm] = [])).push(t));
+    const car = dash.data('career');
+    const seasonsOf = car.status === 'ok' ? Object.fromEntries(car.data.map((c) => [c.gm, c.seasons])) : {};
+    const gms = Object.keys(by).sort((a, b) => (seasonsOf[b] || 0) - (seasonsOf[a] || 0) || a.localeCompare(b));
+    document.getElementById('names').replaceChildren(...gms.map((gm) => {
+      const list = by[gm].slice().sort((a, b) => Number(a.season) - Number(b.season));
+      const norm = (n) => String(n).toLowerCase().replace(/[^a-z0-9äöå]/g, '');
+      const runs = [];
+      list.forEach((t) => { const last = runs[runs.length - 1]; if (last && last.key === norm(t.team_name) && Number(t.season) === last.to + 1) last.to = Number(t.season); else runs.push({key: norm(t.team_name), name: t.team_name, from: Number(t.season), to: Number(t.season), ranks: []}); runs[runs.length - 1].ranks.push(t.final_rank); });
+      const c = el('div', 'bc-name-card');
+      const w = el('div', 'bc-who'); w.append(badge(gm), el('span', null, gm), szn(gm));
+      c.append(w, ...runs.reverse().map((r) => { const row = el('div', 'bc-name-row'); row.append(el('b', null, r.from === r.to ? String(r.from) : r.from + '–' + String(r.to).slice(2)), el('span', null, r.name + (r.ranks.includes('1') ? ' 🏆' : ''))); return row; }));
+      return c;
+    }));
+  }
+
   function drawHistoryPage() {
-    const car = dash.data('career'), ch = dash.data('champions'), rec = dash.data('records'), hh = dash.data('h2h_grid');
+    const car = dash.data('career'), ch = dash.data('champions'), st = dash.data('season_table'), sc = dash.data('scoring'), wk = dash.data('weekly_kings'), ls = dash.data('league_seasons'), tm = dash.data('teams');
     if (car.status === 'ok' && car.data.length) {
       const rows = car.data;
       const most = rows.reduce((a, b) => (b.titles > a.titles ? b : a));
       const tied = rows.filter((r) => r.titles === most.titles);
       const vet = rows.filter((r) => r.seasons >= 3);
       const bw = vet.reduce((a, b) => (b.win_pct > a.win_pct ? b : a));
-      const bp = vet.reduce((a, b) => (b.ppg > a.ppg ? b : a));
       const ul = rows.reduce((a, b) => (b.luck < a.luck ? b : a));
-      setStat('t-titles', most.gm, String(most.titles), tied.map((r) => r.gm + ' (' + r.title_years + ')').join(', '));
+      setStat('t-titles', most.gm, String(most.titles), tied.map((r) => r.gm + ' (' + r.title_years + ')').join(', '), {badges: tied.map((r) => r.gm)});
       setStat('t-win', bw.gm, pct(bw.win_pct), `${bw.gm}, ${bw.record}`, {badges: [bw.gm]});
-      setStat('t-ppg', bp.gm, f1(bp.ppg), `${bp.gm}, ${signed(bp.ppg_diff)} per game vs opponents`, {badges: [bp.gm]});
       setStat('t-luck', ul.gm, signed(ul.luck), `${ul.gm}, ${ul.record} with ${f1(ul.expected_wins)} expected. The football gods hate him.`, {badges: [ul.gm]});
+    }
+    if (sc.status === 'ok' && sc.data.length) {
+      const vet = sc.data.filter((r) => r.seasons >= 3);
+      const bp = vet.reduce((a, b) => (b.ppg > a.ppg ? b : a));
+      setStat('t-ppg', bp.gm, f1(bp.ppg), `${bp.gm}, ${bp.games} games, ${signed(bp.above_avg)} a game over the league average`, {badges: [bp.gm]});
+      pressGroup('ppg-mode', 'mode', hist.ppgMode, (m) => { hist.ppgMode = m; drawHistoryPage(); });
+      drawPpgChart(document.getElementById('chart-ppg'), sc.data, hist.ppgMode);
+      const kings = wk.status === 'ok' ? Object.fromEntries(wk.data.map((k) => [k.gm, k])) : {};
+      const boom = sc.data.map((r) => ({...r, tops: (kings[r.gm] || {}).tops || 0, bottoms: (kings[r.gm] || {}).bottoms || 0}));
+      const topBoom = boom.reduce((a, b) => (b.tops > a.tops ? b : a)).gm;
+      drawTable(document.getElementById('tbl-boom'), boom, [
+        gmCol,
+        {field: 'tops', sortKey: 'tops', label: 'Top week', cls: 'bc-pos'},
+        {field: 'bottoms', sortKey: 'bottoms', label: 'Bottom week', cls: 'bc-neg'},
+        {field: 'games_150', sortKey: 'games_150', label: '150+'},
+        {field: 'games_sub80', sortKey: 'games_sub80', label: 'Under 80', d: true},
+        {field: 'games', sortKey: 'games', label: 'Games', d: true}
+      ], null, {key: 'tops', dir: 'desc'}, {hl: (r) => r.gm === topBoom});
+    } else if (sc.status === 'error') failLine(document.getElementById('chart-ppg'));
+
+    const cl = document.getElementById('champ-list');
+    if (ch.status === 'ok') {
+      cl.replaceChildren(...ch.data.slice().sort((a, b) => String(b.season).localeCompare(String(a.season))).map((c) => {
+        const d = el('div', 'bc-champ');
+        d.style.setProperty('--gm', gmColor(c.champion));
+        const nm = el('div', 'bc-name'); nm.append(badge(c.champion), el('span', null, c.champion));
+        d.append(el('div', 'bc-yr', c.season + (c.platform === 'Sleeper' ? ' · SLEEPER' : '')), nm, el('div', 'bc-team', c.team), el('div', 'bc-team', '2nd ' + c.runner_up + ' · 3rd ' + c.third));
+        return d;
+      }));
+    } else if (ch.status === 'error') failLine(cl);
+
+    if (st.status === 'ok') {
+      const gms = [...new Set(st.data.filter((r) => r.final_rank != null).map((r) => r.gm))].sort();
+      const lg = document.getElementById('finish-legend');
+      lg.replaceChildren(...gms.map((gm) => {
+        const b = el('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(hist.focus === gm)); b.style.setProperty('--chip', gmColor(gm));
+        b.append(badge(gm), document.createTextNode(gm), szn(gm));
+        b.addEventListener('click', () => { hist.focus = hist.focus === gm ? null : gm; drawHistoryPage(); });
+        return b;
+      }));
+      drawFinishChart(document.getElementById('chart-finish'), st.data);
+      if (ls.status === 'ok') { drawHeat(st.data, ls.data); drawLeagueChart(document.getElementById('chart-league'), ls.data, st.data); }
+    } else if (st.status === 'error') failLine(document.getElementById('chart-finish'));
+    if (ls.status === 'ok') drawReview(ls.data); else if (ls.status === 'error') failLine(document.getElementById('rev-card'));
+    if (tm.status === 'ok') drawNames(tm.data);
+  }
+
+  // ---------- RECORDS ----------
+  const BOOK_NOTES = {high: 'The 10 biggest single-week scores ever.', low: 'The 10 smallest (2014 whole-point scoring left out).', blowout: 'Biggest winning margins.', close: 'Smallest winning margins. Sweat city.', shootout: 'Highest combined score in one matchup.', heartbreak: 'Highest scores that still lost.', lucky: 'Lowest scores that still won (2014 left out).'};
+  function drawKings(elm, rows) {
+    elm.replaceChildren();
+    const data = rows.slice().sort((a, b) => b.tops - b.bottoms - (a.tops - a.bottoms));
+    const W = Math.max(280, elm.clientWidth), barH = 18, gap = 8, top = 4, bottom = 6;
+    const H = top + data.length * (barH + gap) + bottom;
+    const svg = d3.select(elm).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Weekly top and bottom scores per GM');
+    const labelW = 78, mid = labelW + (W - labelW) / 2, m = d3.max(data, (d) => Math.max(d.tops, d.bottoms)) || 1, span = (W - labelW) / 2 - 28;
+    const sx = (v) => (v / m) * span;
+    svg.append('line').attr('x1', mid).attr('x2', mid).attr('y1', 0).attr('y2', H).attr('stroke', 'rgba(255,255,255,.2)');
+    data.forEach((d, i) => {
+      const yy = top + i * (barH + gap);
+      svg.append('rect').attr('x', mid - sx(d.bottoms)).attr('y', yy).attr('width', sx(d.bottoms)).attr('height', barH).attr('rx', 3).attr('fill', '#e3122a');
+      svg.append('rect').attr('x', mid).attr('y', yy).attr('width', sx(d.tops)).attr('height', barH).attr('rx', 3).attr('fill', '#2fd585');
+      svg.append('text').attr('x', mid - sx(d.bottoms) - 6).attr('y', yy + barH / 2 + 4).attr('text-anchor', 'end').attr('font-size', 12).attr('fill', '#ff8a96').attr('font-weight', 700).text(d.bottoms);
+      svg.append('text').attr('x', mid + sx(d.tops) + 6).attr('y', yy + barH / 2 + 4).attr('font-size', 12).attr('fill', '#7cf0b6').attr('font-weight', 700).text(d.tops);
+      svg.append('circle').attr('cx', 8).attr('cy', yy + barH / 2).attr('r', 5).attr('fill', gmColor(d.gm));
+      svg.append('text').attr('x', 18).attr('y', yy + barH / 2 + 4).attr('font-size', 12).attr('font-weight', 700).attr('fill', '#f3f5f8').text(d.gm);
+    });
+  }
+
+  function drawRecordsPage() {
+    const rec = dash.data('records'), bk = dash.data('record_book'), sk = dash.data('streaks'), wk = dash.data('weekly_kings'), car = dash.data('career'), st = dash.data('season_table');
+    const rlist = document.getElementById('record-list');
+    if (rec.status === 'ok') {
+      rlist.replaceChildren(...rec.data.map((r) => {
+        const d = el('div', 'bc-stat');
+        d.style.setProperty('--accent', gmColor(r.gm));
+        const v = el('div', 'bc-v'); v.append(badge(r.gm, true), el('span', null, r.record.startsWith('Best regular') ? pct(r.value) : f2(r.value)));
+        d.append(el('div', 'bc-k', r.record), v, el('div', 'bc-s', r.gm + ', ' + r.detail));
+        return d;
+      }));
+    } else if (rec.status === 'error') failLine(rlist);
+
+    if (bk.status === 'ok') {
+      const lists = [...new Map(bk.data.map((r) => [r.list, r.list_label])).entries()];
+      const tabs = document.getElementById('book-tabs');
+      tabs.replaceChildren(...lists.map(([k, label]) => { const b = el('button', null, label); b.type = 'button'; b.setAttribute('aria-pressed', String(k === hist.book)); b.addEventListener('click', () => { hist.book = k; delete sortState['tbl-book']; drawRecordsPage(); }); return b; }));
+      document.getElementById('book-note').textContent = BOOK_NOTES[hist.book] || '';
+      const rows = bk.data.filter((r) => r.list === hist.book);
+      const isGame = ['blowout', 'close', 'shootout'].includes(hist.book);
+      const valLabel = {high: 'Points', low: 'Points', blowout: 'Margin', close: 'Margin', shootout: 'Combined', heartbreak: 'Points', lucky: 'Points'}[hist.book];
+      rows.forEach((r) => { r.score = f2(r.pts) + '–' + f2(r.opp_pts); r.when = 'Wk ' + r.week + ', ' + r.season; r.sortWhen = Number(r.season) * 100 + Number(r.week); });
+      drawTable(document.getElementById('tbl-book'), rows, [
+        {field: 'rank', sortKey: 'rank', label: '#', left: true, firstDir: 'asc'},
+        {field: 'gm', sortKey: 'gm', label: isGame ? 'Winner' : 'GM', left: true, firstDir: 'asc', cell: gmCell},
+        {field: 'value', sortKey: 'value', label: valLabel, fmt: f2, cls: 'bc-money'},
+        {field: 'score', sortKey: 'value', label: 'Score', d: true},
+        {field: 'opp', sortKey: 'opp', label: isGame ? 'Loser' : 'Opponent', left: true, firstDir: 'asc', cell: gmCell},
+        {field: 'when', sortKey: 'sortWhen', label: 'When', left: true}
+      ], (r) => r.list + ',' + r.rank, {key: 'rank', dir: 'asc'}, {hl: (r) => r.rank === 1});
+    } else if (bk.status === 'error') failLine(document.getElementById('tbl-book'));
+
+    if (sk.status === 'ok') {
+      const short = (w) => w.replace(/^Wk (\d+) 20(\d\d)$/, "W$1 '$2");
+    const span = (a, b) => (a === b ? short(a) : short(a) + ' – ' + short(b));
+    const rows = sk.data.map((r) => ({...r, win_span: span(r.win_from, r.win_to), loss_span: span(r.loss_from, r.loss_to)}));
+      const best = rows.reduce((a, b) => (b.win_streak > a.win_streak ? b : a)).gm;
+      drawTable(document.getElementById('tbl-streaks'), rows, [
+        gmCol,
+        {field: 'win_streak', sortKey: 'win_streak', label: 'Win streak', cls: 'bc-pos'},
+        {field: 'win_span', sortKey: 'win_streak', label: 'When', left: true, d: true},
+        {field: 'loss_streak', sortKey: 'loss_streak', label: 'Skid', cls: 'bc-neg'},
+        {field: 'loss_span', sortKey: 'loss_streak', label: 'When', left: true, d: true},
+        {field: 'current', sortKey: 'current_n', label: 'Now', cell: (td, v, r) => { td.textContent = v; td.classList.add(r.current_n > 0 ? 'bc-pos' : 'bc-neg'); }}
+      ], null, {key: 'win_streak', dir: 'desc'}, {hl: (r) => r.gm === best});
+    }
+    if (wk.status === 'ok') drawKings(document.getElementById('chart-kings'), wk.data);
+    if (car.status === 'ok' && car.data.length) {
+      const rows = car.data;
       drawTable(document.getElementById('tbl-career'), rows, [
         gmCol,
         {field: 'record', sortKey: 'win_pct', label: 'Wins-Loss'},
@@ -1238,28 +1913,98 @@ dash.calc('h2h_grid', {
       ], null, {key: 'top3', dir: 'desc'});
       drawLuck(document.getElementById('chart-luck'), rows);
     } else if (car.status === 'error') failLine(document.getElementById('chart-luck'));
+    if (st.status === 'ok') {
+      const done = st.data.filter((r) => r.season !== '2026');
+      const block = (title, rows, tone) => { const b = el('div'); b.append(el('h4', null, title)); rows.forEach((r) => { const row = el('div', 'bc-ls-row'); const v = el('span', 'bc-ls-v ' + (tone === 'good' ? 'bc-pos' : 'bc-neg'), signed(r.luck)); row.append(badge(r.gm), el('span', null, r.gm + ' ' + r.season + ', ' + r.record + (r.final_rank ? ', ' + ord(r.final_rank) : '')), v); b.append(row); }); return b; };
+      document.getElementById('luck-seasons').replaceChildren(
+        block('Luckiest', done.slice().sort((a, b) => b.luck - a.luck).slice(0, 5), 'good'),
+        block('Robbed', done.slice().sort((a, b) => a.luck - b.luck).slice(0, 5), 'bad'));
+    }
+    drawSeasons();
+  }
 
-    const cl = document.getElementById('champ-list');
-    if (ch.status === 'ok') {
-      cl.replaceChildren(...ch.data.slice().sort((a, b) => String(b.season).localeCompare(String(a.season))).map((c) => {
-        const d = el('div', 'bc-champ');
-        d.style.setProperty('--gm', gmColor(c.champion));
-        const nm = el('div', 'bc-name'); nm.append(badge(c.champion), el('span', null, c.champion));
-        d.append(el('div', 'bc-yr', c.season + (c.platform === 'Sleeper' ? ' · SLEEPER' : '')), nm, el('div', 'bc-team', c.team), el('div', 'bc-team', '2nd ' + c.runner_up + ' · 3rd ' + c.third));
-        return d;
-      }));
-    } else if (ch.status === 'error') failLine(cl);
+  // ---------- RIVALS ----------
+  function drawVs() {
+    const gs = dash.data('games');
+    if (gs.status !== 'ok') return;
+    const A = hist.vsA, B = hist.vsB;
+    const games = gs.data.filter((g) => (g.a === A && g.b === B) || (g.a === B && g.b === A)).map((g) => {
+      const ap = Number(g.a === A ? g.a_pts : g.b_pts), bp = Number(g.a === A ? g.b_pts : g.a_pts);
+      return {season: String(g.season), week: String(g.week), ap, bp, margin: Math.round((ap - bp) * 100) / 100, winner: ap > bp ? A : bp > ap ? B : 'Tie', sortWhen: Number(g.season) * 100 + Number(g.week)};
+    }).sort((x, y) => x.sortWhen - y.sortWhen);
+    const sum = document.getElementById('vs-sum');
+    if (!games.length) { sum.replaceChildren(el('div', 'bc-clean', `${A} and ${B} have never met in the regular season.`)); document.getElementById('chart-vs').replaceChildren(); drawTable(document.getElementById('tbl-vs'), [], [], null, {key: 'sortWhen', dir: 'desc'}); return; }
+    const aw = games.filter((g) => g.winner === A).length, bw = games.filter((g) => g.winner === B).length, t = games.length - aw - bw;
+    const aAvg = d3.mean(games, (g) => g.ap), bAvg = d3.mean(games, (g) => g.bp);
+    const bigA = games.filter((g) => g.margin > 0).sort((x, y) => y.margin - x.margin)[0], bigB = games.filter((g) => g.margin < 0).sort((x, y) => x.margin - y.margin)[0];
+    let run = 0, runWho = null; for (let i = games.length - 1; i >= 0; i--) { const w = games[i].winner; if (runWho == null) { runWho = w; run = 1; } else if (w === runWho) run += 1; else break; }
+    const side = (gm, avg, big, r) => { const s = el('div', 'bc-vs-side' + (r ? ' r' : '')); const w = el('div', 'bc-who'); w.append(badge(gm, true), el('span', null, gm), szn(gm)); s.append(w, el('div', 'bc-s', `${f1(avg)} points a game against each other`), el('div', 'bc-s', big ? `Biggest win: by ${f2(Math.abs(big.margin))}, wk ${big.week} ${big.season}` : 'Never beaten them')); return s; };
+    const score = el('div', 'bc-vs-score'); score.append(document.createTextNode(aw + '–' + bw + (t ? '–' + t : ''))); score.append(el('small', null, `${games.length} games · ${runWho === 'Tie' ? 'last one tied' : runWho + ' won the last ' + (run > 1 ? run : 'one')}`));
+    sum.replaceChildren(side(A, aAvg, bigA, false), score, side(B, bAvg, bigB, true));
+    // margin bars, oldest to newest
+    const elm = document.getElementById('chart-vs'); elm.replaceChildren();
+    const W = Math.max(280, elm.clientWidth), H = 140, mid = H / 2;
+    const svg = d3.select(elm).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', `Winning margin of every ${A} vs ${B} game`);
+    const x = d3.scaleBand(games.map((g, i) => i), [10, W - 10]).padding(0.2), m = d3.max(games, (g) => Math.abs(g.margin)) || 1;
+    const y = (v) => (v / m) * (mid - 14);
+    svg.append('line').attr('x1', 0).attr('x2', W).attr('y1', mid).attr('y2', mid).attr('stroke', 'rgba(255,255,255,.2)');
+    svg.append('text').attr('x', 4).attr('y', 12).attr('font-size', 11).attr('fill', gmColor(A)).attr('font-weight', 700).text(A + ' won ↑');
+    svg.append('text').attr('x', 4).attr('y', H - 4).attr('font-size', 11).attr('fill', gmColor(B)).attr('font-weight', 700).text(B + ' won ↓');
+    const tip = d3.select(elm).append('div').attr('class', 'bc-tip').style('opacity', 0);
+    games.forEach((g, i) => {
+      svg.append('rect').attr('x', x(i)).attr('width', x.bandwidth()).attr('y', g.margin >= 0 ? mid - y(g.margin) : mid).attr('height', Math.max(2, Math.abs(y(g.margin)))).attr('rx', 2).attr('fill', g.margin >= 0 ? gmColor(A) : gmColor(B))
+        .on('mousemove', (ev) => { tip.style('opacity', 1).html(''); tip.append('div').attr('class', 'bc-tip-k').text(`Week ${g.week}, ${g.season}`); tip.append('div').text(`${A} ${f2(g.ap)} – ${f2(g.bp)} ${B}`); placeTip(tip, elm, ev); })
+        .on('mouseleave', () => tip.style('opacity', 0));
+    });
+    const rows = games.slice().map((g) => ({...g, when: 'Wk ' + g.week + ', ' + g.season, score: f2(g.ap) + ' – ' + f2(g.bp)}));
+    drawTable(document.getElementById('tbl-vs'), rows, [
+      {field: 'when', sortKey: 'sortWhen', label: 'When', left: true},
+      {field: 'score', sortKey: 'ap', label: A + ' – ' + B},
+      {field: 'winner', sortKey: 'winner', label: 'Winner', left: true, firstDir: 'asc', cell: (td, v) => { if (v === 'Tie') return; gmCell(td, v); }},
+      {field: 'margin', sortKey: 'margin', label: 'Margin', fmt: (v) => f2(Math.abs(v)), d: true}
+    ], (r) => r.season + ',' + r.week, {key: 'sortWhen', dir: 'desc'});
+  }
 
-    const rlist = document.getElementById('record-list');
-    if (rec.status === 'ok') {
-      rlist.replaceChildren(...rec.data.map((r) => {
-        const d = el('div', 'bc-stat');
-        d.style.setProperty('--accent', gmColor(r.gm));
-        const v = el('div', 'bc-v'); v.append(badge(r.gm, true), el('span', null, r.record.startsWith('Best regular') ? pct(r.value) : f2(r.value)));
-        d.append(el('div', 'bc-k', r.record), v, el('div', 'bc-s', r.gm + ', ' + r.detail));
-        return d;
-      }));
-    } else if (rec.status === 'error') failLine(rlist);
+  function drawRivalsPage() {
+    const rv = dash.data('rivalries'), hh = dash.data('h2h_grid');
+    if (rv.status === 'ok' && rv.data.length) {
+      const gms = [...new Set(rv.data.flatMap((r) => [r.a, r.b]))].sort();
+      const most = rv.data.slice().sort((a, b) => b.games - a.games)[0];
+      if (!hist.vsA) { hist.vsA = most.a; hist.vsB = most.b; }
+      const sa = document.getElementById('vs-a'), sb = document.getElementById('vs-b');
+      [sa, sb].forEach((s, i) => {
+        if (s.options.length !== gms.length) s.replaceChildren(...gms.map((g) => new Option(g, g)));
+        s.value = i ? hist.vsB : hist.vsA;
+        if (!s._wired) { s._wired = true; s.addEventListener('change', () => { if (i) hist.vsB = s.value; else hist.vsA = s.value; if (hist.vsA === hist.vsB) { const other = gms.find((g) => g !== hist.vsA); if (i) hist.vsA = other; else hist.vsB = other; } drawRivalsPage(); }); }
+      });
+      drawVs();
+      // nemesis and favorite victim per GM
+      const per = {};
+      rv.data.forEach((r) => {
+        for (const [me, op, w, l] of [[r.a, r.b, r.a_wins, r.b_wins], [r.b, r.a, r.b_wins, r.a_wins]]) (per[me] || (per[me] = [])).push({op, w, l, games: r.games, pct: (w + (r.games - w - l) / 2) / r.games});
+      });
+      const card = (gm) => {
+        const list = per[gm].filter((x) => x.games >= 6);
+        const c = el('div', 'bc-nem'); const w = el('div', 'bc-who'); w.append(badge(gm), el('span', null, gm), szn(gm)); c.append(w);
+        if (!list.length) { c.append(el('div', 'bc-s', 'Not enough games yet.')); return c; }
+        const nem = list.slice().sort((a, b) => a.pct - b.pct || b.games - a.games)[0], vic = list.slice().sort((a, b) => b.pct - a.pct || b.games - a.games)[0];
+        const row = (k, x, cls) => { const r = el('div', 'bc-nem-row'); r.append(el('span', 'bc-k', k), badge(x.op), el('span', null, x.op), el('b', cls, x.w + '–' + x.l)); r.style.cursor = 'pointer'; r.addEventListener('click', () => { hist.vsA = gm; hist.vsB = x.op; drawRivalsPage(); document.getElementById('vs-sum').scrollIntoView({behavior: 'smooth', block: 'center'}); }); return r; };
+        c.append(row('Nemesis', nem, 'bc-neg'), row('Victim', vic, 'bc-pos'));
+        return c;
+      };
+      const car = dash.data('career');
+      const order = car.status === 'ok' ? Object.fromEntries(car.data.map((x) => [x.gm, x.seasons])) : {};
+      document.getElementById('nemesis').replaceChildren(...Object.keys(per).sort((a, b) => (order[b] || 0) - (order[a] || 0) || a.localeCompare(b)).map(card));
+      const rows = rv.data.map((r) => ({...r, series: r.a_wins + '–' + r.b_wins + (r.ties ? '–' + r.ties : ''), leader: r.a_wins > r.b_wins ? r.a : r.b_wins > r.a_wins ? r.b : 'Even', avg_total: (r.a_pts + r.b_pts) / r.games}));
+      drawTable(document.getElementById('tbl-rivals'), rows.sort((a, b) => b.games - a.games).slice(0, 15), [
+        {field: 'a', sortKey: 'a', label: 'GM', left: true, firstDir: 'asc', cell: gmCell},
+        {field: 'series', sortKey: 'gap', label: 'Series'},
+        {field: 'b', sortKey: 'b', label: 'GM', left: true, firstDir: 'asc', cell: gmCell},
+        {field: 'games', sortKey: 'games', label: 'Games'},
+        {field: 'avg_total', sortKey: 'avg_total', label: 'Avg combined', fmt: f1, d: true},
+        {field: 'last', sortKey: 'last', label: 'Last met', left: true, d: true}
+      ], (r) => r.a + ',' + r.b, {key: 'games', dir: 'desc'});
+    } else if (rv.status === 'error') failLine(document.getElementById('nemesis'));
 
     if (hh.status === 'ok') {
       const names = hh.data.map((r) => r.gm);
@@ -1271,16 +2016,15 @@ dash.calc('h2h_grid', {
           const [w, l] = String(v).split('-').map(Number);
           const share = w + l ? w / (w + l) : 0.5;
           const strength = Math.round(Math.abs(share - 0.5) * 2 * 55);
-          if (share > 0.5) td.style.background = `color-mix(in srgb, #3fd18f ${strength}%, transparent)`;
-          else if (share < 0.5) td.style.background = `color-mix(in srgb, #e23a44 ${strength}%, transparent)`;
+          if (share > 0.5) td.style.background = `color-mix(in srgb, #2fd585 ${strength}%, transparent)`;
+          else if (share < 0.5) td.style.background = `color-mix(in srgb, #e3122a ${strength}%, transparent)`;
         }
       })));
       drawTable(document.getElementById('tbl-h2h'), hh.data, cols, null, {key: 'gm', dir: 'asc'});
     }
-    drawSeasons();
   }
 
-  const DRAW = {week: drawWeekPage, money: drawMoneyPage, trophies: drawTrophyPage, standings: drawStandingsPage, history: drawHistoryPage};
+  const DRAW = {week: drawWeekPage, money: drawMoneyPage, trophies: drawTrophyPage, standings: drawStandingsPage, history: drawHistoryPage, records: drawRecordsPage, rivals: drawRivalsPage};
   const tabBtns = [...document.querySelectorAll('#tabs button')];
   function show(p, push) {
     if (!PAGES.includes(p)) p = 'week';
