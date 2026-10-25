@@ -379,13 +379,159 @@ html,body{margin:0;background:#07080b;}
   .bc-fs b { font-size: 22px; }
   #fin-vs { width: 100%; }
 }
+
+/* v3: header extras */
+.bc-top-r { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.bc-top-r .bc-chip { margin-left: 0; }
+.bc-upd { color: #6f7684; font-size: 12px; letter-spacing: .06em; padding-left: 8px; border-left: 1px solid var(--bc-line2); }
+.bc-rules-btn { font-family: var(--bc-cond); font-weight: 800; font-style: italic; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: var(--g-steel); border: 1px solid var(--bc-line2); border-radius: 999px; padding: 6px 16px; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08); }
+.bc-rules-btn:hover { border-color: #fff; }
+.bc-rules-btn:focus-visible { outline: 2px solid var(--bc-gold); outline-offset: 2px; }
+
+/* names open profiles */
+.bc-gmcell, .bc-who:has(.bc-badge), .bc-champ .bc-name { cursor: pointer; }
+.bc-gmcell:hover > span:nth-child(2), .bc-who:has(.bc-badge):hover > span:nth-child(2) { text-decoration: underline; text-decoration-color: var(--bc-red); text-underline-offset: 3px; }
+
+/* form chips */
+.bc-form { display: inline-flex; gap: 3px; vertical-align: middle; }
+.bc-form i { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 3px; font-family: var(--bc-cond); font-style: normal; font-size: 11px; font-weight: 800; color: #07080b; }
+.bc-form-W { background: linear-gradient(180deg, #5ff0a6, #22b56d); }
+.bc-form-L { background: linear-gradient(180deg, #ff6b79, #c90f24); color: #fff !important; }
+.bc-form-T { background: #9aa1ae; }
+
+/* up next */
+.bc-pv-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.bc-pv { position: relative; background: var(--g-steel); border: 1px solid var(--bc-line); border-radius: 6px; padding: 14px 16px 12px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 10px 30px rgba(0, 0, 0, .35); min-width: 0; display: grid; gap: 10px; overflow: hidden; }
+.bc-pv::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 50%; background: linear-gradient(90deg, color-mix(in srgb, var(--ca) 16%, transparent), transparent); pointer-events: none; }
+.bc-pv::after { content: ""; position: absolute; inset: 0 0 0 auto; width: 50%; background: linear-gradient(270deg, color-mix(in srgb, var(--cb) 16%, transparent), transparent); pointer-events: none; }
+.bc-pv > * { position: relative; z-index: 1; }
+.bc-pv-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: start; }
+.bc-pv-side { display: grid; gap: 5px; justify-items: start; min-width: 0; }
+.bc-pv-side.r { justify-items: end; text-align: right; }
+.bc-pv-side .bc-who { font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 24px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; min-width: 0; }
+.bc-pv-side.r .bc-who { flex-direction: row-reverse; }
+.bc-pv-rec { font-size: 12px; color: var(--bc-muted); font-weight: 600; }
+.bc-pv-proj { font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 34px; line-height: 1; background: var(--g-chrome); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 4px; }
+.bc-pv-mid { display: grid; justify-items: center; align-content: center; gap: 4px; padding-top: 30px; }
+.bc-pv-mid .bc-k { font-size: 11px; }
+.bc-pv-vs { font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 22px; color: var(--bc-red); }
+.bc-pv-bar { height: 8px; border-radius: 999px; background: var(--cb); overflow: hidden; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35); }
+.bc-pv-bar i { display: block; height: 100%; background: var(--ca); box-shadow: 2px 0 0 #07080b; }
+.bc-pv-odds { display: flex; justify-content: space-between; font-family: var(--bc-cond); font-weight: 800; font-size: 14px; margin-top: -6px; }
+.bc-pv-foot { font-size: 12px; color: var(--bc-muted); }
+.bc-pv-foot b { color: var(--bc-fg); }
+.bc-pv-line { margin: 0; font-size: 13px; font-style: italic; color: #d6dae2; border-left: 2px solid var(--bc-red); padding-left: 10px; }
+.bc-pv-more { justify-self: start; font-family: var(--bc-cond); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--bc-muted); background: none; border: 0; padding: 0; cursor: pointer; }
+.bc-pv-more:hover { color: #fff; }
+.bc-pv-more::after { content: " →"; }
+
+/* power rankings */
+.bc-pr-list { display: grid; gap: 8px; }
+.bc-pr { position: relative; display: grid; grid-template-columns: 74px 1fr auto; gap: 14px; align-items: center; background: var(--g-steel); border: 1px solid var(--bc-line); border-radius: 6px; padding: 10px 16px 10px 0; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06); overflow: hidden; }
+.bc-pr::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--gm); }
+.bc-pr-rank { display: grid; justify-items: center; gap: 2px; }
+.bc-pr-rank b { font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 40px; line-height: .9; background: var(--g-chrome); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 3px; }
+.bc-pr:first-child .bc-pr-rank b { background: var(--g-gold); -webkit-background-clip: text; background-clip: text; }
+.bc-pr-mv { font-family: var(--bc-cond); font-weight: 800; font-size: 13px; letter-spacing: .04em; }
+.bc-pr-mv.up { color: var(--bc-green); }
+.bc-pr-mv.down { color: #ff4d5e; }
+.bc-pr-mv.flat { color: #6f7684; }
+.bc-pr-who { min-width: 0; display: grid; gap: 4px; }
+.bc-pr-who .bc-who { font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 22px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+.bc-pr-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--bc-muted); font-weight: 600; }
+.bc-pr-blurb { margin: 2px 0 0; font-size: 13px; color: #d6dae2; font-style: italic; }
+.bc-pr-score { display: grid; justify-items: end; line-height: 1; }
+.bc-pr-score b { font-family: var(--bc-cond); font-style: italic; font-weight: 800; font-size: 22px; }
+.bc-pr-score span { font-family: var(--bc-cond); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bc-muted); }
+#pr-weeks { margin-bottom: 2px; }
+
+/* playoff race */
+.bc-table tbody tr td.bc-pbar { background-image: linear-gradient(90deg, rgba(47, 213, 133, .32) var(--p), transparent var(--p)) !important; background-repeat: no-repeat; background-size: 100% 70%; background-position: 0 50%; font-weight: 800; }
+.bc-table tr.bc-cut td { border-bottom: 2px dashed var(--bc-red); }
+
+/* ledgers */
+.bc-ledger td { text-align: center; min-width: 40px; font-weight: 700; }
+.bc-ledger td.bc-left { text-align: left; }
+.bc-ledger td:last-child { font-family: var(--bc-cond); font-size: 17px; font-weight: 900; }
+.bc-ledger td.bc-na { color: #3a3f4a; font-weight: 400; }
+.bc-table.bc-ledger tbody tr td.lg-pos { color: #7cf0b6; background: rgba(47, 213, 133, .12); }
+.bc-table.bc-ledger tbody tr td.lg-neg { color: #ff8a96; background: rgba(227, 18, 42, .14); }
+.bc-table.bc-ledger tbody tr td.lg-eur { color: var(--bc-gold); background: rgba(242, 193, 78, .1); }
+
+/* modal */
+.bc-modal { position: fixed; inset: 0; z-index: 50; background: rgba(4, 5, 8, .72); backdrop-filter: blur(6px); display: grid; place-items: center; padding: 16px; }
+.bc-modal[hidden] { display: none; }
+html.bc-noscroll { overflow: hidden; }
+.bc-modal-card { box-sizing: border-box; position: relative; width: min(760px, 100%); max-height: calc(100vh - 32px); overflow: auto; background: linear-gradient(180deg, #1b1e26, #101217); border: 1px solid var(--bc-line2); border-radius: 10px; box-shadow: 0 30px 80px rgba(0, 0, 0, .6); padding: 22px 22px 18px; color: var(--bc-fg); }
+.bc-modal-card #modal-body { --gm: var(--bc-red); }
+.bc-modal-card #modal-body::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--gm); border-radius: 10px 10px 0 0; }
+.bc-x { position: absolute; top: 10px; right: 12px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--bc-line2); background: #0b0c10; color: #fff; font-size: 22px; line-height: 1; cursor: pointer; z-index: 2; }
+.bc-x:focus-visible { outline: 2px solid var(--bc-gold); outline-offset: 2px; }
+.bc-pf-head { display: flex; align-items: center; gap: 14px; padding-right: 40px; }
+.bc-badge.xl { width: 58px; height: 58px; font-size: 22px; }
+.bc-pf-name { font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 38px; text-transform: uppercase; line-height: 1; }
+.bc-pf-sub { font-size: 13px; color: var(--bc-muted); margin-top: 4px; }
+.bc-pf-h { margin: 18px 0 8px; font-family: var(--bc-cond); font-size: 15px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--bc-muted); display: flex; align-items: center; gap: 10px; }
+.bc-pf-h::after { content: ""; flex: 1; height: 1px; background: var(--bc-line2); }
+.bc-pf-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.bc-pf-tile { background: rgba(255, 255, 255, .035); border: 1px solid var(--bc-line); border-radius: 6px; padding: 10px 12px; min-width: 0; }
+.bc-pf-tile .bc-k { font-size: 11px; }
+.bc-pf-v { font-family: var(--bc-cond); font-style: italic; font-weight: 900; font-size: 26px; line-height: 1.1; margin-top: 4px; }
+.bc-pf-tile.gold .bc-pf-v { color: var(--bc-gold); }
+.bc-pf-tile.money .bc-pf-v { color: var(--bc-gold); }
+.bc-pf-tile .bc-s { margin-top: 2px; overflow-wrap: anywhere; }
+.bc-pf-form { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.bc-pf-chart { margin-top: 10px; }
+.bc-pf-rivals { display: grid; gap: 6px; }
+.bc-pf-riv { display: flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, .035); border: 1px solid var(--bc-line); border-radius: 6px; padding: 8px 12px; color: var(--bc-fg); font: inherit; font-size: 14px; cursor: pointer; text-align: left; }
+.bc-pf-riv:hover { border-color: var(--bc-line2); }
+.bc-pf-riv .bc-k { min-width: 120px; font-size: 12px; }
+.bc-pf-riv b { margin-left: auto; font-family: var(--bc-cond); font-size: 18px; }
+.bc-pf-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.bc-pf-tag { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: rgba(242, 193, 78, .1); color: #e9d49c; border: 1px solid rgba(242, 193, 78, .3); }
+.bc-pf-names .bc-name-row:first-child { border-top: 0; }
+
+@media (max-width: 980px) { .bc-pv-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 620px) {
+  .bc-top-r { margin-left: 0; width: 100%; justify-content: space-between; }
+  .bc-upd { display: none; }
+  .bc-hero { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .bc-hero .bc-purse { grid-column: 1 / -1; }
+  .bc-hero .bc-stat:last-child { grid-column: auto; }
+  .bc-hero .bc-stat:not(.bc-purse) { padding: 10px 10px 10px 12px; }
+  .bc-hero .bc-stat:not(.bc-purse) .bc-k { font-size: 11px; letter-spacing: .06em; }
+  .bc-hero .bc-stat:not(.bc-purse) .bc-v { font-size: 19px; flex-wrap: wrap; gap: 4px 6px; margin-top: 6px; }
+  .bc-hero .bc-stat:not(.bc-purse) .bc-badge.lg { width: 26px; height: 26px; font-size: 11px; }
+  .bc-hero .bc-stat:not(.bc-purse) .bc-s { display: none; }
+  #h-purse-sub { display: none; }
+  .bc-purse .bc-v { font-size: calc(var(--cds-font-size-title) * 1.7); }
+  .bc-tabs.more-r { -webkit-mask-image: linear-gradient(90deg, #000 78%, transparent); mask-image: linear-gradient(90deg, #000 78%, transparent); }
+  .bc-tabs.more-l.more-r { -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 78%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 78%, transparent); }
+  .bc-tabs.more-l:not(.more-r) { -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%); mask-image: linear-gradient(90deg, transparent, #000 14%); }
+  .bc-pv { padding: 12px; }
+  .bc-pv-side .bc-who { font-size: 19px; gap: 6px; }
+  .bc-pv-side .bc-badge.lg { width: 28px; height: 28px; font-size: 12px; }
+  .bc-pv-proj { font-size: 28px; }
+  .bc-pv-mid { padding-top: 24px; }
+  .bc-pr { grid-template-columns: 52px 1fr; padding-right: 12px; gap: 10px; }
+  .bc-pr-rank b { font-size: 32px; }
+  .bc-pr-score { display: none; }
+  .bc-pr-who .bc-who { font-size: 19px; }
+  .bc-pr-who .bc-szn { display: none; }
+  .bc-modal { padding: 0; place-items: end stretch; }
+  .bc-modal-card { width: 100%; max-height: 92vh; border-radius: 14px 14px 0 0; padding: 18px 14px 14px; }
+  .bc-pf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bc-pf-name { font-size: 30px; }
+  .bc-badge.xl { width: 46px; height: 46px; font-size: 18px; }
+  .bc-pf-riv .bc-k { min-width: 92px; }
+}
 </style>
 
 <div class="bc">
   <div class="bc-top" id="top">
     <div class="bc-bug"><span>SPPJ</span></div>
     <h1 class="bc-title">League Hub</h1>
-    <div class="bc-chip"><i class="bc-dot"></i><span>Through week</span><b id="bc-week" data-source="weekly_trophies_2026" data-field="week">…</b><span>· 2026</span></div>
+    <div class="bc-top-r"><div class="bc-chip"><i class="bc-dot"></i><span>Through week</span><b id="bc-week" data-source="weekly_trophies_2026" data-field="week">…</b><span>· 2026</span><span class="bc-upd" id="bc-upd" data-source="meta_2026"></span></div><button type="button" class="bc-rules-btn" id="open-rules">Rules</button></div>
   </div>
 
   <div class="bc-ticker" id="ticker">
@@ -418,6 +564,10 @@ html,body{margin:0;background:#07080b;}
   <!-- THIS WEEK -->
   <div class="bc-page" id="page-week" role="tabpanel">
     <section class="bc-seg">
+      <div class="bc-seg-h"><h2 id="preview-title">Up next</h2><p id="preview-sub">Projections, all-time series and form</p></div>
+      <div class="bc-pv-grid" id="preview-cards" data-source="schedule_2026 preview_2026 results_2026"></div>
+    </section>
+    <section class="bc-seg">
       <div class="bc-seg-h"><h2 id="week-title">Week recap</h2><p>Scores, awards and who paid</p></div>
       <div class="bc-weeks" id="week-tabs" role="group" aria-label="Pick a week" data-source="weekly_trophies_2026"></div>
       <p class="bc-headline" id="week-headline" data-source="weekly_trophies_2026 week_games">…</p>
@@ -442,7 +592,7 @@ html,body{margin:0;background:#07080b;}
       <div class="bc-seg-h"><h2>The purse</h2><p>Every euro goes to the champion</p></div>
       <div class="bc-card">
         <h3>Winner's purse after each week</h3>
-        <p class="bc-note">Entry fees (30€ from all 12 GMs) plus every fine collected so far. The champion takes the lot.</p>
+        <p class="bc-note">Entry fees (30€ from all 12 GMs) plus every fine collected so far. The champion takes the lot. Faded bars are the projection: the rest of the regular season at this season's average fines per week.</p>
         <div class="bc-legend" id="purse-legend"></div>
         <div class="bc-chart" id="chart-purse" data-source="purse_by_week"></div>
       </div>
@@ -461,6 +611,13 @@ html,body{margin:0;background:#07080b;}
           <p class="bc-note">Counts per fine type and the total to pay.</p>
           <div class="bc-scroll"><table class="bc-table" id="tbl-fines" data-source="fines_by_gm" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
         </div>
+      </div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Fines by week</h2><p>Who paid in when</p></div>
+      <div class="bc-card">
+        <p class="bc-note">Euros fined each week. Hover a number to see the crime.</p>
+        <div class="bc-scroll"><table class="bc-table bc-ledger" id="tbl-fledger" data-source="fines_ledger" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
       </div>
     </section>
     <section class="bc-seg">
@@ -489,6 +646,13 @@ html,body{margin:0;background:#07080b;}
       </div>
     </section>
     <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Week by week</h2><p>Trophy points won and lost</p></div>
+      <div class="bc-card">
+        <p class="bc-note">Every award each week. Hover a number to see what it was for.</p>
+        <div class="bc-scroll"><table class="bc-table bc-ledger" id="tbl-tledger" data-source="trophy_ledger" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+    <section class="bc-seg">
       <div class="bc-seg-h"><h2>Season trophies</h2><p>Current holders, can still change hands</p></div>
       <div class="bc-holders" id="holders" data-source="season_trophies_2026 rules"></div>
     </section>
@@ -501,10 +665,23 @@ html,body{margin:0;background:#07080b;}
   <!-- STANDINGS -->
   <div class="bc-page" id="page-standings" role="tabpanel" hidden>
     <section class="bc-seg">
+      <div class="bc-seg-h"><h2 id="pr-title">Power rankings</h2><p>Who's actually good right now</p></div>
+      <div class="bc-weeks" id="pr-weeks" role="group" aria-label="Pick a week" data-source="power_rankings"></div>
+      <div class="bc-pr-list" id="pr-list" data-source="power_rankings"></div>
+      <p class="bc-note">Power score blends season all-play (45%), win % (25%) and all-play over the last three weeks (30%), so hot teams climb and lucky records don't hide anything. Arrows show the move from the week before.</p>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Playoff race</h2><p>Seeds and odds</p></div>
+      <div class="bc-card">
+        <p class="bc-note" id="odds-note"></p>
+        <div class="bc-scroll"><table class="bc-table" id="tbl-odds" data-source="playoff_odds" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+    <section class="bc-seg">
       <div class="bc-seg-h"><h2>2026 standings</h2><p>Regular season so far</p></div>
       <div class="bc-card">
-        <p class="bc-note">All-play: your weekly score against every other team that week. Luck: real wins minus the wins your scoring earned.</p>
-        <div class="bc-scroll"><table class="bc-table" id="tbl-standings" data-source="this_season" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
+        <p class="bc-note">All-play: your weekly score against every other team that week. Luck: real wins minus the wins your scoring earned. Form is the last five results, newest on the right.</p>
+        <div class="bc-scroll"><table class="bc-table" id="tbl-standings" data-source="this_season results_2026" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
       </div>
     </section>
   </div>
@@ -688,7 +865,14 @@ html,body{margin:0;background:#07080b;}
     </section>
   </div>
 
-  <p class="bc-foot" id="foot">Data from ESPN league 838597 and the 2020 Sleeper league, updated by Claude after each week. 2015's eighth team was a filler team and is left out of GM totals. 2020 places 7 to 12 follow the regular-season record.</p>
+  <div class="bc-modal" id="modal" hidden>
+    <div class="bc-modal-card" role="dialog" aria-modal="true" aria-label="Details">
+      <button type="button" class="bc-x" aria-label="Close">×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <p class="bc-foot" id="foot">Data from ESPN league 838597 and the 2020 Sleeper league, updated by Claude after each week. Tap any name or badge to open that GM's profile. 2015's eighth team was a filler team and is left out of GM totals. 2020 places 7 to 12 follow the regular-season record.</p>
 </div>
 
 <script>
@@ -1121,6 +1305,148 @@ dash.calc('rivalries', {
   }
 });
 
+dash.calc('results_2026', {
+  inputs: ['games'],
+  title: '2026 results per GM',
+  description: "Each GM's 2026 games in order with the result, used for form chips and power rankings.",
+  fn: (games) => {
+    const out = [];
+    games.filter((g) => String(g.season) === '2026').forEach((g) => {
+      const a = Number(g.a_pts), b = Number(g.b_pts);
+      out.push({gm: g.a, opp: g.b, week: Number(g.week), pts: a, opp_pts: b, res: a > b ? 'W' : a < b ? 'L' : 'T'});
+      out.push({gm: g.b, opp: g.a, week: Number(g.week), pts: b, opp_pts: a, res: b > a ? 'W' : b < a ? 'L' : 'T'});
+    });
+    return out.sort((x, y) => x.week - y.week);
+  }
+});
+
+dash.calc('power_rankings', {
+  inputs: ['results_2026', 'power_notes_2026'],
+  title: 'Power rankings',
+  description: 'Weekly power score: 45% season all-play, 25% win %, 30% all-play over the last three weeks. Ranked each week with movement from the week before, plus the weekly write-up.',
+  fn: (results, notes) => {
+    const weeks = [...new Set(results.map((r) => r.week))].sort((a, b) => a - b);
+    const byWeek = {};
+    weeks.forEach((w) => { byWeek[w] = results.filter((r) => r.week === w); });
+    const note = {};
+    notes.forEach((n) => { note[n.week + '|' + n.gm] = n.blurb; });
+    const out = [];
+    let prev = {};
+    weeks.forEach((W) => {
+      const t = {};
+      results.filter((r) => r.week <= W).forEach((r) => {
+        const x = t[r.gm] || (t[r.gm] = {gm: r.gm, w: 0, l: 0, ti: 0, pf: 0, ap: 0, apn: 0, ap3: 0, apn3: 0});
+        x.pf += r.pts; if (r.res === 'W') x.w += 1; else if (r.res === 'L') x.l += 1; else x.ti += 1;
+        const field = byWeek[r.week];
+        const beat = field.filter((o) => o.gm !== r.gm && o.pts < r.pts).length;
+        x.ap += beat; x.apn += field.length - 1;
+        if (r.week > W - 3) { x.ap3 += beat; x.apn3 += field.length - 1; }
+      });
+      const ranked = Object.values(t).map((x) => ({...x, score: 0.45 * x.ap / x.apn + 0.25 * (x.w + x.ti / 2) / (x.w + x.l + x.ti) + 0.30 * x.ap3 / x.apn3}))
+        .sort((a, b) => b.score - a.score || b.pf - a.pf);
+      const now = {};
+      ranked.forEach((x, i) => {
+        now[x.gm] = i + 1;
+        out.push({week: String(W), gm: x.gm, rank: i + 1, prev_rank: prev[x.gm] || null, move: prev[x.gm] ? prev[x.gm] - (i + 1) : 0,
+          score: Math.round(x.score * 1000) / 10, record: x.w + '-' + x.l + (x.ti ? '-' + x.ti : ''), pf: Math.round(x.pf * 100) / 100,
+          allplay_pct: x.ap / x.apn, recent_pct: x.ap3 / x.apn3, blurb: note[W + '|' + x.gm] || ''});
+      });
+      prev = now;
+    });
+    return out;
+  }
+});
+
+dash.calc('playoff_odds', {
+  inputs: ['results_2026', 'schedule_2026', 'league_settings', 'divisions_2026'],
+  title: 'Playoff race',
+  description: 'Current seeds by record then points, and odds from 10,000 simulated finishes of the regular season. Each team scores around its own 2026 average (pulled a bit toward the league average) with week-to-week swings like this season so far.',
+  fn: (results, schedule, settings, divisions) => {
+    const set = {};
+    settings.forEach((s) => { set[s.key] = s.value; });
+    const spots = Number(set.playoff_teams || 8), regWeeks = Number(set.reg_weeks || 14);
+    const div = {};
+    divisions.forEach((d) => { div[d.gm] = d.division; });
+    const t = {};
+    results.forEach((r) => {
+      const x = t[r.gm] || (t[r.gm] = {gm: r.gm, w: 0, l: 0, ti: 0, pf: 0, n: 0, sq: 0});
+      x.pf += r.pts; x.n += 1; x.sq += r.pts * r.pts;
+      if (r.res === 'W') x.w += 1; else if (r.res === 'L') x.l += 1; else x.ti += 1;
+    });
+    const teams = Object.values(t);
+    const lastWeek = Math.max(0, ...results.map((r) => r.week));
+    const all = results.map((r) => r.pts);
+    const lgMean = all.reduce((a, b) => a + b, 0) / (all.length || 1);
+    const lgSd = Math.sqrt(all.reduce((a, b) => a + (b - lgMean) ** 2, 0) / Math.max(1, all.length - 1)) || 25;
+    const remaining = schedule.filter((s) => Number(s.week) > lastWeek && Number(s.week) <= regWeeks);
+    const order = (list) => list.slice().sort((a, b) => (b.w + b.ti / 2) - (a.w + a.ti / 2) || b.pf - a.pf);
+    const seedNow = {};
+    order(teams).forEach((x, i) => { seedNow[x.gm] = i + 1; });
+    // seeded random so the numbers don't jump on every page load
+    let seed = 20141234 + lastWeek;
+    const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let z = Math.imul(seed ^ seed >>> 15, 1 | seed); z = z + Math.imul(z ^ z >>> 7, 61 | z) ^ z; return ((z ^ z >>> 14) >>> 0) / 4294967296; };
+    const gauss = () => { let u = 0, v = 0; while (u === 0) u = rnd(); while (v === 0) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+    const mean = {};
+    teams.forEach((x) => { const own = x.pf / x.n; const k = x.n / (x.n + 4); mean[x.gm] = k * own + (1 - k) * lgMean; });
+    const N = 10000, tally = {};
+    teams.forEach((x) => { tally[x.gm] = {made: 0, top: 0, bye: 0, last: 0, seedSum: 0}; });
+    for (let i = 0; i < N; i++) {
+      const s = {};
+      teams.forEach((x) => { s[x.gm] = {gm: x.gm, w: x.w, l: x.l, ti: x.ti, pf: x.pf}; });
+      remaining.forEach((m) => {
+        if (!s[m.a] || !s[m.b]) return;
+        const pa = mean[m.a] + gauss() * lgSd, pb = mean[m.b] + gauss() * lgSd;
+        s[m.a].pf += pa; s[m.b].pf += pb;
+        if (pa > pb) { s[m.a].w += 1; s[m.b].l += 1; } else { s[m.b].w += 1; s[m.a].l += 1; }
+      });
+      order(Object.values(s)).forEach((x, k) => {
+        const tl = tally[x.gm]; tl.seedSum += k + 1;
+        if (k < spots) tl.made += 1;
+        if (k === 0) tl.top += 1;
+        if (k < 4) tl.bye += 1;
+        if (k === teams.length - 1) tl.last += 1;
+      });
+    }
+    return order(teams).map((x) => ({
+      gm: x.gm, seed: seedNow[x.gm], record: x.w + '-' + x.l + (x.ti ? '-' + x.ti : ''), wins: x.w + x.ti / 2, pf: Math.round(x.pf * 100) / 100,
+      division: div[x.gm] || '', playoff_pct: tally[x.gm].made / N, top_seed_pct: tally[x.gm].top / N, top4_pct: tally[x.gm].bye / N,
+      last_pct: tally[x.gm].last / N, avg_seed: tally[x.gm].seedSum / N, games_left: remaining.filter((m) => m.a === x.gm || m.b === x.gm).length,
+      spots, reg_weeks: regWeeks
+    }));
+  }
+});
+
+dash.calc('trophy_ledger', {
+  inputs: ['weekly_trophies_2026', 'rules'],
+  title: 'Trophy points by week',
+  description: 'Trophy points each GM earned or lost in each week, from the weekly awards.',
+  fn: (weekly, rules) => {
+    const pts = {};
+    rules.forEach((r) => { pts[r.key] = Number(r.trophy_points); });
+    const out = {};
+    const add = (gm, week, p, what) => { const k = gm + '|' + week; const r = out[k] || (out[k] = {gm, week: String(week), pts: 0, awards: []}); r.pts += p; r.awards.push(what); };
+    weekly.forEach((w) => {
+      add(w.most_points_gm, w.week, pts.most_points, 'Most points');
+      add(w.least_points_gm, w.week, pts.least_points, 'Least points');
+      add(w.top_player_gm, w.week, pts.top_player, 'Top player');
+      add(w.gm_move_gm, w.week, pts.gm_move, 'GM move');
+      add(w.coach_gm, w.week, pts.coach, 'Coach');
+    });
+    return Object.values(out).map((r) => ({...r, awards: r.awards.join(', ')}));
+  }
+});
+
+dash.calc('fines_ledger', {
+  inputs: ['fine_log'],
+  title: 'Fines by week',
+  description: 'Euros each GM was fined in each week.',
+  fn: (fine_log) => {
+    const out = {};
+    fine_log.forEach((f) => { const k = f.gm + '|' + f.week; const r = out[k] || (out[k] = {gm: f.gm, week: String(f.week), eur: 0, what: []}); r.eur += f.fine_eur; r.what.push(f.type + ' (' + f.player + ')'); });
+    return Object.values(out).map((r) => ({...r, what: r.what.join(', ')}));
+  }
+});
+
 (function () {
   const f1 = d3.format('.1f'), f2 = d3.format('.2f'), pct = d3.format('.1%'), c1 = d3.format(',.1f');
   const signed = (v) => (v > 0 ? '+' : '') + f1(v);
@@ -1154,7 +1480,7 @@ dash.calc('rivalries', {
   function failLine(e) { e.replaceChildren(); e.appendChild(el('div', 'bc-fail', 'Failed to load')); }
   function badge(g, lg) {
     const b = el('span', 'bc-badge' + (lg ? ' lg' : ''), GM[g] ? GM[g][1] : String(g || '?').slice(0, 2).toUpperCase());
-    const c = gmColor(g); b.style.setProperty('--gm', c); b.setAttribute('aria-hidden', 'true');
+    const c = gmColor(g); b.style.setProperty('--gm', c); b.setAttribute('aria-hidden', 'true'); if (g) b.dataset.gm = g;
     if (GM[g] && GM[g][2]) b.style.setProperty('--ring', GM[g][2]);
     const n = parseInt(c.slice(1), 16), lum = (0.2126 * ((n >> 16) & 255) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255)) / 255;
     if (lum < 0.5) { b.style.color = '#fff'; b.style.webkitTextFillColor = '#fff'; b.style.textShadow = '0 1px 1px rgba(0,0,0,.45)'; }
@@ -1299,15 +1625,16 @@ dash.calc('rivalries', {
     rows.forEach((r) => {
       const g = svg.append('g');
       const bx = x(r.week), bw = x.bandwidth();
+      if (r.proj) g.attr('opacity', 0.32);
       g.append('rect').attr('x', bx).attr('y', y(r.entry_eur)).attr('width', bw).attr('height', y(0) - y(r.entry_eur)).attr('fill', 'url(#bc-g-bronze)');
       if (r.fines_to_date_eur > 0) g.append('rect').attr('x', bx).attr('y', y(r.purse_eur)).attr('width', bw).attr('height', Math.max(1, y(r.entry_eur) - y(r.purse_eur) - 2)).attr('rx', 2).attr('fill', 'url(#bc-g-gold)');
-      g.append('text').attr('x', bx + bw / 2).attr('y', y(r.purse_eur) - 7).attr('text-anchor', 'middle').attr('font-size', 15).attr('font-weight', 800).attr('font-style', 'italic').attr('font-family', "'Barlow Condensed', sans-serif").attr('fill', '#f6cf5b').text(eur(r.purse_eur));
+      if (!r.proj || r.week === rows[rows.length - 1].week) g.append('text').attr('x', bx + bw / 2).attr('y', y(r.purse_eur) - 7).attr('text-anchor', 'middle').attr('font-size', 15).attr('font-weight', 800).attr('font-style', 'italic').attr('font-family', "'Barlow Condensed', sans-serif").attr('fill', '#f6cf5b').text((r.proj ? '≈' : '') + eur(r.purse_eur));
       g.append('rect').attr('x', bx - 4).attr('y', top).attr('width', bw + 8).attr('height', H - bottom - top).attr('fill', 'transparent')
         .on('mousemove', (ev) => {
           tip.style('opacity', 1).html('');
-          tip.append('div').attr('class', 'bc-tip-k').text('After week ' + r.week);
+          tip.append('div').attr('class', 'bc-tip-k').text((r.proj ? 'Projected after week ' : 'After week ') + r.week);
           tip.append('div').text(`Entry fees: ${eur(r.entry_eur)}`);
-          tip.append('div').text(`Fines so far: ${eur(r.fines_to_date_eur)} (+${eur(r.week_fines_eur)} this week)`);
+          tip.append('div').text(r.proj ? `Fines at this pace: ${eur(r.fines_to_date_eur)} (about ${eur(r.week_fines_eur)} a week)` : `Fines so far: ${eur(r.fines_to_date_eur)} (+${eur(r.week_fines_eur)} this week)`);
           tip.append('div').text(`Purse: ${eur(r.purse_eur)}`);
           placeTip(tip, elm, ev);
         })
@@ -1428,6 +1755,7 @@ dash.calc('rivalries', {
 
   // THIS WEEK
   function drawWeekPage() {
+    drawPreview();
     const wt = dash.data('weekly_trophies_2026'), fl = dash.data('fine_log'), wg = dash.data('week_games');
     if (wt.status !== 'ok' || !wt.data.length) return;
     const weeks = wt.data.map((w) => String(w.week)).sort((a, b) => Number(a) - Number(b));
@@ -1516,7 +1844,13 @@ dash.calc('rivalries', {
       const lg = document.getElementById('purse-legend');
       const item = (c, t) => { const s = el('span'); const i = el('i'); i.style.background = c; s.append(i, document.createTextNode(t)); return s; };
       lg.replaceChildren(item('linear-gradient(90deg,#5a4214,#d2a64a,#4a360f)', 'Entry fees'), item('linear-gradient(90deg,#b8860b,#fff3c4,#a37508)', 'Fines collected'));
-      drawPurse(document.getElementById('chart-purse'), pb.data.slice().sort((a, b) => Number(a.week) - Number(b.week)));
+      const done = pb.data.slice().sort((a, b) => Number(a.week) - Number(b.week));
+      const set = Object.fromEntries((dash.data('league_settings').data || []).map((s) => [s.key, s.value]));
+      const regWeeks = Number(set.reg_weeks || 14), last = done[done.length - 1];
+      const perWeek = last.fines_to_date_eur / done.length;
+      const proj = [];
+      for (let w = Number(last.week) + 1; w <= regWeeks; w++) { const f = Math.round(last.fines_to_date_eur + perWeek * (w - Number(last.week))); proj.push({week: String(w), entry_eur: last.entry_eur, fines_to_date_eur: f, week_fines_eur: Math.round(perWeek), purse_eur: last.entry_eur + f, proj: true}); }
+      drawPurse(document.getElementById('chart-purse'), done.concat(proj));
     } else if (pb.status === 'error') failLine(document.getElementById('chart-purse'));
 
     if (fb.status === 'ok' && fb.data.length) {
@@ -1545,6 +1879,8 @@ dash.calc('rivalries', {
       ], null, {key: 'total_eur', dir: 'desc'});
     } else if (fb.status === 'error') failLine(document.getElementById('chart-fines'));
 
+    const fl = dash.data('fines_ledger');
+    if (fl.status === 'ok') ledger('tbl-fledger', fl.data, 'eur', (td, v, t, total) => { td.textContent = v == null ? '' : v + '€'; if (total) { td.classList.add('bc-money'); return; } if (v) td.classList.add('lg-eur'); if (t) td.title = t; }, 'Total', true);
     const rf = document.getElementById('rule-fines');
     if (ru.status === 'ok') rf.replaceChildren(ruleRows(el('div'), ru.data, 'fine'));
     else if (ru.status === 'error') failLine(rf);
@@ -1585,10 +1921,14 @@ dash.calc('rivalries', {
       const g = (kind, title) => { const box = el('div'); box.append(el('div', 'bc-k', title)); return ruleRows(box, ru.data, kind); };
       rt.replaceChildren(g('weekly', 'Weekly trophies'), g('season', 'Season trophies'));
     } else if (ru.status === 'error') failLine(rt);
+    const tl = dash.data('trophy_ledger');
+    if (tl.status === 'ok') ledger('tbl-tledger', tl.data, 'pts', (td, v, t, total) => { td.textContent = v == null ? '' : signedInt(v); if (total) { td.classList.add(v > 0 ? 'bc-pos' : v < 0 ? 'bc-neg' : 'bc-zero'); return; } if (v > 0) td.classList.add('lg-pos'); else if (v < 0) td.classList.add('lg-neg'); if (t) td.title = t; }, 'Total', true);
   }
 
   // STANDINGS
   function drawStandingsPage() {
+    drawPower();
+    drawOdds();
     const ts = dash.data('this_season');
     if (ts.status !== 'ok') return;
     drawTable(document.getElementById('tbl-standings'), ts.data, [
@@ -1596,6 +1936,7 @@ dash.calc('rivalries', {
       gmCol,
       {field: 'team', sortKey: 'team', label: 'Team', left: true, firstDir: 'asc', d: true},
       {field: 'record', sortKey: 'rank', label: 'Record', firstDir: 'asc'},
+      {field: 'gm', sortKey: 'rank', label: 'Form', cell: (td, v) => { td.textContent = ''; td.appendChild(formChips(v, 5)); }},
       {field: 'pf', sortKey: 'pf', label: 'Points for', fmt: f2},
       {field: 'pa', sortKey: 'pa', label: 'Against', fmt: f2, d: true},
       {field: 'allplay_pct', sortKey: 'allplay_pct', label: 'All-play %', fmt: pct, d: true},
@@ -2154,6 +2495,301 @@ dash.calc('rivalries', {
     }
   }
 
+  // ---------- SHARED: form chips, win odds ----------
+  function formChips(gm, n) {
+    const rs = dash.data('results_2026');
+    const wrap = el('span', 'bc-form');
+    if (rs.status !== 'ok') return wrap;
+    const list = rs.data.filter((r) => r.gm === gm).sort((a, b) => a.week - b.week).slice(-(n || 5));
+    list.forEach((r) => { const c = el('i', 'bc-form-' + r.res, r.res); c.title = `Week ${r.week}: ${r.res === 'W' ? 'beat' : r.res === 'L' ? 'lost to' : 'tied'} ${r.opp}, ${f2(r.pts)}–${f2(r.opp_pts)}`; wrap.appendChild(c); });
+    return wrap;
+  }
+  const erf = (x) => { const s = Math.sign(x); x = Math.abs(x); const t = 1 / (1 + 0.3275911 * x); return s * (1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x)); };
+  const winProb = (a, b, sd) => 0.5 * (1 + erf((a - b) / ((sd || 25) * Math.SQRT2)));
+  function seriesBetween(a, b) {
+    const gs = dash.data('games');
+    if (gs.status !== 'ok') return null;
+    let w = 0, l = 0, last = null;
+    gs.data.forEach((g) => {
+      if (!((g.a === a && g.b === b) || (g.a === b && g.b === a))) return;
+      const ap = Number(g.a === a ? g.a_pts : g.b_pts), bp = Number(g.a === a ? g.b_pts : g.a_pts);
+      if (ap > bp) w += 1; else if (bp > ap) l += 1;
+      const when = Number(g.season) * 100 + Number(g.week);
+      if (!last || when > last.when) last = {when, season: g.season, week: g.week, ap, bp};
+    });
+    return {w, l, last};
+  }
+
+  // ---------- THIS WEEK: up next ----------
+  function drawPreview() {
+    const pv = dash.data('preview_2026'), sc = dash.data('schedule_2026'), ts = dash.data('this_season'), rs = dash.data('results_2026');
+    const box = document.getElementById('preview-cards');
+    if (sc.status !== 'ok' || ts.status !== 'ok' || rs.status !== 'ok') { if (sc.status === 'error') failLine(box); return; }
+    const lastWeek = Math.max(0, ...rs.data.map((r) => r.week));
+    const pvRows = pv.status === 'ok' ? pv.data : [];
+    const pvWeek = pvRows.length ? Math.max(...pvRows.map((r) => Number(r.week))) : 0;
+    const week = pvWeek > lastWeek ? pvWeek : lastWeek + 1;
+    const games = sc.data.filter((m) => Number(m.week) === week);
+    document.getElementById('preview-title').textContent = 'Up next: week ' + week;
+    if (!games.length) { box.replaceChildren(el('div', 'bc-clean', 'Regular season is done. Playoff matchups coming soon.')); document.getElementById('preview-sub').textContent = 'Playoffs'; return; }
+    const st = Object.fromEntries(ts.data.map((r) => [r.gm, r]));
+    const ppg = {};
+    rs.data.forEach((r) => { (ppg[r.gm] || (ppg[r.gm] = [])).push(r.pts); });
+    const avg = (g) => d3.mean(ppg[g] || [0]);
+    const hasProj = pvWeek === week;
+    document.getElementById('preview-sub').textContent = hasProj ? 'ESPN projections, all-time series and form' : 'Season averages, all-time series and form';
+    box.replaceChildren(...games.map((m) => {
+      const p = pvRows.find((r) => Number(r.week) === week && ((r.a === m.a && r.b === m.b) || (r.a === m.b && r.b === m.a)));
+      const flip = p && p.a !== m.a;
+      const num = (v) => (v === '' || v == null || isNaN(Number(v)) ? null : Number(v));
+      const rawA = p ? num(flip ? p.b_proj : p.a_proj) : null, rawB = p ? num(flip ? p.a_proj : p.b_proj) : null;
+      const gotProj = rawA != null && rawB != null;
+      const pa = gotProj ? rawA : avg(m.a), pb = gotProj ? rawB : avg(m.b);
+      const prob = winProb(pa, pb, 26);
+      const c = el('div', 'bc-pv');
+      c.style.setProperty('--ca', gmColor(m.a)); c.style.setProperty('--cb', gmColor(m.b));
+      const side = (g, proj, r) => {
+        const s = el('div', 'bc-pv-side' + (r ? ' r' : ''));
+        const w = el('div', 'bc-who'); w.append(badge(g, true), el('span', null, g));
+        const rec = st[g] ? `${st[g].record} · ${ordShort(st[g].rank)}` : '';
+        s.append(w, el('div', 'bc-pv-rec', rec), formChips(g, 5), el('div', 'bc-pv-proj', f1(proj)));
+        return s;
+      };
+      const mid = el('div', 'bc-pv-mid');
+      mid.append(el('div', 'bc-k', gotProj ? 'Projected' : 'Season avg'), el('div', 'bc-pv-vs', 'VS'));
+      const bar = el('div', 'bc-pv-bar'); const fa = el('i'); fa.style.width = (prob * 100).toFixed(1) + '%'; bar.append(fa);
+      const odds = el('div', 'bc-pv-odds'); odds.append(el('span', null, Math.round(prob * 100) + '%'), el('span', null, Math.round((1 - prob) * 100) + '%'));
+      const top = el('div', 'bc-pv-top'); top.append(side(m.a, pa, false), mid, side(m.b, pb, true));
+      const ser = seriesBetween(m.a, m.b);
+      const foot = el('div', 'bc-pv-foot');
+      if (ser && ser.w + ser.l) {
+        const lead = ser.w > ser.l ? `${m.a} leads ${ser.w}–${ser.l}` : ser.l > ser.w ? `${m.b} leads ${ser.l}–${ser.w}` : `Series tied ${ser.w}–${ser.l}`;
+        foot.append(el('b', null, lead), document.createTextNode(` all-time · last met week ${ser.last.week}, ${ser.last.season} (${f2(ser.last.ap)}–${f2(ser.last.bp)})`));
+      } else foot.append(el('b', null, 'First ever meeting'));
+      c.append(top, bar, odds, foot);
+      if (p && p.line) c.append(el('p', 'bc-pv-line', p.line));
+      const vsBtn = el('button', 'bc-pv-more', 'Full head to head'); vsBtn.type = 'button';
+      vsBtn.addEventListener('click', () => { hist.vsA = m.a; hist.vsB = m.b; show('rivals', true); document.getElementById('page-rivals').scrollIntoView({block: 'start'}); });
+      c.append(vsBtn);
+      return c;
+    }));
+  }
+  const ordShort = (n) => (n == null ? '' : ord(n));
+
+  // ---------- STANDINGS: power rankings, table, playoff race ----------
+  const pr = {week: null};
+  function drawPower() {
+    const p = dash.data('power_rankings');
+    const box = document.getElementById('pr-list');
+    if (p.status !== 'ok' || !p.data.length) { if (p.status === 'error') failLine(box); return; }
+    const weeks = [...new Set(p.data.map((r) => r.week))].sort((a, b) => Number(a) - Number(b));
+    if (!pr.week || !weeks.includes(pr.week)) pr.week = weeks[weeks.length - 1];
+    const tabs = document.getElementById('pr-weeks');
+    tabs.replaceChildren(...weeks.map((w) => { const b = el('button', null, 'Wk ' + w); b.type = 'button'; b.setAttribute('aria-pressed', String(w === pr.week)); b.addEventListener('click', () => { pr.week = w; drawPower(); }); return b; }));
+    document.getElementById('pr-title').textContent = 'Power rankings: week ' + pr.week;
+    const rows = p.data.filter((r) => r.week === pr.week).sort((a, b) => a.rank - b.rank);
+    box.replaceChildren(...rows.map((r) => {
+      const row = el('div', 'bc-pr');
+      row.style.setProperty('--gm', gmColor(r.gm));
+      const mv = el('span', 'bc-pr-mv ' + (r.move > 0 ? 'up' : r.move < 0 ? 'down' : 'flat'), r.prev_rank == null ? 'NEW' : r.move > 0 ? '▲' + r.move : r.move < 0 ? '▼' + Math.abs(r.move) : '–');
+      const rk = el('div', 'bc-pr-rank'); rk.append(el('b', null, String(r.rank)), mv);
+      const who = el('div', 'bc-pr-who'); const w = el('div', 'bc-who'); w.append(badge(r.gm), el('span', null, r.gm), szn(r.gm)); who.append(w);
+      const meta = el('div', 'bc-pr-meta'); meta.append(el('span', null, r.record), el('span', null, f1(r.pf) + ' pts'), el('span', null, Math.round(r.allplay_pct * 100) + '% all-play'), formChips(r.gm, 5));
+      who.append(meta);
+      if (r.blurb) who.append(el('p', 'bc-pr-blurb', r.blurb));
+      const sc = el('div', 'bc-pr-score'); sc.append(el('b', null, f1(r.score)), el('span', null, 'power'));
+      row.append(rk, who, sc);
+      return row;
+    }));
+  }
+
+  function drawOdds() {
+    const o = dash.data('playoff_odds');
+    const tbl = document.getElementById('tbl-odds');
+    if (o.status !== 'ok' || !o.data.length) return;
+    const spots = o.data[0].spots, left = d3.max(o.data, (r) => r.games_left);
+    document.getElementById('odds-note').textContent = `Top ${spots} of 12 make the playoffs (quarterfinal and semifinal one week each, two-week final). Seeds go by record, then points. ${left} regular-season weeks left. Odds come from 10,000 simulated finishes using each team's 2026 scoring.`;
+    const pctCell = (td, v) => { td.textContent = v >= 0.995 ? '>99%' : v <= 0.005 && v > 0 ? '<1%' : Math.round(v * 100) + '%'; td.style.setProperty('--p', (v * 100).toFixed(1) + '%'); td.classList.add('bc-pbar'); };
+    drawTable(tbl, o.data, [
+      {field: 'seed', sortKey: 'seed', label: 'Seed', left: true, firstDir: 'asc'},
+      gmCol,
+      {field: 'record', sortKey: 'wins', label: 'Record'},
+      {field: 'pf', sortKey: 'pf', label: 'Points', fmt: f1, d: true},
+      {field: 'division', sortKey: 'division', label: 'Division', left: true, firstDir: 'asc', d: true},
+      {field: 'playoff_pct', sortKey: 'playoff_pct', label: 'Playoffs', cell: pctCell},
+      {field: 'top_seed_pct', sortKey: 'top_seed_pct', label: '#1 seed', cell: (td, v) => { td.textContent = v >= 0.995 ? '>99%' : v > 0 && v < 0.005 ? '<1%' : Math.round(v * 100) + '%'; }, d: true},
+      {field: 'last_pct', sortKey: 'last_pct', label: 'Last place', cell: (td, v) => { td.textContent = v > 0 && v < 0.005 ? '<1%' : Math.round(v * 100) + '%'; if (v >= 0.2) td.classList.add('bc-neg'); }}
+    ], null, {key: 'seed', dir: 'asc'}, {hl: (r) => r.seed === 1});
+    if (sortState['tbl-odds'] && sortState['tbl-odds'].key === 'seed' && sortState['tbl-odds'].dir === 'asc') {
+      const rowsEls = tbl.querySelectorAll('tbody tr'); if (rowsEls[spots - 1]) rowsEls[spots - 1].classList.add('bc-cut');
+    }
+  }
+
+  // ---------- LEDGERS ----------
+  function ledger(tblId, data, valKey, fmtCell, totalLabel, sortDesc) {
+    const weeks = [...new Set(data.map((r) => Number(r.week)))].sort((a, b) => a - b);
+    const gms = new Set(data.map((r) => r.gm));
+    const st = dash.data('this_season'); if (st.status === 'ok') st.data.forEach((r) => gms.add(r.gm));
+    const rows = [...gms].map((gm) => { const o = {gm, total: 0}; weeks.forEach((w) => { const x = data.find((r) => r.gm === gm && Number(r.week) === w); o['w' + w] = x ? x[valKey] : null; o['t' + w] = x ? (x.awards || x.what) : ''; o.total += x ? x[valKey] : 0; }); return o; });
+    const cols = [gmCol].concat(weeks.map((w) => ({field: 'w' + w, sortKey: 'w' + w, label: 'W' + w, cell: (td, v, r) => fmtCell(td, v, r['t' + w])}))).concat([{field: 'total', sortKey: 'total', label: totalLabel, cell: (td, v) => fmtCell(td, v, '', true)}]);
+    drawTable(document.getElementById(tblId), rows, cols, null, {key: 'total', dir: sortDesc ? 'desc' : 'asc'});
+    document.querySelectorAll('#' + tblId + ' tbody td').forEach((td) => { if (td.textContent === '') { td.textContent = '·'; td.classList.add('bc-na'); } });
+  }
+
+  // ---------- MODAL: GM profile and rules ----------
+  const modal = document.getElementById('modal'), modalBody = document.getElementById('modal-body');
+  let lastFocus = null;
+  function openModal(build, label) {
+    lastFocus = document.activeElement;
+    modalBody.replaceChildren(); modalBody.removeAttribute('style'); build(modalBody);
+    modal.querySelector('[role="dialog"]').setAttribute('aria-label', label);
+    modal.hidden = false; document.documentElement.classList.add('bc-noscroll');
+    modal.querySelector('.bc-x').focus();
+  }
+  function closeModal() { modal.hidden = true; document.documentElement.classList.remove('bc-noscroll'); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  modal.addEventListener('click', (ev) => { if (ev.target === modal) closeModal(); });
+  modal.querySelector('.bc-x').addEventListener('click', closeModal);
+  document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && !modal.hidden) closeModal(); });
+
+  function tile(k, v, sub, cls) { const t = el('div', 'bc-pf-tile ' + (cls || '')); t.append(el('div', 'bc-k', k), el('div', 'bc-pf-v', v)); if (sub) t.append(el('div', 'bc-s', sub)); return t; }
+  function openProfile(gm) {
+    if (!gm || !GM[gm] && !vet(gm)) return;
+    openModal((root) => {
+      const car = (dash.data('career').data || []).find((r) => r.gm === gm) || {};
+      const sc = (dash.data('scoring').data || []).find((r) => r.gm === gm) || {};
+      const ts = (dash.data('this_season').data || []).find((r) => r.gm === gm);
+      const prw = dash.data('power_rankings').data || [];
+      const lastPrWeek = prw.length ? String(Math.max(...prw.map((r) => Number(r.week)))) : null;
+      const prr = prw.find((r) => r.gm === gm && r.week === lastPrWeek);
+      const odds = (dash.data('playoff_odds').data || []).find((r) => r.gm === gm);
+      const fb = (dash.data('fines_by_gm').data || []).find((r) => r.gm === gm);
+      const tb = (dash.data('trophy_board').data || []).find((r) => r.gm === gm);
+      const teams = (dash.data('teams').data || []).filter((t) => t.gm === gm).sort((a, b) => Number(b.season) - Number(a.season));
+      const v = vet(gm) || {n: 0, first: ''};
+      const col = gmColor(gm);
+      root.style.setProperty('--gm', col);
+      const head = el('div', 'bc-pf-head');
+      const nm = el('div', 'bc-pf-name'); nm.append(el('span', null, gm));
+      const sub = el('div', 'bc-pf-sub', (teams[0] ? teams[0].team_name : '') + ` · in the league since ${v.first} · ${v.n} seasons`);
+      const ti = el('div'); ti.append(nm, sub);
+      const big = badge(gm, true); big.classList.add('xl');
+      head.append(big, ti);
+      root.append(head);
+      if (ts) {
+        root.append(el('h4', 'bc-pf-h', '2026 so far'));
+        const g = el('div', 'bc-pf-grid');
+        g.append(tile('Record', ts.record, ordShort(ts.rank) + ' in the standings'),
+          tile('Power rank', prr ? '#' + prr.rank : '–', prr ? (prr.move > 0 ? '▲' + prr.move + ' this week' : prr.move < 0 ? '▼' + Math.abs(prr.move) + ' this week' : 'No change') : ''),
+          tile('Playoff odds', odds ? Math.round(odds.playoff_pct * 100) + '%' : '–', odds ? 'Seed ' + odds.seed + ' right now' : ''),
+          tile('Points per game', f1(ts.ppg), Math.round(ts.allplay_pct * 100) + '% all-play'),
+          tile('Fines owed', fb ? fb.total_eur + '€' : '0€', fb ? fb.fines_status : '', 'money'),
+          tile('Trophy points', tb ? signedInt(tb.total) : '0', ''));
+        root.append(g);
+        const f = el('div', 'bc-pf-form'); f.append(el('span', 'bc-k', 'Last 5'), formChips(gm, 5)); root.append(f);
+        if (prr && prr.blurb) root.append(el('p', 'bc-pr-blurb', prr.blurb));
+      }
+      root.append(el('h4', 'bc-pf-h', 'Career'));
+      const fd = finishData(dash.data('season_table').data || []);
+      const fs = fd.stats[gm];
+      const g2 = el('div', 'bc-pf-grid');
+      g2.append(tile('Record', car.record || '–', car.win_pct != null ? pct(car.win_pct) + ' win rate' : ''),
+        tile('Titles', String(car.titles || 0), car.title_years || 'Still waiting', car.titles ? 'gold' : ''),
+        tile('Avg finish', fs ? f1(fs.avg) : '–', fs ? `best ${ord(fs.best)}, worst ${ord(fs.worst)}` : ''),
+        tile('Points per game', sc.ppg ? f1(sc.ppg) : '–', sc.above_avg != null ? signed(sc.above_avg) + ' vs league' : ''),
+        tile('Best week', car.best_week ? f2(car.best_week) : '–', car.best_week_when || ''),
+        tile('Worst week', car.worst_week ? f2(car.worst_week) : '–', car.worst_week_when || ''));
+      root.append(g2);
+      // finishes mini chart
+      if (fs) {
+        const ch = el('div', 'bc-pf-chart'); root.append(ch);
+        const W = Math.max(260, ch.clientWidth || 520), H = 110, top = 10, bottom = 18;
+        const x = d3.scalePoint(fd.seasons, [16, W - 16]), y = d3.scaleLinear([1, fd.maxN], [top, H - bottom]);
+        const svg = d3.select(ch).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Final placing each season');
+        svg.append('line').attr('x1', 0).attr('x2', W).attr('y1', y(1)).attr('y2', y(1)).attr('stroke', 'rgba(242,193,78,.35)').attr('stroke-dasharray', '3 4');
+        svg.append('path').attr('d', d3.line().x((r) => x(r.season)).y((r) => y(r.final_rank)).curve(d3.curveMonotoneX)(fs.list)).attr('fill', 'none').attr('stroke', col).attr('stroke-width', 2.5);
+        fs.list.forEach((r) => { svg.append('circle').attr('cx', x(r.season)).attr('cy', y(r.final_rank)).attr('r', 8).attr('fill', r.final_rank === 1 ? '#f2c14e' : col).attr('stroke', '#07080b'); svg.append('text').attr('x', x(r.season)).attr('y', y(r.final_rank) + 3.5).attr('text-anchor', 'middle').attr('font-size', 10).attr('font-weight', 800).attr('fill', '#07080b').text(r.final_rank); });
+        fd.seasons.forEach((s) => svg.append('text').attr('x', x(s)).attr('y', H - 3).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#6f7684').text("'" + s.slice(2)));
+      }
+      // rivals
+      const rv = dash.data('rivalries').data || [];
+      const mine = rv.filter((r) => r.a === gm || r.b === gm).map((r) => { const me = r.a === gm; const w = me ? r.a_wins : r.b_wins, l = me ? r.b_wins : r.a_wins; return {op: me ? r.b : r.a, w, l, games: r.games, pct: (w + (r.games - w - l) / 2) / r.games}; });
+      const qual = mine.filter((x) => x.games >= 6);
+      if (qual.length) {
+        root.append(el('h4', 'bc-pf-h', 'Rivals'));
+        const nem = qual.slice().sort((a, b) => a.pct - b.pct)[0], vic = qual.slice().sort((a, b) => b.pct - a.pct)[0], most = mine.slice().sort((a, b) => b.games - a.games)[0];
+        const rr = el('div', 'bc-pf-rivals');
+        [['Nemesis', nem, 'bc-neg'], ['Favorite victim', vic, 'bc-pos'], ['Most played', most, '']].forEach(([k, x, cls]) => {
+          const b = el('button', 'bc-pf-riv'); b.type = 'button';
+          b.append(el('span', 'bc-k', k), badge(x.op), el('span', 'bc-pf-op', x.op), el('b', cls, x.w + '–' + x.l));
+          b.addEventListener('click', () => { closeModal(); hist.vsA = gm; hist.vsB = x.op; show('rivals', true); document.getElementById('page-rivals').scrollIntoView({block: 'start'}); });
+          rr.append(b);
+        });
+        root.append(rr);
+      }
+      // record book appearances
+      const bk = dash.data('record_book').data || [];
+      const mineBk = bk.filter((r) => r.gm === gm);
+      if (mineBk.length) {
+        root.append(el('h4', 'bc-pf-h', 'In the record book'));
+        const counts = {};
+        mineBk.forEach((r) => { counts[r.list_label] = (counts[r.list_label] || 0) + 1; });
+        const ul = el('div', 'bc-pf-tags');
+        Object.entries(counts).forEach(([k, n]) => ul.append(el('span', 'bc-pf-tag', `${n}× ${k.toLowerCase()} top 10`)));
+        root.append(ul);
+      }
+      // names
+      root.append(el('h4', 'bc-pf-h', 'Team names'));
+      const names = el('div', 'bc-pf-names');
+      teams.forEach((t) => { const r = el('div', 'bc-name-row'); r.append(el('b', null, t.season), el('span', null, t.team_name + (t.final_rank === '1' ? ' 🏆' : t.final_rank ? ' · ' + ord(Number(t.final_rank)) : ''))); names.append(r); });
+      root.append(names);
+    }, gm + ' profile');
+  }
+
+  function openRules() {
+    openModal((root) => {
+      const ru = dash.data('rules').data || [];
+      const set = Object.fromEntries((dash.data('league_settings').data || []).map((s) => [s.key, s.value]));
+      root.append(el('div', 'bc-pf-name', 'The rulebook'));
+      const sec = (title, kind) => { root.append(el('h4', 'bc-pf-h', title)); const box = el('div'); ruleRows(box, ru, kind); root.append(box); };
+      root.append(el('h4', 'bc-pf-h', 'Money'));
+      [['Entry fee', '30€ per GM, held for the champion'], ['Fines', 'Go into the same pot. The champion takes entry fees plus every fine'], ['Last place', "Pays for engraving the winner's name on the trophy"]].forEach(([a, b]) => { const r = el('div', 'bc-rule'); r.append(el('span', null, a), el('b', null, b)); root.append(r); });
+      sec('Fines', 'fine');
+      sec('Weekly trophies', 'weekly');
+      sec('Season trophies', 'season');
+      root.append(el('h4', 'bc-pf-h', 'Playoffs'));
+      [['Teams', (set.playoff_teams || '8') + ' of 12'], ['Format', set.playoff_rounds || ''], ['Seeding', set.seeding || '']].forEach(([a, b]) => { const r = el('div', 'bc-rule'); r.append(el('span', null, a), el('b', null, b)); root.append(r); });
+      root.append(el('p', 'bc-note', 'Fewest trophy points at the end of the season is the danger zone. Goose egg: a starter scores 0 to 0.9. Double goose egg: a starter scores below zero. Unfilled roster: a starter who never played a snap.'));
+    }, 'Rules');
+  }
+  document.getElementById('open-rules').addEventListener('click', openRules);
+
+  // any badge or name tag opens that GM's profile
+  document.querySelector('.bc').addEventListener('click', (ev) => {
+    if (ev.target.closest('#fin-pick, select, .bc-pf-riv, .bc-modal, .bc-tabs')) return;
+    const host = ev.target.closest('.bc-gmcell, .bc-who, .bc-badge, .bc-champ .bc-name');
+    if (!host) return;
+    const b = host.classList.contains('bc-badge') ? host : host.querySelector('.bc-badge');
+    if (b && b.dataset.gm) { ev.preventDefault(); openProfile(b.dataset.gm); }
+  });
+
+  // tab row: show a fade when there are more tabs off screen
+  const tabsEl = document.getElementById('tabs');
+  const tabFade = () => { tabsEl.classList.toggle('more-r', tabsEl.scrollLeft + tabsEl.clientWidth < tabsEl.scrollWidth - 4); tabsEl.classList.toggle('more-l', tabsEl.scrollLeft > 4); };
+  tabsEl.addEventListener('scroll', tabFade, {passive: true});
+  window.addEventListener('resize', tabFade);
+  setTimeout(tabFade, 50);
+
+  function drawUpdated() {
+    const m = dash.data('meta_2026');
+    const elU = document.getElementById('bc-upd');
+    if (m.status !== 'ok' || !elU) return;
+    const at = (m.data.find((r) => r.key === 'updated_at') || {}).value;
+    if (!at) return;
+    const d = new Date(at);
+    elU.textContent = 'Updated ' + d.toLocaleDateString('en-GB', {weekday: 'short', day: 'numeric', month: 'short'});
+    elU.title = d.toLocaleString('en-GB');
+  }
+
   const DRAW = {week: drawWeekPage, money: drawMoneyPage, trophies: drawTrophyPage, standings: drawStandingsPage, history: drawHistoryPage, records: drawRecordsPage, rivals: drawRivalsPage};
   const tabBtns = [...document.querySelectorAll('#tabs button')];
   function show(p, push) {
@@ -2186,6 +2822,7 @@ dash.calc('rivalries', {
   dash.onData(() => {
     drawHero();
     drawTicker();
+    drawUpdated();
     DRAW[state.page]();
   });
 
