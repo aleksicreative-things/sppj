@@ -83,8 +83,6 @@
 {"week":"6","most_points_gm":"Makkis","most_points":"149.84","least_points_gm":"Jussi","least_points":"66.12","top_player":"Kenneth Walker III","top_player_pts":"26.9","top_player_gm":"Joel","gm_move_player":"Trevor Lawrence","gm_move_pts":"26.34","gm_move_gm":"Makkis","coach_gm":"Peetu","coach_lineup_pct":"100","coach_bench_pts":"6.54"}
 ],
 "season_trophies_2026":[
-{"trophy":"Narrowest win of the season","gm":"Jussi","detail":"Beat Anton by 1.06 in week 4","rule_key":"narrow_win"},
-{"trophy":"Loser of the narrowest win","gm":"Anton","detail":"Lost to Jussi by 1.06 in week 4","rule_key":"narrow_loss"},
 {"trophy":"Highest scoring player of the season","gm":"Jan","detail":"Josh Allen 40.82 in week 2","rule_key":"top_player_season"},
 {"trophy":"Highest scoring team in one week","gm":"Joel","detail":"173.66 points in week 1","rule_key":"high_game"},
 {"trophy":"Lowest scoring team in one week","gm":"Jussi","detail":"66.12 points in week 6","rule_key":"low_game"}
@@ -102,5 +100,20 @@
 {"gm":"Niko","entry_fee_eur":"30","entry_fee_status":"Paid","fines_status":"Not paid"},
 {"gm":"Oliver","entry_fee_eur":"30","entry_fee_status":"Paid","fines_status":"Not paid"},
 {"gm":"Peetu","entry_fee_eur":"30","entry_fee_status":"Paid","fines_status":"Not paid"}
+],
+"rules":[
+{"key":"goose","kind":"fine","rule":"Goose egg: starter scores 0 to 0.9 points","trophy_points":"0","fine_eur":"3"},
+{"key":"double_goose","kind":"fine","rule":"Double goose egg: starter scores minus points","trophy_points":"0","fine_eur":"4"},
+{"key":"unfilled","kind":"fine","rule":"Unfilled roster: starter in the lineup who never played a snap","trophy_points":"0","fine_eur":"5"},
+{"key":"bench50","kind":"fine","rule":"Bench scores over 50 points and you lose","trophy_points":"0","fine_eur":"10"},
+{"key":"first_round_flop","kind":"fine","rule":"Biggest first-round flop of the season (season end)","trophy_points":"0","fine_eur":"5"},
+{"key":"most_points","kind":"weekly","rule":"Most points of the week","trophy_points":"1","fine_eur":"0"},
+{"key":"least_points","kind":"weekly","rule":"Least points of the week","trophy_points":"-1","fine_eur":"0"},
+{"key":"top_player","kind":"weekly","rule":"Highest scoring player of the week","trophy_points":"1","fine_eur":"0"},
+{"key":"gm_move","kind":"weekly","rule":"GM move of the week: best pickup that week","trophy_points":"1","fine_eur":"0"},
+{"key":"coach","kind":"weekly","rule":"Coach of the week: best lineup percentage","trophy_points":"1","fine_eur":"0"},
+{"key":"top_player_season","kind":"season","rule":"Highest scoring player in one week (season)","trophy_points":"1","fine_eur":"0"},
+{"key":"high_game","kind":"season","rule":"Highest scoring team in one week","trophy_points":"2","fine_eur":"-2"},
+{"key":"low_game","kind":"season","rule":"Lowest scoring team in one week","trophy_points":"-2","fine_eur":"2"}
 ]
 }
