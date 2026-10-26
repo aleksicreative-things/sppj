@@ -5,6 +5,12 @@
 <meta name="description" content="Scores, fines, trophies, the winner's purse and every season since 2014 for the SPPJ fantasy league.">
 <meta property="og:title" content="SPPJ League Hub">
 <meta property="og:description" content="Scores, fines, trophies, the winner's purse and every season since 2014.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SPPJ">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#06070a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23e23a44'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='900' font-size='26' text-anchor='middle' fill='white'%3ESP%3C/text%3E%3C/svg%3E">
 <style>
@@ -28,8 +34,8 @@ html,body{margin:0;background:#06070a;}
   };
   window.__sppjRun = () => {
     const load = (f) => fetch(f + '?v=' + Date.now(), {cache: 'no-store'}).then((r) => { if (!r.ok) throw new Error(f); return r.json(); });
-    Promise.all([load('history.json'), load('season.json')]).then(([h, s]) => {
-      raw = {...h, ...s, games: h.games.concat(s.games)};
+    Promise.all([load('history.json'), load('season.json'), load('archive.json').catch(() => ({}))]).then(([h, s, ar]) => {
+      raw = {...h, ...ar, ...s, games: h.games.concat(s.games)};
       for (const [id, o] of calcs) { try { out[id] = o.fn(...o.inputs.map(get)); } catch (e) { console.error(id, e); } }
       ready = true; cbs.forEach((f) => f());
       const m = s._meta || {}, foot = document.getElementById('foot');
@@ -483,6 +489,101 @@ html.bc-noscroll { overflow: hidden; }
 #pr-legend { margin: 0; }
 .bc-note b { color: var(--bc-fg); font-weight: 600; }
 @media (max-width: 620px) { .bc-pr-nums, .bc-d2 { display: none; } .bc-pr-score b { font-size: 15px; } }
+
+/* ---------- v8: light theme ---------- */
+.bc[data-theme="light"] {
+  --bc-bg: #f3f4f7; --bc-s1: #ffffff; --bc-s2: rgba(10, 14, 30, .045); --bc-line: rgba(10, 14, 30, .09); --bc-line2: rgba(10, 14, 30, .18);
+  --bc-fg: #10131a; --bc-muted: #4f5664; --bc-dim: #858c99; --bc-red: #e1112a; --bc-gold: #a2740a; --bc-green: #0f9158; --bc-blue: #2f6fe0;
+  color-scheme: light;
+  background: radial-gradient(60% 38% at 100% 0%, rgba(225, 17, 42, .07), transparent 70%), var(--bc-bg);
+}
+.bc[data-theme="light"] .bc-tabs { background: rgba(243, 244, 247, .86); }
+.bc[data-theme="light"] .bc-table th, .bc[data-theme="light"] .bc-modal-card, .bc[data-theme="light"] .bc-tip,
+.bc[data-theme="light"] .bc-tools input, .bc[data-theme="light"] .bc-tools select, .bc[data-theme="light"] #fin-vs, .bc[data-theme="light"] .bc-me-pick select { background: #fff; }
+.bc[data-theme="light"] .bc-stat, .bc[data-theme="light"] .bc-card, .bc[data-theme="light"] .bc-game, .bc[data-theme="light"] .bc-award, .bc[data-theme="light"] .bc-champ,
+.bc[data-theme="light"] .bc-pv, .bc[data-theme="light"] .bc-pr, .bc[data-theme="light"] .bc-nem, .bc[data-theme="light"] .bc-name-card, .bc[data-theme="light"] .bc-hero, .bc[data-theme="light"] .bc-tiles4 { box-shadow: 0 1px 2px rgba(10, 14, 30, .04); }
+.bc[data-theme="light"] .bc-hero .bc-stat, .bc[data-theme="light"] .bc-tiles4 .bc-stat { box-shadow: none; }
+.bc[data-theme="light"] .bc-badge { background: color-mix(in srgb, var(--gm, #93a0c0) 22%, #fff); border-color: color-mix(in srgb, var(--gm, #93a0c0) 85%, #000); color: color-mix(in srgb, var(--gm, #93a0c0) 55%, #000); -webkit-text-fill-color: color-mix(in srgb, var(--gm, #93a0c0) 55%, #000); }
+.bc[data-theme="light"] .bc-badge[style*="--ring"] { --ring-gap: #f3f4f7; }
+.bc[data-theme="light"] .bc-ledger td.bc-na, .bc[data-theme="light"] .bc-heat td.bc-na { color: #c9cdd5; }
+.bc[data-theme="light"] .bc-weeks button[aria-pressed="true"] { color: #fff; }
+.bc[data-theme="light"] .bc-modal { background: rgba(20, 24, 34, .35); }
+.bc[data-theme="light"] .bc-pr-bar i + i { box-shadow: -1px 0 0 #fff; }
+.bc[data-theme="light"] .bc-form-W { background: rgba(15, 145, 88, .12); }
+.bc[data-theme="light"] .bc-form-L { background: rgba(225, 17, 42, .1); color: #c40e24; }
+.bc[data-theme="light"] .bc-neg, .bc[data-theme="light"] .bc-pr-inj .out, .bc[data-theme="light"] .bc-award.bad .bc-k { color: #c40e24; }
+/* chart ink drawn with fixed colors: swap for dark ink in light mode */
+.bc[data-theme="light"] svg [fill="#eceef2"] { fill: #10131a; }
+.bc[data-theme="light"] svg [fill="#6b7180"], .bc[data-theme="light"] svg [fill="#7d8492"] { fill: #6b7180; }
+.bc[data-theme="light"] svg [stroke="rgba(255,255,255,.06)"], .bc[data-theme="light"] svg [stroke="rgba(255,255,255,.05)"], .bc[data-theme="light"] svg [stroke="rgba(255,255,255,.08)"], .bc[data-theme="light"] svg [stroke="rgba(255,255,255,.1)"] { stroke: rgba(10, 14, 30, .1); }
+.bc[data-theme="light"] svg [stroke="#06070a"] { stroke: #fff; }
+.bc[data-theme="light"] svg [fill="#06070a"] { fill: #fff; }
+
+/* header controls */
+.bc-me-pick { display: inline-flex; align-items: center; gap: 6px; font-family: var(--bc-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--bc-dim); }
+.bc-me-pick select { font: inherit; font-family: var(--bc-body); font-size: 12.5px; letter-spacing: 0; text-transform: none; color: var(--bc-fg); background: #0b0c0f; border: 1px solid var(--bc-line2); border-radius: 999px; padding: 4px 8px; }
+.bc-theme-btn { min-width: 52px; }
+
+/* my team */
+.bc-me-card { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.bc-me-card .bc-pf-tile { padding: 10px 12px; }
+.bc-me-card .bc-pf-tile.wide { grid-column: span 2; }
+.bc-me-card .bc-pf-v { font-size: 17px; display: flex; align-items: center; gap: 7px; }
+@media (max-width: 980px) { .bc-me-card { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .bc-me-card { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bc-me-card .bc-pf-tile.wide { grid-column: 1 / -1; } .bc-me-pick > span { display: none; } .bc-top-r .bc-chip { width: 100%; } .bc-top-r { gap: 6px; justify-content: flex-start; } }
+
+/* live */
+.bc-pv-k .bc-live { color: var(--bc-red); display: inline-flex; align-items: center; gap: 5px; }
+.bc-pv-k .bc-live::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--bc-red); }
+.bc-pv.live .bc-pv-proj { color: var(--bc-fg); }
+
+/* trend lines and playoff path */
+.bc-spark { display: inline-block; vertical-align: middle; }
+.bc-path { font-family: var(--bc-mono); font-size: 10.5px; letter-spacing: .02em; }
+.bc-path.in { color: var(--bc-green); }
+.bc-path.out { color: #ff6b7a; }
+.bc[data-theme="light"] .bc-path.out { color: #c40e24; }
+
+/* payments */
+.bc-pay-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.bc-pay-bar { flex: 1; min-width: 160px; }
+.bc-pay-bar .bc-k { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.bc-pay-bar .bc-k b { color: var(--bc-fg); font-weight: 500; }
+.bc-pay-track { height: 4px; border-radius: 2px; background: var(--bc-s2); overflow: hidden; }
+.bc-pay-track i { display: block; height: 100%; background: var(--bc-green); }
+.bc-copy { font-family: var(--bc-mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--bc-fg); background: transparent; border: 1px solid var(--bc-line2); border-radius: 999px; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+.bc-copy:hover { border-color: var(--bc-fg); }
+.bc-copy.done { color: var(--bc-green); border-color: var(--bc-green); }
+
+.bc-badge.has-logo { background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; color: transparent !important; -webkit-text-fill-color: transparent !important; border: 1.5px solid var(--gm) !important; }
+.bc[data-theme="light"] .bc-badge.has-logo { border-color: var(--gm) !important; }
+
+/* ---------- v9: playoffs, draft and waiver wire ---------- */
+.bc-bracket { display: grid; grid-template-columns: repeat(var(--rounds, 3), minmax(0, 1fr)); gap: 10px; align-items: center; }
+.bc-bracket-col { display: grid; gap: 8px; }
+.bc-bracket-col > .bc-k { margin-bottom: 2px; }
+.bc-bracket .bc-game { overflow: hidden; }
+.bc-bracket .bc-game.champ { border-color: color-mix(in srgb, var(--bc-gold) 60%, transparent); }
+.bc-place { margin-top: 12px; }
+.bc-draft-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.bc-pick { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 12px; background: var(--bc-s1); border: 1px solid var(--bc-line); border-radius: 10px; }
+.bc-pick > b { font-family: var(--bc-mono); font-size: 11px; color: var(--bc-dim); font-weight: 500; }
+.bc-pick-p { min-width: 0; }
+.bc-pick-p .bc-pick-n { font-weight: 500; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bc-pick-p .bc-pick-s { font-family: var(--bc-mono); font-size: 10px; color: var(--bc-dim); display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+.bc-pick-r { text-align: right; line-height: 1.15; }
+.bc-pick-r b { font-family: var(--bc-disp); font-weight: 600; font-size: 15px; display: block; }
+.bc-pick-r span { font-family: var(--bc-mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; }
+.bc-pick.hit .bc-pick-r span { color: var(--bc-green); }
+.bc-pick.miss .bc-pick-r span { color: #ff6b7a; }
+.bc-pick.ok .bc-pick-r span { color: var(--bc-muted); }
+.bc-sb { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.bc-sb h3 { margin: 0 0 8px; }
+.bc-log-tools { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; align-items: center; }
+.bc-log-tools select { font: inherit; font-size: 12.5px; background: #0b0c0f; color: var(--bc-fg); border: 1px solid var(--bc-line2); border-radius: 8px; padding: 6px 10px; }
+.bc[data-theme="light"] .bc-log-tools select { background: #fff; }
+.bc-avail { font-family: var(--bc-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--bc-dim); }
+@media (max-width: 760px) { .bc-bracket { grid-template-columns: minmax(0, 1fr); } .bc-draft-grid, .bc-sb { grid-template-columns: minmax(0, 1fr); } }
 </style>
 
 
@@ -490,7 +591,7 @@ html.bc-noscroll { overflow: hidden; }
   <div class="bc-top" id="top">
     <div class="bc-bug"><span>SPPJ</span></div>
     <h1 class="bc-title">League Hub</h1>
-    <div class="bc-top-r"><div class="bc-chip"><i class="bc-dot"></i><span>Through week</span><b id="bc-week" data-source="weekly_trophies_2026" data-field="week">…</b><span>· 2026</span><span class="bc-upd" id="bc-upd" data-source="meta_2026"></span></div><button type="button" class="bc-rules-btn" id="open-rules">Rules</button></div>
+    <div class="bc-top-r"><div class="bc-chip"><i class="bc-dot"></i><span>Through week</span><b id="bc-week" data-source="weekly_trophies_2026" data-field="week">…</b><span>· 2026</span><span class="bc-upd" id="bc-upd" data-source="meta_2026"></span></div><label class="bc-me-pick"><span>My team</span><select id="me-pick" aria-label="My team"><option value="">Pick</option></select></label><button type="button" class="bc-rules-btn bc-theme-btn" id="theme-btn" aria-label="Switch between light and dark">Light</button><button type="button" class="bc-rules-btn" id="open-rules">Rules</button></div>
   </div>
 
   <div class="bc-ticker" id="ticker">
@@ -518,13 +619,23 @@ html.bc-noscroll { overflow: hidden; }
     <button type="button" role="tab" data-page="history" aria-selected="false">History</button>
     <button type="button" role="tab" data-page="records" aria-selected="false">Records</button>
     <button type="button" role="tab" data-page="rivals" aria-selected="false">Rivals</button>
+    <button type="button" role="tab" data-page="playoffs" aria-selected="false">Playoffs</button>
+    <button type="button" role="tab" data-page="draft" aria-selected="false">Draft &amp; waivers</button>
   </nav>
 
   <!-- THIS WEEK -->
   <div class="bc-page" id="page-week" role="tabpanel">
+    <section class="bc-seg" id="me-seg" hidden>
+      <div class="bc-seg-h"><h2 id="me-title">Your week</h2><p id="me-sub">Change your team in the header</p></div>
+      <div class="bc-me-card" id="me-card"></div>
+    </section>
     <section class="bc-seg">
       <div class="bc-seg-h"><h2 id="preview-title">Up next</h2><p id="preview-sub">Tap a matchup for the details</p></div>
       <div class="bc-pv-grid" id="preview-cards" data-source="schedule_2026 preview_2026 results_2026"></div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2 id="wh-title">This week in SPPJ history</h2><p>Same week, every season since 2014</p></div>
+      <div class="bc-awards" id="week-hist" data-source="games"></div>
     </section>
     <section class="bc-seg">
       <div class="bc-seg-h"><h2 id="week-title">Week recap</h2><p>Scores, awards and who paid</p></div>
@@ -583,7 +694,8 @@ html.bc-noscroll { overflow: hidden; }
       <div class="bc-grid2">
         <div class="bc-card">
           <h3>Payment status</h3>
-          <p class="bc-note">Entry fees are in the hold. Fines get settled separately and go to the same place.</p>
+          <div class="bc-pay-top"><div class="bc-pay-bar" id="pay-bar"></div><button type="button" class="bc-copy" id="copy-remind">Copy reminder for the chat</button></div>
+          <p class="bc-note">Entry fees are in the hold. Fines get settled separately and go to the same place. The reminder button copies a ready message listing everyone with unpaid fines.</p>
           <div class="bc-scroll"><table class="bc-table" id="tbl-pay" data-source="fines_by_gm" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
         </div>
         <div class="bc-card">
@@ -775,7 +887,7 @@ html.bc-noscroll { overflow: hidden; }
     <section class="bc-seg">
       <div class="bc-seg-h"><h2>Career</h2><p>Regular season totals</p></div>
       <div class="bc-card" id="career-card">
-        <p class="bc-note">Avg pts is per 14 games so short and long seasons compare fairly. Click a header to sort.</p>
+        <p class="bc-note">Per game is points scored per regular-season game. Best season is the GM's highest points per game in a finished season, fewest against is the lowest points per game allowed, each with the year. 2014 is left out (whole-point scoring) and the current season counts once it's finished. Click a header to sort.</p>
         <div class="bc-scroll"><table class="bc-table" id="tbl-career" data-source="career" data-row-key="gm"><thead></thead><tbody></tbody></table></div>
       </div>
       <div class="bc-card" id="extras">
@@ -792,6 +904,51 @@ html.bc-noscroll { overflow: hidden; }
           <select id="season-pick" aria-label="Season"><option value="">All seasons</option></select>
         </div>
         <div class="bc-scroll"><table class="bc-table" id="tbl-season" data-source="season_table" data-row-key="season,gm"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PLAYOFFS -->
+  <div class="bc-page" id="page-playoffs" role="tabpanel" hidden>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Playoff brackets</h2><p id="po-avail"></p></div>
+      <div class="bc-weeks" id="po-tabs" role="group" aria-label="Pick a season"></div>
+      <div class="bc-card"><div class="bc-bracket" id="po-bracket" data-source="playoffs"></div><div class="bc-place" id="po-place"></div></div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Clutch or choke</h2><p>Playoff records</p></div>
+      <p class="bc-note">Titles, finals and last places count every season since 2014 (from the final standings). Playoff wins and losses count the winners bracket from 2014 on (2020 was played on Sleeper and isn't included). Before 2024 some playoff rounds lasted two weeks, so those scores are two-week totals.</p>
+      <div class="bc-card"><div class="bc-scroll"><table class="bc-table" id="tbl-clutch" data-source="playoffs teams" data-row-key="gm"><thead></thead><tbody></tbody></table></div></div>
+    </section>
+  </div>
+
+  <!-- DRAFT AND WAIVERS -->
+  <div class="bc-page" id="page-draft" role="tabpanel" hidden>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2 id="dr-title">Draft room</h2><p id="dr-avail"></p></div>
+      <p class="bc-note">Finish is where the player ended up among everyone drafted in the league that season, by total points (WR3 = the third best receiver drafted). Hit, fine and miss compare that finish to where he was picked. Steals are round 4 or later picks that outscored their draft slot by the most; busts are round 2 and 3 picks that fell the furthest.</p>
+      <div class="bc-weeks" id="dr-tabs" role="group" aria-label="Pick a season"></div>
+      <div class="bc-card"><h3>First round</h3><div class="bc-draft-grid" id="dr-r1" data-source="draft_history"></div></div>
+      <div class="bc-sb">
+        <div class="bc-card"><h3>Steals</h3><div class="bc-draft-grid" style="grid-template-columns:1fr" id="dr-steal"></div></div>
+        <div class="bc-card"><h3>Busts</h3><div class="bc-draft-grid" style="grid-template-columns:1fr" id="dr-bust"></div></div>
+      </div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Best drafters</h2><p>Total season points from every player each GM drafted</p></div>
+      <p class="bc-note">Adds up the full-season points of every player a GM drafted, whether they kept him or not, and ranks it within each season. Average rank across the seasons we have.</p>
+      <div class="bc-card"><div class="bc-scroll"><table class="bc-table" id="tbl-drafters" data-source="gm_moves" data-row-key="gm"><thead></thead><tbody></tbody></table></div></div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>Waiver kings</h2><p>Who works the wire, since 2024</p></div>
+      <p class="bc-note">Completed waiver claims and free agent pickups, trades, and FAAB spent. ESPN only keeps transaction logs from 2024 on, so this counts 2024 to now.</p>
+      <div class="bc-card"><div class="bc-scroll"><table class="bc-table" id="tbl-wire" data-source="gm_moves" data-row-key="gm"><thead></thead><tbody></tbody></table></div></div>
+    </section>
+    <section class="bc-seg">
+      <div class="bc-seg-h"><h2>2026 transactions</h2><p>Every add and drop this season</p></div>
+      <div class="bc-card">
+        <div class="bc-log-tools"><select id="log-gm" aria-label="Filter by GM"><option value="">All GMs</option></select><span class="bc-avail" id="log-count"></span></div>
+        <div class="bc-scroll" style="max-height:30rem"><table class="bc-table" id="tbl-log" data-source="moves_2026" data-row-key="week,gm,added"><thead></thead><tbody></tbody></table></div>
       </div>
     </section>
   </div>
@@ -1423,7 +1580,7 @@ dash.calc('playoff_odds', {
     const mean = {};
     teams.forEach((x) => { const own = x.pf / x.n; const k = x.n / (x.n + 4); mean[x.gm] = k * own + (1 - k) * lgMean; });
     const N = 10000, tally = {};
-    teams.forEach((x) => { tally[x.gm] = {made: 0, top: 0, bye: 0, last: 0, seedSum: 0}; });
+    teams.forEach((x) => { tally[x.gm] = {made: 0, top: 0, bye: 0, last: 0, seedSum: 0, byW: {}}; });
     for (let i = 0; i < N; i++) {
       const s = {};
       teams.forEach((x) => { s[x.gm] = {gm: x.gm, w: x.w, l: x.l, ti: x.ti, pf: x.pf}; });
@@ -1435,13 +1592,31 @@ dash.calc('playoff_odds', {
       });
       order(Object.values(s)).forEach((x, k) => {
         const tl = tally[x.gm]; tl.seedSum += k + 1;
-        if (k < spots) tl.made += 1;
+        const fw = x.w + x.ti / 2; const bw = tl.byW[fw] || (tl.byW[fw] = [0, 0]); bw[0] += 1;
+        if (k < spots) { tl.made += 1; bw[1] += 1; }
         if (k === 0) tl.top += 1;
         if (k < 4) tl.bye += 1;
         if (k === teams.length - 1) tl.last += 1;
       });
     }
+    // playoff math: hard locks and eliminations (ties count against you because the points tiebreak can't be known),
+    // plus the final win total that got a team in at least 9 times out of 10 in the simulations
+    const left = (g) => remaining.filter((m) => m.a === g || m.b === g).length;
+    const cur = (x) => x.w + x.ti / 2;
+    const path = {};
+    teams.forEach((x) => {
+      const others = teams.filter((o) => o.gm !== x.gm);
+      const maxX = cur(x) + left(x.gm);
+      let lock = null;
+      for (let k = 0; k <= left(x.gm); k++) { const threats = others.filter((o) => cur(o) + left(o.gm) >= cur(x) + k).length; if (threats <= spots - 1) { lock = k; break; } }
+      const above = others.filter((o) => cur(o) > maxX).length;
+      const tl = tally[x.gm];
+      let safe = null;
+      Object.keys(tl.byW).map(Number).sort((a, b) => a - b).some((w) => { const [n, mde] = tl.byW[w]; if (n >= 30 && mde / n >= 0.9) { safe = w; return true; } return false; });
+      path[x.gm] = {clinched: lock === 0, eliminated: above >= spots, lock_wins: lock, safe_wins: safe == null ? null : Math.max(0, Math.ceil(safe - cur(x))), left: left(x.gm)};
+    });
     return order(teams).map((x) => ({
+      ...path[x.gm],
       gm: x.gm, seed: seedNow[x.gm], record: x.w + '-' + x.l + (x.ti ? '-' + x.ti : ''), wins: x.w + x.ti / 2, pf: Math.round(x.pf * 100) / 100,
       division: div[x.gm] || '', playoff_pct: tally[x.gm].made / N, top_seed_pct: tally[x.gm].top / N, top4_pct: tally[x.gm].bye / N,
       last_pct: tally[x.gm].last / N, avg_seed: tally[x.gm].seedSum / N, games_left: remaining.filter((m) => m.a === x.gm || m.b === x.gm).length,
@@ -1487,7 +1662,7 @@ dash.calc('fines_ledger', {
   const signedInt = (v) => (v > 0 ? '+' : '') + v;
   const eur = (v) => v + '€';
   const sortState = {};
-  const PAGES = ['week', 'fines', 'trophies', 'standings', 'history', 'records', 'rivals'];
+  const PAGES = ['week', 'fines', 'trophies', 'standings', 'history', 'records', 'rivals', 'playoffs', 'draft'];
   const state = {week: null, q: '', season: '', page: 'week'};
   const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const FINE_COLORS = {goose_eur: '#e9c46a', double_eur: '#ff5a6b', unfilled_eur: '#6ea8ff', bench_eur: '#a98bff', season_eur: '#5d6370'};
@@ -1508,7 +1683,14 @@ dash.calc('fines_ledger', {
     Jose: ['#8fd0ff', 'JO'],    // Kullijuustot: champ's sky blue shirt
     Tomek: ['#b28cff', 'TO']    // no current logo
   };
-  const gmColor = (g) => (GM[g] ? GM[g][0] : '#6b7180');
+  const THEME = {light: false};
+  const gmColor = (g) => {
+    const c = GM[g] ? GM[g][0] : '#6b7180';
+    if (!THEME.light) return c;
+    const n = parseInt(c.slice(1), 16), lum = (0.2126 * ((n >> 16) & 255) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255)) / 255;
+    return lum > 0.62 ? d3.color(c).darker(lum > 0.85 ? 2.2 : 1).formatHex() : c;
+  };
+  const store = {get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } }};
 
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   function failLine(e) { e.replaceChildren(); e.appendChild(el('div', 'bc-fail', 'Failed to load')); }
@@ -1516,7 +1698,13 @@ dash.calc('fines_ledger', {
     const b = el('span', 'bc-badge' + (lg ? ' lg' : ''), GM[g] ? GM[g][1] : String(g || '?').slice(0, 2).toUpperCase());
     const c = gmColor(g); b.style.setProperty('--gm', c); b.setAttribute('aria-hidden', 'true'); if (g) b.dataset.gm = g;
     if (GM[g] && GM[g][2]) b.style.setProperty('--ring', GM[g][2]);
+    const lg0 = logoOf(g); if (lg0) { b.style.backgroundImage = 'url(' + lg0 + ')'; b.classList.add('has-logo'); }
     return b;
+  }
+  let logoCache = null;
+  function logoOf(g) {
+    if (!logoCache) { const d = dash.data('logos'); if (d.status !== 'ok') return null; logoCache = Object.fromEntries((d.data || []).map((x) => [x.gm, x.img])); }
+    return logoCache[g] || null;
   }
   // Seasons in the league per GM (from the teams list), shown as a small tag next to names for context.
   let vetCache = null;
@@ -1788,6 +1976,7 @@ dash.calc('fines_ledger', {
   // THIS WEEK
   function drawWeekPage() {
     drawPreview();
+    drawMe();
     const wt = dash.data('weekly_trophies_2026'), fl = dash.data('fine_log'), wg = dash.data('week_games');
     if (wt.status !== 'ok' || !wt.data.length) return;
     const weeks = wt.data.map((w) => String(w.week)).sort((a, b) => Number(a) - Number(b));
@@ -1902,6 +2091,7 @@ dash.calc('fines_ledger', {
         {field: 'total_eur', sortKey: 'total_eur', label: 'Total', fmt: eur, cls: 'bc-money'}
       ], null, {key: 'total_eur', dir: 'desc'}, {hl: (r) => r.gm === topGm});
       const pill = (td, v) => { td.textContent = ''; td.appendChild(el('span', 'bc-pill ' + (String(v).toLowerCase() === 'paid' ? 'paid' : 'unpaid'), v)); };
+      drawPay(rows);
       drawTable(document.getElementById('tbl-pay'), rows, [
         gmCol,
         {field: 'entry_fee_eur', sortKey: 'entry_fee_eur', label: 'Entry fee', fmt: eur, d: true},
@@ -1975,8 +2165,8 @@ dash.calc('fines_ledger', {
         {field: 'crank', sortKey: 'crank', label: '#', left: true, firstDir: 'asc'},
         gmCol,
         {field: 'record', sortKey: 'crank', label: 'W-L', firstDir: 'asc'},
-        {field: 'gm', sortKey: 'crank', label: 'Form', cell: (td, v) => { td.textContent = ''; td.appendChild(formChips(v, 5)); }, d: true},
-        {field: 'pf', sortKey: 'pf', label: 'PF', fmt: f1},
+        {field: 'gm', sortKey: 'pf', label: 'Trend', cell: (td, v) => { td.textContent = ''; td.appendChild(spark(v)); }},
+        {field: 'pf', sortKey: 'pf', label: 'PF', fmt: f1, d: true},
         {field: 'pa', sortKey: 'pa', label: 'PA', fmt: f1, d: true},
         {field: 'allplay_pct', sortKey: 'allplay_pct', label: 'All-play', fmt: (v) => Math.round(v * 100) + '%', d: true},
         {field: 'rank', sortKey: 'rank', label: 'Seed', firstDir: 'asc'}
@@ -2003,8 +2193,8 @@ dash.calc('fines_ledger', {
       {field: 'ppg_against', sortKey: 'ppg_against', label: 'Against', fmt: f1, d: true},
       {field: 'allplay_pct', sortKey: 'allplay_pct', label: 'All-play %', fmt: pct, d: true},
       {field: 'luck', sortKey: 'luck', label: 'Luck', fmt: signed, sign: true, d: true},
-      {field: 'best_week', sortKey: 'best_week', label: 'Best week', fmt: f2, d: true},
-      {field: 'final_rank', sortKey: 'final_rank', label: 'Finish', firstDir: 'asc', empty: 'In progress'}
+      {field: 'best_week', sortKey: 'best_week', label: 'Best week', cell: (td, v, r) => { td.textContent = f2(v) + (r.best_week_no ? '  wk ' + r.best_week_no : ''); }, d: true},
+      {field: 'final_rank', sortKey: 'final_rank', label: 'Finish', firstDir: 'asc', empty: 'Live', fmt: (v) => ord(Number(v))}
     ], (r) => encodeURIComponent(r.season) + ',' + encodeURIComponent(r.gm), {key: 'season', dir: 'desc'});
   }
 
@@ -2414,19 +2604,24 @@ dash.calc('fines_ledger', {
     }
     if (wk.status === 'ok') drawKings(document.getElementById('chart-kings'), wk.data);
     if (car.status === 'ok' && car.data.length) {
-      const rows = car.data;
+      const fin = st.status === 'ok' ? st.data.filter((x) => x.final_rank != null && x.final_rank !== '' && x.season !== '2014') : [];
+      const rows = car.data.map((c) => {
+        const mine = fin.filter((x) => x.gm === c.gm);
+        const hi = mine.reduce((a, b) => (!a || b.ppg > a.ppg ? b : a), null);
+        const lo = mine.reduce((a, b) => (!a || b.ppg_against < a.ppg_against ? b : a), null);
+        return {...c, best_ppg: hi ? hi.ppg : null, best_ppg_txt: hi ? f1(hi.ppg) + ' (' + hi.season + ')' : '', low_pa: lo ? lo.ppg_against : null, low_pa_txt: lo ? f1(lo.ppg_against) + ' (' + lo.season + ')' : ''};
+      });
       drawTable(document.getElementById('tbl-career'), rows, [
         gmCol,
-        {field: 'record', sortKey: 'win_pct', label: 'Wins-Loss'},
-        {field: 'win_pct', sortKey: 'win_pct', label: 'Win %', fmt: pct},
+        {field: 'record', sortKey: 'win_pct', label: 'W-L'},
+        {field: 'win_pct', sortKey: 'win_pct', label: 'Win %', fmt: pct, d: true},
         {field: 'seasons', sortKey: 'seasons', label: 'Seasons', d: true},
-        {field: 'titles', sortKey: 'titles', label: 'Titles'},
-        {field: 'avg_pts', sortKey: 'avg_pts', label: 'Avg pts', fmt: c1, d: true},
-        {field: 'avg_pts_against', sortKey: 'avg_pts_against', label: 'Avg against', fmt: c1, d: true},
-        {field: 'avg_diff', sortKey: 'avg_diff', label: 'Diff', fmt: signed, sign: true, d: true},
+        {field: 'titles', sortKey: 'titles', label: 'Titles', d: true},
         {field: 'ppg', sortKey: 'ppg', label: 'Per game', fmt: f1, d: true},
         {field: 'ppg_against', sortKey: 'ppg_against', label: 'Against', fmt: f1, d: true},
-        {field: 'ppg_diff', sortKey: 'ppg_diff', label: 'Diff', fmt: signed, sign: true, d: true}
+        {field: 'ppg_diff', sortKey: 'ppg_diff', label: 'Diff', fmt: signed, sign: true, d: true},
+        {field: 'best_ppg_txt', sortKey: 'best_ppg', label: 'Best season', cls: 'bc-pos'},
+        {field: 'low_pa_txt', sortKey: 'low_pa', label: 'Fewest against', firstDir: 'asc', d: true}
       ], null, {key: 'win_pct', dir: 'desc'});
       drawTable(document.getElementById('tbl-extra'), rows, [
         gmCol,
@@ -2593,25 +2788,45 @@ dash.calc('fines_ledger', {
     rs.data.forEach((r) => { (ppg[r.gm] || (ppg[r.gm] = [])).push(r.pts); });
     const avg = (g) => d3.mean(ppg[g] || [0]);
     const hasProj = pvWeek === week;
+    const lvAll = dash.data('live_2026');
+    const liveRows = lvAll.status === 'ok' ? lvAll.data.filter((x) => Number(x.week) === week) : [];
+    if (liveRows.length) {
+      const at = liveRows[0].updated_at ? new Date(liveRows[0].updated_at) : null;
+      const allFinal = liveRows.every((x) => x.status === 'final');
+      document.getElementById('preview-title').textContent = (allFinal ? 'Final: week ' : 'Live: week ') + week;
+      document.getElementById('preview-sub').textContent = at ? 'Scores as of ' + at.toLocaleString('en-GB', {weekday: 'short', hour: '2-digit', minute: '2-digit'}) : 'Live scores';
+    }
+    drawWeekHist(week);
     box.replaceChildren(...games.map((m) => {
       const p = pvRows.find((r) => Number(r.week) === week && ((r.a === m.a && r.b === m.b) || (r.a === m.b && r.b === m.a)));
       const flip = p && p.a !== m.a;
       const num = (v) => (v === '' || v == null || isNaN(Number(v)) ? null : Number(v));
       const rawA = p ? num(flip ? p.b_proj : p.a_proj) : null, rawB = p ? num(flip ? p.a_proj : p.b_proj) : null;
       const gotProj = rawA != null && rawB != null;
-      const pa = gotProj ? rawA : avg(m.a), pb = gotProj ? rawB : avg(m.b);
-      const prob = winProb(pa, pb, 26);
+      let pa = gotProj ? rawA : avg(m.a), pb = gotProj ? rawB : avg(m.b);
+      const lv = liveRows.find((x) => (x.a === m.a && x.b === m.b) || (x.a === m.b && x.b === m.a));
+      let la = null, lb = null;
+      if (lv) {
+        const lf = lv.a !== m.a;
+        la = num(lf ? lv.b_pts : lv.a_pts); lb = num(lf ? lv.a_pts : lv.b_pts);
+        const qa = num(lf ? lv.b_proj : lv.a_proj), qb = num(lf ? lv.a_proj : lv.b_proj);
+        if (qa != null && qb != null) { pa = qa; pb = qb; }
+      }
+      const isFinal = lv && lv.status === 'final';
+      const prob = isFinal ? (la > lb ? 1 : la < lb ? 0 : 0.5) : winProb(pa, pb, lv ? 14 : 26);
       const c = el('div', 'bc-pv'); c.tabIndex = 0; c.setAttribute('role', 'button'); c.setAttribute('aria-expanded', 'false');
       c.style.setProperty('--ca', gmColor(m.a)); c.style.setProperty('--cb', gmColor(m.b));
       const ser = seriesBetween(m.a, m.b);
       const k = el('div', 'bc-pv-k');
       let lead = 'First meeting';
       if (ser && ser.w + ser.l) lead = ser.w > ser.l ? `${m.a} leads ${ser.w}–${ser.l}` : ser.l > ser.w ? `${m.b} leads ${ser.l}–${ser.w}` : `Series ${ser.w}–${ser.l}`;
-      k.append(el('span', null, gotProj ? 'ESPN proj' : 'Season avg'), el('b', null, lead));
-      const row = (g, proj, pr) => {
+      if (lv) { c.classList.add('live'); k.append(el('span', isFinal ? null : 'bc-live', isFinal ? 'Final' : 'Live'), el('b', null, lead)); }
+      else k.append(el('span', null, gotProj ? 'ESPN proj' : 'Season avg'), el('b', null, lead));
+      const row = (g, proj, pr, now) => {
         const r = el('div', 'bc-pv-row ' + (pr >= 0.5 ? 'fav' : 'dog'));
         const nm = el('div', 'bc-pv-nm', g); nm.appendChild(el('span', 'bc-pv-rec', st[g] ? `${st[g].record} · ${ordShort(st[g].rank)}` : ''));
-        r.append(badge(g), nm, el('span', 'bc-pv-pct', Math.round(pr * 100) + '%'), el('b', 'bc-pv-proj', f1(proj)));
+        const sub = now == null ? Math.round(pr * 100) + '%' : isFinal ? '' : Math.round(pr * 100) + '% · proj ' + f1(proj);
+        r.append(badge(g), nm, el('span', 'bc-pv-pct', sub), el('b', 'bc-pv-proj', now == null ? f1(proj) : f2(now)));
         return r;
       };
       const bar = el('div', 'bc-pv-bar'); const fa = el('i'); fa.style.width = (prob * 100).toFixed(1) + '%'; bar.append(fa);
@@ -2623,7 +2838,7 @@ dash.calc('fines_ledger', {
       const vsBtn = el('button', 'bc-pv-more', 'Full head to head'); vsBtn.type = 'button';
       vsBtn.addEventListener('click', (ev) => { ev.stopPropagation(); hist.vsA = m.a; hist.vsB = m.b; show('rivals', true); document.getElementById('page-rivals').scrollIntoView({block: 'start'}); });
       x.append(vsBtn);
-      c.append(k, row(m.a, pa, prob), row(m.b, pb, 1 - prob), bar, x);
+      c.append(k, row(m.a, pa, prob, la), row(m.b, pb, 1 - prob, lb), bar, x);
       const toggle = () => { const on = !c.classList.contains('open'); c.classList.toggle('open', on); c.setAttribute('aria-expanded', String(on)); };
       c.addEventListener('click', (ev) => { if (ev.target.closest('.bc-who, .bc-badge, .bc-pv-more')) return; toggle(); });
       c.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); } });
@@ -2631,6 +2846,245 @@ dash.calc('fines_ledger', {
     }));
   }
   const ordShort = (n) => (n == null ? '' : ord(n));
+
+  // ---------- MY TEAM ----------
+  const ME = {gm: store.get('sppj-me') || ''};
+  const meStyle = document.createElement('style'); document.head.appendChild(meStyle);
+  function applyMe() {
+    const g = ME.gm && GM[ME.gm] ? ME.gm : '';
+    const sel = `.bc-badge[data-gm="${g}"]`;
+    meStyle.textContent = g ? `.bc tbody tr:has(${sel}) td { background: color-mix(in srgb, ${gmColor(g)} 9%, transparent) !important; }
+.bc tbody tr:has(${sel}) td:first-child { box-shadow: inset 2px 0 0 ${gmColor(g)}; }
+.bc .bc-pr:has(${sel}), .bc .bc-pv:has(${sel}), .bc .bc-game:has(${sel}), .bc .bc-award:has(${sel}) { border-color: color-mix(in srgb, ${gmColor(g)} 55%, transparent); }` : '';
+    const pick = document.getElementById('me-pick'); if (pick && pick.value !== g) pick.value = g;
+  }
+  function drawMe() {
+    const seg = document.getElementById('me-seg'), box = document.getElementById('me-card');
+    const g = ME.gm;
+    if (!g) { seg.hidden = true; return; }
+    const ts = dash.data('this_season'), po = dash.data('playoff_odds'), pw = dash.data('power_rankings'), fb = dash.data('fines_by_gm'), tb = dash.data('trophy_board'), sk = dash.data('streaks'), dv = dash.data('divisions_2026');
+    if (ts.status !== 'ok' || po.status !== 'ok') return;
+    seg.hidden = false;
+    document.getElementById('me-title').textContent = g + "'s week";
+    const me = ts.data.find((x) => x.gm === g) || {};
+    const odds = po.data.find((x) => x.gm === g) || {};
+    const conf = dv.status === 'ok' ? (dv.data.find((x) => x.gm === g) || {}).division : '';
+    const confRank = conf ? ts.data.filter((x) => (dv.data.find((d) => d.gm === x.gm) || {}).division === conf).sort((a, b) => a.rank - b.rank).findIndex((x) => x.gm === g) + 1 : null;
+    const out = [];
+    // next game from the matchup cards (same numbers as Up next)
+    const card = [...document.querySelectorAll('#preview-cards .bc-pv')].find((c) => c.querySelector(`.bc-badge[data-gm="${g}"]`));
+    if (card) {
+      const rows = [...card.querySelectorAll('.bc-pv-row')];
+      const mine = rows.find((rw) => rw.querySelector(`.bc-badge[data-gm="${g}"]`)), opp = rows.find((rw) => rw !== mine);
+      const oppGm = opp.querySelector('.bc-badge').dataset.gm;
+      const state0 = (card.querySelector('.bc-pv-k span') || {}).textContent || ''; const pctTxt = mine.querySelector('.bc-pv-pct').textContent; const t = tile(state0 === 'Final' ? 'Final' : state0 === 'Live' ? 'Live now' : 'Next up', '', `${mine.querySelector('.bc-pv-proj').textContent} vs ${opp.querySelector('.bc-pv-proj').textContent}` + (pctTxt ? ' · ' + pctTxt : ''), 'wide');
+      t.querySelector('.bc-pf-v').append(document.createTextNode('vs '), badge(oppGm), el('span', null, oppGm));
+      out.push(t);
+    }
+    const s = sk.status === 'ok' ? sk.data.find((x) => x.gm === g) : null;
+    out.push(tile('Record', me.record || '–', [conf && confRank ? ordShort(confRank) + ' in ' + conf : '', me.rank ? 'seed ' + me.rank : '', s && s.current ? 'streak ' + s.current : ''].filter(Boolean).join(' · ')));
+    const pathTxt = odds.clinched ? 'Clinched' : odds.eliminated ? 'Eliminated' : odds.safe_wins != null ? `${odds.safe_wins} more wins = 90% safe` : '';
+    out.push(tile('Playoff odds', odds.playoff_pct != null ? (odds.playoff_pct >= 0.995 ? '>99%' : Math.round(odds.playoff_pct * 100) + '%') : '–', pathTxt));
+    if (pw.status === 'ok' && pw.data.length) { const lw = String(Math.max(...pw.data.map((x) => Number(x.week)))); const p = pw.data.find((x) => x.week === lw && x.gm === g); if (p) out.push(tile('Power rank', ordShort(p.rank), f1(p.score) + ' of 100' + (p.move ? (p.move > 0 ? ' · up ' : ' · down ') + Math.abs(p.move) : ''))); }
+    const f = fb.status === 'ok' ? fb.data.find((x) => x.gm === g) : null;
+    const tp = tb.status === 'ok' ? tb.data.find((x) => x.gm === g) : null;
+    out.push(tile('Fines and trophies', (f ? f.total_eur : 0) + '€', (tp ? signedInt(tp.total) : '0') + ' trophy points', 'money'));
+    box.replaceChildren(...out);
+  }
+  (function initMe() {
+    const pick = document.getElementById('me-pick');
+    Object.keys(GM).filter((g) => g !== 'Tomek').sort().forEach((g) => pick.appendChild(new Option(g, g)));
+    pick.value = ME.gm;
+    pick.addEventListener('change', () => { ME.gm = pick.value; store.set('sppj-me', ME.gm); applyMe(); if (state.page === 'week') drawMe(); });
+    applyMe();
+  })();
+
+  // ---------- THEME ----------
+  (function initTheme() {
+    const root = document.querySelector('.bc'), btn = document.getElementById('theme-btn');
+    const set = (light, redraw) => {
+      THEME.light = light;
+      root.setAttribute('data-theme', light ? 'light' : 'dark');
+      document.documentElement.style.background = light ? '#f3f4f7' : '#06070a';
+      document.body.style.background = light ? '#f3f4f7' : '#06070a';
+      const tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', light ? '#f3f4f7' : '#06070a');
+      btn.textContent = light ? 'Dark' : 'Light';
+      if (redraw) { applyMe(); drawHero(); DRAW[state.page](); }
+    };
+    set(store.get('sppj-theme') === 'light', false);
+    btn.addEventListener('click', () => { const l = !THEME.light; store.set('sppj-theme', l ? 'light' : 'dark'); set(l, true); });
+  })();
+
+  // ---------- THIS WEEK IN HISTORY ----------
+  function drawWeekHist(week) {
+    const gs = dash.data('games'), box = document.getElementById('week-hist');
+    if (gs.status !== 'ok' || !week) return;
+    document.getElementById('wh-title').textContent = 'Week ' + week + ' in SPPJ history';
+    const past = gs.data.filter((x) => Number(x.week) === week && x.season !== '2026' && x.a !== 'Other' && x.b !== 'Other');
+    if (!past.length) { box.replaceChildren(el('div', 'bc-clean', 'No history for this week yet.')); return; }
+    const sides = [], games = [];
+    past.forEach((x) => { const a = Number(x.a_pts), b = Number(x.b_pts); sides.push({gm: x.a, pts: a, opp: x.b, season: x.season, won: a > b}, {gm: x.b, pts: b, opp: x.a, season: x.season, won: b > a}); if (a !== b) games.push({w: a > b ? x.a : x.b, l: a > b ? x.b : x.a, m: Math.abs(a - b), season: x.season}); });
+    const hi = sides.reduce((a, b) => (b.pts > a.pts ? b : a));
+    const lowPool = sides.filter((s) => s.season !== '2014');
+    const lo = lowPool.reduce((a, b) => (b.pts < a.pts ? b : a));
+    const blow = games.reduce((a, b) => (b.m > a.m ? b : a));
+    const rec = {};
+    sides.forEach((s) => { const x = rec[s.gm] || (rec[s.gm] = {gm: s.gm, w: 0, l: 0}); if (s.won) x.w += 1; else x.l += 1; });
+    const owner = Object.values(rec).filter((x) => x.w + x.l >= 4).sort((a, b) => (b.w / (b.w + b.l)) - (a.w / (a.w + a.l)) || b.w - a.w)[0];
+    const cursed = Object.values(rec).filter((x) => x.w + x.l >= 4).sort((a, b) => (a.w / (a.w + a.l)) - (b.w / (b.w + b.l)) || b.l - a.l)[0];
+    const lastSeason = String(Math.max(...past.map((x) => Number(x.season))));
+    const ly = sides.filter((s) => s.season === lastSeason);
+    const lyTop = ly.reduce((a, b) => (b.pts > a.pts ? b : a));
+    const card = (k, gm, what, tone) => { const d = el('div', 'bc-award ' + (tone || '')); const w = el('div', 'bc-who'); w.append(badge(gm), el('span', null, gm)); d.append(el('div', 'bc-k', k), w, el('div', 'bc-what', what)); return d; };
+    box.replaceChildren(
+      card('Week ' + week + ' high', hi.gm, `${f2(hi.pts)} vs ${hi.opp}, ${hi.season}`, 'good'),
+      card('Week ' + week + ' low', lo.gm, `${f2(lo.pts)} vs ${lo.opp}, ${lo.season}`, 'bad'),
+      card('Biggest blowout', blow.w, `Beat ${blow.l} by ${f2(blow.m)}, ${blow.season}`, ''),
+      card('Owns week ' + week, owner.gm, `${owner.w}-${owner.l} all-time this week` + (cursed && cursed.gm !== owner.gm ? `. Cursed: ${cursed.gm} ${cursed.w}-${cursed.l}` : ''), 'gold'),
+      card('Last year', lyTop.gm, `Topped week ${week} of ${lastSeason} with ${f2(lyTop.pts)}`, '')
+    );
+  }
+
+  // ---------- PLAYOFFS ----------
+  const po = {season: null};
+  const ROUND = (n, max) => (n === max ? 'Final' : n === max - 1 ? 'Semifinal' : n === max - 2 ? 'Quarterfinal' : 'Round ' + n);
+  function gameCard(g, champ) {
+    const card = el('div', 'bc-game' + (champ ? ' champ' : ''));
+    const ap = Number(g.a_pts), bp = Number(g.b_pts);
+    const side = (t, pts) => { const rw = el('div', 'bc-game-row ' + (g.winner === t ? 'won' : g.winner ? 'lost' : '')); rw.append(badge(t), el('div', 'bc-nm', t), el('div', 'bc-pts', f2(pts))); return rw; };
+    card.append(side(g.a, ap), side(g.b, bp), el('div', 'bc-game-foot' + (Math.abs(ap - bp) < 5 ? ' close' : ''), (champ ? 'Champion: ' + g.winner + ' · ' : '') + 'by ' + f2(Math.abs(ap - bp))));
+    return card;
+  }
+  function drawPlayoffsPage() {
+    const pd = dash.data('playoffs'), tm = dash.data('teams');
+    if (pd.status !== 'ok' || tm.status !== 'ok') return;
+    const seasons = [...new Set(pd.data.map((x) => x.season))].sort();
+    document.getElementById('po-avail').textContent = seasons.length ? 'Bracket games loaded: ' + seasons.join(', ') : 'No bracket games loaded yet';
+    if (!po.season || !seasons.includes(po.season)) po.season = seasons[seasons.length - 1];
+    document.getElementById('po-tabs').replaceChildren(...seasons.map((s) => { const b = el('button', null, s); b.type = 'button'; b.setAttribute('aria-pressed', String(s === po.season)); b.addEventListener('click', () => { po.season = s; drawPlayoffsPage(); }); return b; }));
+    const games = pd.data.filter((x) => x.season === po.season);
+    const main = games.filter((x) => x.bracket === 'main'), place = games.filter((x) => x.bracket === 'place');
+    const maxR = Math.max(...main.map((x) => Number(x.round)));
+    const box = document.getElementById('po-bracket'); box.style.setProperty('--rounds', maxR);
+    box.replaceChildren(...Array.from({length: maxR}, (_, k) => k + 1).map((rd) => { const col = el('div', 'bc-bracket-col'); col.append(el('div', 'bc-k', ROUND(rd, maxR))); main.filter((x) => Number(x.round) === rd).forEach((g) => col.append(gameCard(g, rd === maxR))); return col; }));
+    const pl = document.getElementById('po-place');
+    const third = place.filter((x) => Number(x.round) === maxR);
+    pl.replaceChildren(...(third.length ? [el('div', 'bc-k', 'Placement games, final round'), ...third.map((g) => { const c = gameCard(g, false); c.style.marginTop = '6px'; return c; })] : []));
+    // clutch table
+    const recs = {};
+    const R = (g) => recs[g] || (recs[g] = {gm: g, w: 0, l: 0, best: null, finals: 0, titles: 0, runner: 0, lasts: 0, apps: 0});
+    tm.data.filter((t) => t.gm !== 'Other' && t.final_rank).forEach((t) => { const x = R(t.gm); const fr = Number(t.final_rank); if (fr === 1) { x.titles += 1; x.finals += 1; } if (fr === 2) { x.runner += 1; x.finals += 1; } const n = tm.data.filter((q) => q.season === t.season).length; if (fr === n) x.lasts += 1; });
+    pd.data.filter((x) => x.bracket === 'main').forEach((g) => {
+      [[g.a, Number(g.a_pts)], [g.b, Number(g.b_pts)]].forEach(([t, p]) => { const x = R(t); if (g.winner === t) x.w += 1; else if (g.winner) x.l += 1; if (x.best == null || p > x.best) x.best = p; });
+    });
+    const rows = Object.values(recs).filter((x) => x.gm !== 'Tomek' || x.titles + x.finals).map((x) => ({...x, rec: x.w + '-' + x.l, pct: x.w + x.l ? x.w / (x.w + x.l) : -1}));
+    drawTable(document.getElementById('tbl-clutch'), rows, [
+      gmCol,
+      {field: 'titles', sortKey: 'titles', label: 'Titles', cls: 'bc-money'},
+      {field: 'runner', sortKey: 'runner', label: 'Runner-up'},
+      {field: 'rec', sortKey: 'pct', label: 'Playoff W-L'},
+      {field: 'best', sortKey: 'best', label: 'Best playoff score', fmt: (v) => (v == null ? '–' : f2(v)), d: true},
+      {field: 'lasts', sortKey: 'lasts', label: 'Last places', d: true}
+    ], null, {key: 'titles', dir: 'desc'});
+  }
+
+  // ---------- DRAFT AND WAIVERS ----------
+  const dr = {season: null, gm: ''};
+  function pickCard(x, mode) {
+    const pr = Number(x.pts_rank), ov = Number(x.overall);
+    const verdict = mode === 'steal' ? 'hit' : mode === 'bust' ? 'miss' : pr <= ov + 6 ? 'hit' : pr <= ov + 30 ? 'ok' : 'miss';
+    const c = el('div', 'bc-pick ' + verdict);
+    const p = el('div', 'bc-pick-p'); p.append(el('div', 'bc-pick-n', x.player));
+    const s = el('div', 'bc-pick-s'); s.append(badge(x.gm), document.createTextNode(x.gm + ' · ' + x.pos + ' · round ' + x.round)); p.append(s);
+    const rr = el('div', 'bc-pick-r'); rr.append(el('b', null, f1(Number(x.pts))), el('span', null, (x.pos_rank ? x.pos + x.pos_rank : '') + ' · ' + (verdict === 'hit' ? (mode === 'steal' ? 'steal' : 'hit') : verdict === 'miss' ? (mode === 'bust' ? 'bust' : 'miss') : 'fine')));
+    c.append(el('b', null, '#' + ov), p, rr);
+    return c;
+  }
+  function drawDraftPage() {
+    const dh = dash.data('draft_history'), mv = dash.data('gm_moves'), lg = dash.data('moves_2026');
+    if (dh.status === 'ok' && dh.data.length) {
+      const seasons = [...new Set(dh.data.map((x) => x.season))].sort();
+      document.getElementById('dr-avail').textContent = 'Drafts loaded: ' + seasons.join(', ');
+      if (!dr.season || !seasons.includes(dr.season)) dr.season = seasons[seasons.length - 1];
+      document.getElementById('dr-tabs').replaceChildren(...seasons.map((s) => { const b = el('button', null, s); b.type = 'button'; b.setAttribute('aria-pressed', String(s === dr.season)); b.addEventListener('click', () => { dr.season = s; drawDraftPage(); }); return b; }));
+      document.getElementById('dr-title').textContent = dr.season + ' draft room';
+      const ds = dh.data.filter((x) => x.season === dr.season);
+      document.getElementById('dr-r1').replaceChildren(...ds.filter((x) => x.kind === 'first_round').sort((a, b) => a.overall - b.overall).map((x) => pickCard(x)));
+      document.getElementById('dr-steal').replaceChildren(...ds.filter((x) => x.kind === 'steal').map((x) => pickCard(x, 'steal')));
+      document.getElementById('dr-bust').replaceChildren(...ds.filter((x) => x.kind === 'bust').map((x) => pickCard(x, 'bust')));
+    }
+    if (mv.status === 'ok' && mv.data.length) {
+      const seasons = [...new Set(mv.data.map((x) => x.season))].sort();
+      const per = {};
+      seasons.forEach((s) => {
+        const rows = mv.data.filter((x) => x.season === s && x.draft_pts !== '').sort((a, b) => Number(b.draft_pts) - Number(a.draft_pts));
+        rows.forEach((x, k) => { const p = per[x.gm] || (per[x.gm] = {gm: x.gm, ranks: [], best: null, adds: 0, trades: 0, faab: 0, n: 0, cur: 0}); p.ranks.push(k + 1); if (!p.best || k + 1 < p.best.r) p.best = {r: k + 1, s}; });
+        mv.data.filter((x) => x.season === s).forEach((x) => { const p = per[x.gm] || (per[x.gm] = {gm: x.gm, ranks: [], best: null, adds: 0, trades: 0, faab: 0, n: 0, cur: 0}); if (x.waivers === '' || x.waivers == null) return; p.adds += Number(x.waivers || 0) + Number(x.free_agents || 0); p.trades += Number(x.trades || 0); p.faab += Number(x.faab || 0); p.n += 1; if (s === seasons[seasons.length - 1]) p.cur = Number(x.waivers || 0) + Number(x.free_agents || 0); });
+      });
+      const rows = Object.values(per).filter((p) => p.gm !== 'Other').map((p) => ({...p, avg_rank: p.ranks.length ? d3.mean(p.ranks) : null, best_txt: p.best ? ordShort(p.best.r) + ' (' + p.best.s + ')' : '', adds_per: p.n ? p.adds / p.n : 0, faab_per: p.n ? p.faab / p.n : 0}));
+      drawTable(document.getElementById('tbl-drafters'), rows.filter((x) => x.avg_rank != null), [
+        gmCol,
+        {field: 'avg_rank', sortKey: 'avg_rank', label: 'Avg rank', fmt: f1, firstDir: 'asc'},
+        {field: 'best_txt', sortKey: 'avg_rank', label: 'Best draft'},
+        {field: 'ranks', sortKey: 'avg_rank', label: 'By season', fmt: (v) => v.join(' · '), d: true}
+      ], null, {key: 'avg_rank', dir: 'asc'}, {hl: (x) => x === rows.filter((y) => y.avg_rank != null).sort((a, b) => a.avg_rank - b.avg_rank)[0]});
+      drawTable(document.getElementById('tbl-wire'), rows.filter((x) => x.n), [
+        gmCol,
+        {field: 'adds', sortKey: 'adds', label: 'Pickups'},
+        {field: 'adds_per', sortKey: 'adds_per', label: 'Per season', fmt: f1, d: true},
+        {field: 'cur', sortKey: 'cur', label: seasons[seasons.length - 1]},
+        {field: 'trades', sortKey: 'trades', label: 'Trades'},
+        {field: 'faab_per', sortKey: 'faab_per', label: 'FAAB per season', fmt: (v) => '$' + Math.round(v), d: true}
+      ], null, {key: 'adds', dir: 'desc'});
+    }
+    if (lg.status === 'ok') {
+      const sel = document.getElementById('log-gm');
+      if (sel.options.length === 1) { [...new Set(lg.data.map((x) => x.gm))].sort().forEach((g) => sel.appendChild(new Option(g, g))); sel.addEventListener('change', () => { dr.gm = sel.value; drawDraftPage(); }); }
+      const rows = lg.data.filter((x) => !dr.gm || x.gm === dr.gm).map((x, k) => ({...x, k, w: Number(x.week), b: Number(x.bid)}));
+      document.getElementById('log-count').textContent = rows.length + ' moves';
+      drawTable(document.getElementById('tbl-log'), rows, [
+        {field: 'w', sortKey: 'w', label: 'Wk', left: true},
+        gmCol,
+        {field: 'added', sortKey: 'added', label: 'Added', left: true, cls: 'bc-pos'},
+        {field: 'dropped', sortKey: 'dropped', label: 'Dropped', left: true, d: true},
+        {field: 'kind', sortKey: 'kind', label: 'How', d: true},
+        {field: 'b', sortKey: 'b', label: 'Bid', fmt: (v) => (v ? '$' + v : '')}
+      ], (x) => x.k, {key: 'w', dir: 'desc'});
+    }
+  }
+
+  // ---------- TREND LINE ----------
+  function spark(gm) {
+    const rs = dash.data('results_2026'); const wrap = el('span', 'bc-spark');
+    if (rs.status !== 'ok') return wrap;
+    const all = rs.data.map((x) => x.pts), lo = d3.min(all), hi = d3.max(all);
+    const pts = rs.data.filter((x) => x.gm === gm).sort((a, b) => a.week - b.week);
+    const W = 64, Hh = 18, xs = (i) => 2 + i * ((W - 4) / Math.max(1, pts.length - 1)), ys = (v) => Hh - 2 - ((v - lo) / Math.max(1, hi - lo)) * (Hh - 4);
+    const svg = d3.select(wrap).append('svg').attr('width', W).attr('height', Hh).attr('viewBox', `0 0 ${W} ${Hh}`).attr('role', 'img').attr('aria-label', gm + ' weekly scores: ' + pts.map((p) => f1(p.pts)).join(', '));
+    svg.append('path').attr('d', d3.line().x((d, i) => xs(i)).y((d) => ys(d.pts)).curve(d3.curveMonotoneX)(pts)).attr('fill', 'none').attr('stroke', gmColor(gm)).attr('stroke-width', 1.5).attr('stroke-linejoin', 'round');
+    if (pts.length) svg.append('circle').attr('cx', xs(pts.length - 1)).attr('cy', ys(pts[pts.length - 1].pts)).attr('r', 2.2).attr('fill', gmColor(gm));
+    svg.append('title').text('Weekly scores: ' + pts.map((p) => 'W' + p.week + ' ' + f1(p.pts)).join(', '));
+    return wrap;
+  }
+
+  // ---------- PAYMENTS ----------
+  function drawPay(rows) {
+    const owed = d3.sum(rows, (x) => x.total_eur > 0 ? x.total_eur : 0);
+    const paid = d3.sum(rows.filter((x) => String(x.fines_status).toLowerCase() === 'paid'), (x) => x.total_eur > 0 ? x.total_eur : 0);
+    const bar = document.getElementById('pay-bar');
+    const k = el('div', 'bc-k'); k.append(el('span', null, 'Fines paid in'), el('b', null, paid + '€ of ' + owed + '€'));
+    const tr = el('div', 'bc-pay-track'); const i = el('i'); i.style.width = (owed ? (paid / owed) * 100 : 0).toFixed(1) + '%'; tr.append(i);
+    bar.replaceChildren(k, tr);
+    const open = rows.filter((x) => x.total_eur > 0 && String(x.fines_status).toLowerCase() !== 'paid').sort((a, b) => b.total_eur - a.total_eur);
+    const btn = document.getElementById('copy-remind');
+    btn.hidden = !open.length;
+    btn.onclick = () => {
+      const txt = 'SPPJ fines check. Still open: ' + open.map((x) => `${x.gm} ${x.total_eur}€`).join(', ') + `. That's ${d3.sum(open, (x) => x.total_eur)}€ waiting for the winner's purse. MobilePay to Allu and tell him when it's done so you get marked paid. Full list: https://aleksicreative-things.github.io/sppj/#fines`;
+      const done = () => { btn.textContent = 'Copied'; btn.classList.add('done'); setTimeout(() => { btn.textContent = 'Copy reminder for the chat'; btn.classList.remove('done'); }, 2000); };
+      const fallback = () => { const ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) { /* ignore */ } ta.remove(); done(); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fallback); else fallback();
+    };
+  }
 
   // ---------- STANDINGS: power rankings, table, playoff race ----------
   const pr = {week: null};
@@ -2678,17 +3132,18 @@ dash.calc('fines_ledger', {
     const tbl = document.getElementById('tbl-odds');
     if (o.status !== 'ok' || !o.data.length) return;
     const spots = o.data[0].spots, left = d3.max(o.data, (r) => r.games_left);
-    document.getElementById('odds-note').textContent = `Top ${spots} of 12 make the playoffs (quarterfinal and semifinal one week each, two-week final). Seeds go by record, then points. ${left} regular-season weeks left. Odds come from 10,000 simulated finishes using each team's 2026 scoring.`;
+    document.getElementById('odds-note').textContent = `Top ${spots} of 12 make the playoffs (quarterfinal and semifinal one week each, two-week final). Seeds go by record, then points. ${left} regular-season weeks left. Odds come from 10,000 simulated finishes using each team's 2026 scoring. Path: how many of the remaining games a team needs to win to get in at least 9 times out of 10 (hover for the number that guarantees a spot no matter what). Clinched and Eliminated count ties against you, because the points tiebreak can't be known yet.`;
     const pctCell = (td, v) => { td.textContent = v >= 0.995 ? '>99%' : v <= 0.005 && v > 0 ? '<1%' : Math.round(v * 100) + '%'; td.style.setProperty('--p', (v * 100).toFixed(1) + '%'); td.classList.add('bc-pbar'); };
     drawTable(tbl, o.data, [
       {field: 'seed', sortKey: 'seed', label: 'Seed', left: true, firstDir: 'asc'},
       gmCol,
-      {field: 'record', sortKey: 'wins', label: 'Record'},
+      {field: 'record', sortKey: 'wins', label: 'Record', d: true},
       {field: 'pf', sortKey: 'pf', label: 'Points', fmt: f1, d: true},
       {field: 'division', sortKey: 'division', label: 'Conf', left: true, firstDir: 'asc', d: true},
       {field: 'playoff_pct', sortKey: 'playoff_pct', label: 'Playoffs', cell: pctCell},
       {field: 'top_seed_pct', sortKey: 'top_seed_pct', label: '#1 seed', cell: (td, v) => { td.textContent = v >= 0.995 ? '>99%' : v > 0 && v < 0.005 ? '<1%' : Math.round(v * 100) + '%'; }, d: true},
-      {field: 'last_pct', sortKey: 'last_pct', label: 'Last place', cell: (td, v) => { td.textContent = v > 0 && v < 0.005 ? '<1%' : Math.round(v * 100) + '%'; if (v >= 0.2) td.classList.add('bc-neg'); }}
+      {field: 'safe_wins', sortKey: 'playoff_pct', label: 'Path', cell: (td, v, rr) => { td.textContent = ''; const s = el('span', 'bc-path' + (rr.clinched ? ' in' : rr.eliminated ? ' out' : ''), rr.clinched ? 'Clinched' : rr.eliminated ? 'Eliminated' : v == null ? 'Long shot' : v === 0 ? 'Safe pace' : v + ' of ' + rr.left + ' wins'); s.title = rr.clinched ? 'In the playoffs no matter what' : rr.eliminated ? 'Cannot reach the top ' + rr.spots + ' anymore' : (v == null ? 'No final win total gets in 9 times out of 10' : 'Winning ' + v + ' of the last ' + rr.left + ' got in at least 9 times out of 10 in the simulations') + (rr.lock_wins != null ? '. Winning ' + rr.lock_wins + ' guarantees a spot whatever else happens.' : '.'); td.appendChild(s); }},
+      {field: 'last_pct', sortKey: 'last_pct', label: 'Last place', d: true, cell: (td, v) => { td.textContent = v > 0 && v < 0.005 ? '<1%' : Math.round(v * 100) + '%'; if (v >= 0.2) td.classList.add('bc-neg'); }}
     ], null, {key: 'seed', dir: 'asc'}, {hl: (r) => r.seed === 1});
     if (sortState['tbl-odds'] && sortState['tbl-odds'].key === 'seed' && sortState['tbl-odds'].dir === 'asc') {
       const rowsEls = tbl.querySelectorAll('tbody tr'); if (rowsEls[spots - 1]) rowsEls[spots - 1].classList.add('bc-cut');
@@ -2860,7 +3315,7 @@ dash.calc('fines_ledger', {
     elU.title = d.toLocaleString('en-GB');
   }
 
-  const DRAW = {week: drawWeekPage, fines: drawMoneyPage, trophies: drawTrophyPage, standings: drawStandingsPage, history: drawHistoryPage, records: drawRecordsPage, rivals: drawRivalsPage};
+  const DRAW = {week: drawWeekPage, fines: drawMoneyPage, trophies: drawTrophyPage, standings: drawStandingsPage, history: drawHistoryPage, records: drawRecordsPage, rivals: drawRivalsPage, playoffs: drawPlayoffsPage, draft: drawDraftPage};
   const tabBtns = [...document.querySelectorAll('#tabs button')];
   function show(p, push) {
     if (!PAGES.includes(p)) p = 'week';
