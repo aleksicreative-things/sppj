@@ -194,6 +194,7 @@ html,body{margin:0;background:#06070a;}
 .bc-game-foot.close { color: var(--bc-gold); }
 
 .bc-awards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.bc-awards.seven { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .bc-award { padding: 10px 12px; }
 .bc-award.good .bc-k { color: var(--bc-green); }
 .bc-award.bad .bc-k { color: #ff6b7a; }
@@ -396,7 +397,7 @@ html.bc-noscroll { overflow: hidden; }
 
 @media (max-width: 1100px) {
   .bc-champs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .bc-awards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .bc-awards, .bc-awards.seven { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 980px) {
   .bc-hero { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -440,7 +441,7 @@ html.bc-noscroll { overflow: hidden; }
   .bc-weeks { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
   .bc-weeks::-webkit-scrollbar { display: none; }
   .bc-weeks button { flex: none; }
-  .bc-awards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bc-awards, .bc-awards.seven { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bc-awards .bc-award:last-child { grid-column: 1 / -1; }
   .bc-champs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bc-records { grid-template-columns: minmax(0, 1fr); }
@@ -645,7 +646,7 @@ html.bc-noscroll { overflow: hidden; }
     </section>
     <section class="bc-seg">
       <div class="bc-seg-h"><h2>Awards</h2><p>Trophy points handed out this week</p></div>
-      <div class="bc-awards" id="week-awards" data-source="weekly_trophies_2026"></div>
+      <div class="bc-awards seven" id="week-awards" data-source="weekly_trophies_2026"></div>
     </section>
     <section class="bc-seg">
       <div class="bc-seg-h"><h2>Fines this week</h2><p id="week-sub">Into the purse</p></div>
@@ -1040,7 +1041,7 @@ dash.calc('trophy_board', {
     const pts = {};
     for (const r of rules) pts[r.key] = Number(r.trophy_points);
     const by = {};
-    const row = (g) => by[g] || (by[g] = {gm: g, most_points: 0, least_points: 0, top_player: 0, gm_move: 0, coach: 0, weekly_points: 0, season_points: 0, total: 0});
+    const row = (g) => by[g] || (by[g] = {gm: g, most_points: 0, least_points: 0, top_player: 0, gm_move: 0, coach: 0, blowout: 0, blown_out: 0, weekly_points: 0, season_points: 0, total: 0});
     for (const p of payments_2026) row(p.gm);
     for (const w of weekly_trophies_2026) {
       row(w.most_points_gm).most_points += 1;
@@ -1048,10 +1049,12 @@ dash.calc('trophy_board', {
       row(w.top_player_gm).top_player += 1;
       row(w.gm_move_gm).gm_move += 1;
       row(w.coach_gm).coach += 1;
+      if (w.blowout_gm) row(w.blowout_gm).blowout += 1;
+      if (w.blown_out_gm) row(w.blown_out_gm).blown_out += 1;
     }
     for (const s of season_trophies_2026) row(s.gm).season_points += pts[s.rule_key] || 0;
     return Object.values(by).map((r) => {
-      const weekly = r.most_points * pts.most_points + r.least_points * pts.least_points + r.top_player * pts.top_player + r.gm_move * pts.gm_move + r.coach * pts.coach;
+      const weekly = r.most_points * pts.most_points + r.least_points * pts.least_points + r.top_player * pts.top_player + r.gm_move * pts.gm_move + r.coach * pts.coach + r.blowout * (pts.blowout || 0) + r.blown_out * (pts.blown_out || 0);
       return {...r, weekly_points: weekly, total: weekly + r.season_points};
     });
   }
@@ -1640,6 +1643,8 @@ dash.calc('trophy_ledger', {
       add(w.top_player_gm, w.week, pts.top_player, 'Top player');
       add(w.gm_move_gm, w.week, pts.gm_move, 'GM move');
       add(w.coach_gm, w.week, pts.coach, 'Coach');
+      if (w.blowout_gm) add(w.blowout_gm, w.week, pts.blowout || 0, 'Biggest blowout');
+      if (w.blown_out_gm) add(w.blown_out_gm, w.week, pts.blown_out || 0, 'Blown out');
     });
     return Object.values(out).map((r) => ({...r, awards: r.awards.join(', ')}));
   }
@@ -2029,7 +2034,9 @@ dash.calc('fines_ledger', {
       award('Least points −1', w.least_points_gm, f2(Number(w.least_points)) + ' pts', 'bad'),
       award('Top player +1', w.top_player_gm, w.top_player + ', ' + f2(Number(w.top_player_pts)), 'good'),
       award('GM move +1', w.gm_move_gm, w.gm_move_player + ', ' + f2(Number(w.gm_move_pts)), 'good'),
-      award('Coach of the week +1', w.coach_gm, w.coach_lineup_pct + '% lineup, ' + f2(Number(w.coach_bench_pts)) + ' left on bench', 'good')
+      award('Coach of the week +1', w.coach_gm, w.coach_lineup_pct + '% lineup, ' + f2(Number(w.coach_bench_pts)) + ' left on bench', 'good'),
+      ...(w.blowout_gm ? [award('Biggest blowout +1', w.blowout_gm, 'Won by ' + f2(Number(w.blowout_margin)) + ' vs ' + w.blown_out_gm, 'good'),
+        award('Blown out −1', w.blown_out_gm, 'Lost by ' + f2(Number(w.blowout_margin)) + ' to ' + w.blowout_gm, 'bad')] : [])
     );
 
     const fines = fl.status === 'ok' ? fl.data.filter((f) => f.week === state.week) : [];
@@ -2121,6 +2128,8 @@ dash.calc('fines_ledger', {
         {field: 'top_player', sortKey: 'top_player', label: 'Top player', d: true},
         {field: 'gm_move', sortKey: 'gm_move', label: 'GM move', d: true},
         {field: 'coach', sortKey: 'coach', label: 'Coach', d: true},
+        {field: 'blowout', sortKey: 'blowout', label: 'Blowout', d: true},
+        {field: 'blown_out', sortKey: 'blown_out', label: 'Blown out', d: true},
         {field: 'weekly_points', sortKey: 'weekly_points', label: 'Weekly', fmt: signedInt, sign: true},
         {field: 'season_points', sortKey: 'season_points', label: 'Season', fmt: signedInt, sign: true},
         {field: 'total', sortKey: 'total', label: 'Total', fmt: signedInt}
