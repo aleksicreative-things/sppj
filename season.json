@@ -1,5 +1,5 @@
 {
-"_meta":{"updated":"2026-10-27","season":"2026"},
+"_meta":{"updated":"2026-11-03","season":"2026"},
 "games":[
 {"season":"2026","week":"1","a":"Peetu","a_pts":"134.14","b":"Niko","b_pts":"129.66"},
 {"season":"2026","week":"1","a":"Makkis","a_pts":"145.26","b":"Eero","b_pts":"99.74"},
@@ -42,7 +42,13 @@
 {"season":"2026","week":"7","a":"Jose","a_pts":"118.54","b":"Allu","b_pts":"98.14"},
 {"season":"2026","week":"7","a":"Juho","a_pts":"114.36","b":"Jan","b_pts":"113.1"},
 {"season":"2026","week":"7","a":"Jussi","a_pts":"92.48","b":"Makkis","b_pts":"174.48"},
-{"season":"2026","week":"7","a":"Joel","a_pts":"96.12","b":"Niko","b_pts":"88.42"}
+{"season":"2026","week":"7","a":"Joel","a_pts":"96.12","b":"Niko","b_pts":"88.42"},
+{"season":"2026","week":"8","a":"Eero","a_pts":"83.6","b":"Anton","b_pts":"86.8"},
+{"season":"2026","week":"8","a":"Allu","a_pts":"121.04","b":"Oliver","b_pts":"136.9"},
+{"season":"2026","week":"8","a":"Jan","a_pts":"79.7","b":"Jose","b_pts":"101.76"},
+{"season":"2026","week":"8","a":"Makkis","a_pts":"193.38","b":"Juho","b_pts":"132.42"},
+{"season":"2026","week":"8","a":"Niko","a_pts":"87.3","b":"Jussi","b_pts":"105"},
+{"season":"2026","week":"8","a":"Peetu","a_pts":"150.48","b":"Joel","b_pts":"97.96"}
 ],
 "fine_log_2026":[
 {"week":"1","gm":"Niko","player":"Colston Loveland","points":"0","type":"Goose egg"},
@@ -84,7 +90,16 @@
 {"week":"7","gm":"Juho","player":"Rashee Rice","points":"0","type":"Unfilled roster"},
 {"week":"7","gm":"Jan","player":"Texans D/ST","points":"0","type":"Goose egg"},
 {"week":"7","gm":"Jussi","player":"Panthers D/ST","points":"-3","type":"Double goose egg"},
-{"week":"7","gm":"Niko","player":"Jets D/ST","points":"0","type":"Goose egg"}
+{"week":"7","gm":"Niko","player":"Jets D/ST","points":"0","type":"Goose egg"},
+{"week":"8","gm":"Eero","player":"Lamar Jackson","points":"0","type":"Goose egg"},
+{"week":"8","gm":"Anton","player":"Zay Flowers","points":"0","type":"Goose egg"},
+{"week":"8","gm":"Anton","player":"Tre Tucker","points":"0","type":"Goose egg"},
+{"week":"8","gm":"Jan","player":"DK Metcalf","points":"0.9","type":"Goose egg"},
+{"week":"8","gm":"Jan","player":"Will Reichard","points":"0","type":"Goose egg"},
+{"week":"8","gm":"Jan","player":"Omar Cooper Jr.","points":"0","type":"Goose egg"},
+{"week":"8","gm":"Jan","player":"Emanuel Wilson","points":"0","type":"Goose egg"},
+{"week":"8","gm":"Jussi","player":"Chris Godwin Jr.","points":"0","type":"Goose egg"},
+{"week":"8","gm":"Jussi","player":"Keon Coleman","points":"0.9","type":"Goose egg"}
 ],
 "weekly_trophies_2026":[
 {"week":"1","most_points_gm":"Joel","most_points":"173.66","least_points_gm":"Jussi","least_points":"93.12","top_player":"Caleb Williams","top_player_pts":"37.26","top_player_gm":"Joel","gm_move_player":"Dallas Goedert","gm_move_pts":"21.7","gm_move_gm":"Peetu","coach_gm":"Makkis","coach_lineup_pct":"100","coach_bench_pts":"19.6"},
@@ -93,11 +108,12 @@
 {"week":"4","most_points_gm":"Allu","most_points":"148.38","least_points_gm":"Anton","least_points":"99","top_player":"Tetairoa McMillan","top_player_pts":"38.2","top_player_gm":"Jose","gm_move_player":"Brian Robinson Jr.","gm_move_pts":"25.2","gm_move_gm":"Eero","coach_gm":"Joel","coach_lineup_pct":"100","coach_bench_pts":"4.58"},
 {"week":"5","most_points_gm":"Makkis","most_points":"161.9","least_points_gm":"Jussi","least_points":"80.5","top_player":"Drake Maye","top_player_pts":"39.46","top_player_gm":"Jose","gm_move_player":"Matthew Stafford","gm_move_pts":"27.32","gm_move_gm":"Eero","coach_gm":"Makkis","coach_lineup_pct":"100","coach_bench_pts":"18.4"},
 {"week":"6","most_points_gm":"Makkis","most_points":"149.84","least_points_gm":"Jussi","least_points":"66.12","top_player":"Kenneth Walker III","top_player_pts":"26.9","top_player_gm":"Joel","gm_move_player":"Trevor Lawrence","gm_move_pts":"26.34","gm_move_gm":"Makkis","coach_gm":"Peetu","coach_lineup_pct":"100","coach_bench_pts":"6.54"},
-{"week":"7","most_points_gm":"Makkis","most_points":"174.48","least_points_gm":"Niko","least_points":"88.42","top_player":"Tony Pollard","top_player_pts":"35","top_player_gm":"Jussi","gm_move_player":"Omar Cooper Jr.","gm_move_pts":"20","gm_move_gm":"Jan","coach_gm":"Jussi","coach_lineup_pct":"100","coach_bench_pts":"9.3"}
+{"week":"7","most_points_gm":"Makkis","most_points":"174.48","least_points_gm":"Niko","least_points":"88.42","top_player":"Tony Pollard","top_player_pts":"35","top_player_gm":"Jussi","gm_move_player":"Omar Cooper Jr.","gm_move_pts":"20","gm_move_gm":"Jan","coach_gm":"Jussi","coach_lineup_pct":"100","coach_bench_pts":"9.3"},
+{"week":"8","most_points_gm":"Makkis","most_points":"193.38","least_points_gm":"Jan","least_points":"79.7","top_player":"Joe Burrow","top_player_pts":"36.48","top_player_gm":"Makkis","gm_move_player":"Kirk Cousins","gm_move_pts":"28.18","gm_move_gm":"Peetu","coach_gm":"Juho","coach_lineup_pct":"100","coach_bench_pts":"27.32"}
 ],
 "season_trophies_2026":[
 {"trophy":"Highest scoring player of the season","gm":"Jan","detail":"Josh Allen 40.82 in week 2","rule_key":"top_player_season"},
-{"trophy":"Highest scoring team in one week","gm":"Makkis","detail":"174.48 points in week 7","rule_key":"high_game"},
+{"trophy":"Highest scoring team in one week","gm":"Makkis","detail":"193.38 points in week 8","rule_key":"high_game"},
 {"trophy":"Lowest scoring team in one week","gm":"Jussi","detail":"66.12 points in week 6","rule_key":"low_game"}
 ],
 "payments_2026":[
@@ -236,12 +252,12 @@
 {"key":"seeding","value":"Record, then points for"}
 ],
 "preview_2026":[
-{"week":"8","a":"Eero","b":"Anton","a_proj":"91.38","b_proj":"108.01","line":"Dead even at 6-6 and Eero took the last one by 0.86. Anton has won two straight and ESPN likes him by 17."},
-{"week":"8","a":"Allu","b":"Oliver","a_proj":"100.02","b_proj":"101.62","line":"Allu leads the series 9-5 but has lost three straight. Oliver has won three in a row. ESPN calls it a coin flip."},
-{"week":"8","a":"Jan","b":"Jose","a_proj":"56.07","b_proj":"103.82","line":"Jan leads 6-3 all time, but four teams on bye have his projection at 56. Jose brings a four-game win streak."},
-{"week":"8","a":"Makkis","b":"Juho","a_proj":"103.12","b_proj":"110.94","line":"Juho leads 9-6 and ESPN even has him ahead. Makkis just dropped 174, so good luck with that."},
-{"week":"8","a":"Niko","b":"Jussi","a_proj":"118.27","b_proj":"101.63","line":"Two teams on three-game skids. Niko leads 10-8 and the projection by 17. Jussi needs another Pollard miracle."},
-{"week":"8","a":"Peetu","b":"Joel","a_proj":"104.93","b_proj":"102.84","line":"Series tied 3-3. Joel is 6-1 but missing three guys to IR, Peetu needs this before the season slips away."}
+{"week":"9","a":"Anton","b":"Allu","a_proj":"113.11","b_proj":"109.21","line":"Allu leads the series 10-8 but has lost four straight. Anton has won three in a row and ESPN has him by 4. Ugly wins still count."},
+{"week":"9","a":"Oliver","b":"Jan","a_proj":"107.88","b_proj":"112.82","line":"Oliver leads 7-3 and has won four straight. Jan broke 80 just once in the last three weeks, yet ESPN likes him by 5. Bold."},
+{"week":"9","a":"Jose","b":"Makkis","a_proj":"101.40","b_proj":"128.90","line":"The two hottest teams in the league: Jose has won five straight, Makkis four. Makkis leads 5-4 and ESPN has him by 27 after a 193 week."},
+{"week":"9","a":"Juho","b":"Niko","a_proj":"121.93","b_proj":"120.66","line":"Juho owns this one 12-4 and won the last meeting by 1.22. Niko has lost four straight. ESPN calls it a coin flip, history does not."},
+{"week":"9","a":"Jussi","b":"Peetu","a_proj":"86.25","b_proj":"130.32","line":"Peetu leads 4-1 but Jussi won the last one. A.J. Brown is out, Pollard projects zero and ESPN has Peetu by 44. Rough."},
+{"week":"9","a":"Joel","b":"Eero","a_proj":"112.74","b_proj":"72.16","line":"Eero leads 6-3 and dropped 150 on Joel last year. This year he projects at 72 with Lamar, Breece Hall and Monangai out. Joel by 41 on paper."}
 ],
 "power_notes_2026":[
 {"week":"6","gm":"Makkis","blurb":"Most points in the league by 69. The 4-2 record is the only thing keeping this from being a coronation."},
@@ -267,10 +283,22 @@
 {"week":"7","gm":"Allu","blurb":"Three straight losses and a -1 from the Patriots D/ST. The poop is sliding off the stick."},
 {"week":"7","gm":"Eero","blurb":"Two straight losses and a medical tent of Breece Hall, Lamar and Monangai. At least he paid no fines this week."},
 {"week":"7","gm":"Jan","blurb":"Lost by 1.26 despite GM move of the week. Next week Texans, 49ers, Giants and Saints are all on bye. Best lineup: 77."},
-{"week":"7","gm":"Jussi","blurb":"Perfect lineup, Pollard dropped 35, two trophies, and still lost by 82. Some weeks you just draw Makkis."}
+{"week":"7","gm":"Jussi","blurb":"Perfect lineup, Pollard dropped 35, two trophies, and still lost by 82. Some weeks you just draw Makkis."},
+{"week":"8","gm":"Makkis","blurb":"193.38, the second-best week in SPPJ history, breaking his own season record from a week ago. Burrow dropped 36. Nobody is close."},
+{"week":"8","gm":"Joel","blurb":"Lost by 52 and still climbed two spots. Price is back, and Eero, Allu and Jan are up next. 6-2 covers a lot of sins."},
+{"week":"8","gm":"Peetu","blurb":"150.48 and Joel flattened. Kirk Cousins cost 4 FAAB, scored 28 and took GM move of the week. Biggest climber, up five."},
+{"week":"8","gm":"Oliver","blurb":"Four straight wins and a perfect lineup with Nabers and Montgomery both sitting. Quietly the most annoying team in the league."},
+{"week":"8","gm":"Juho","blurb":"Season-high 132, a perfect lineup and coach of the week, then lost by 61 because Makkis happened. Still up one."},
+{"week":"8","gm":"Anton","blurb":"Won 86.8 to 83.6 with Zay Flowers and Tre Tucker both laying goose eggs. Three straight wins, but the eye test says down four."},
+{"week":"8","gm":"Allu","blurb":"Fourth straight loss, but 121 is his best since week 4 and the roster finally looks healthy-ish. Up two, call it progress."},
+{"week":"8","gm":"Niko","blurb":"Four straight losses and 87 points. The D/ST carousel keeps landing on duds and Juho owns him 12-4. Down three."},
+{"week":"8","gm":"Jose","blurb":"Five straight wins and still down six. Adams and Pittman are on IR and the next three are Makkis, Niko and Peetu, the hardest run in the league."},
+{"week":"8","gm":"Jussi","blurb":"Season-high 105, skid snapped and out of the basement. Then A.J. Brown is out and Peetu is next. Enjoy the view while it lasts."},
+{"week":"8","gm":"Jan","blurb":"79.7, the low score of the week, and four goose eggs for 12 euros. Most expensive week in the league by a mile."},
+{"week":"8","gm":"Eero","blurb":"Lost by 3.2 after Lamar threw one incompletion and called it a day. Lamar, Breece Hall and Monangai are all out. Rock bottom, for now."}
 ],
 "meta_2026":[
-{"key":"updated_at","value":"2026-10-27T08:47:19Z"}
+{"key":"updated_at","value":"2026-11-03T09:13:13Z"}
 ],
 "power_inputs_2026":[
 {"week":"1","gm":"Allu","roster_proj":"119.21","out":"","questionable":""},
@@ -345,18 +373,30 @@
 {"week":"6","gm":"Eero","roster_proj":"112.67","out":"","questionable":""},
 {"week":"6","gm":"Peetu","roster_proj":"131.76","out":"","questionable":""},
 {"week":"6","gm":"Jose","roster_proj":"104.04","out":"","questionable":""},
-{"week":"7","gm":"Allu","roster_proj":"108.42","out":"Egbuka, Charbonnet","questionable":"St. Brown, Waddle"},
-{"week":"7","gm":"Jussi","roster_proj":"102.52","out":"Etienne (IR)","questionable":""},
-{"week":"7","gm":"Joel","roster_proj":"102.85","out":"Price, Stribling, Croskey-Merritt (IR)","questionable":""},
-{"week":"7","gm":"Niko","roster_proj":"118.28","out":"","questionable":"Golden"},
-{"week":"7","gm":"Juho","roster_proj":"119.04","out":"Deebo Samuel, Rashee Rice","questionable":""},
-{"week":"7","gm":"Anton","roster_proj":"112.09","out":"DeVonta Smith, Warren, Love","questionable":""},
-{"week":"7","gm":"Makkis","roster_proj":"115.57","out":"","questionable":"Aaron Jones"},
-{"week":"7","gm":"Oliver","roster_proj":"109.05","out":"Montgomery","questionable":""},
-{"week":"7","gm":"Jan","roster_proj":"77.10","out":"","questionable":"McConkey"},
-{"week":"7","gm":"Eero","roster_proj":"106.30","out":"Breece Hall, Lamar Jackson, Monangai","questionable":"Barkley, Coker"},
-{"week":"7","gm":"Peetu","roster_proj":"110.35","out":"Mike Evans","questionable":"DJ Moore, Shaheed"},
-{"week":"7","gm":"Jose","roster_proj":"116.17","out":"Davante Adams, Pittman (IR)","questionable":""}
+{"week":"7","gm":"Allu","roster_proj":"108.42","out":"","questionable":""},
+{"week":"7","gm":"Jussi","roster_proj":"102.52","out":"","questionable":""},
+{"week":"7","gm":"Joel","roster_proj":"102.85","out":"","questionable":""},
+{"week":"7","gm":"Niko","roster_proj":"118.28","out":"","questionable":""},
+{"week":"7","gm":"Juho","roster_proj":"119.04","out":"","questionable":""},
+{"week":"7","gm":"Anton","roster_proj":"112.09","out":"","questionable":""},
+{"week":"7","gm":"Makkis","roster_proj":"115.57","out":"","questionable":""},
+{"week":"7","gm":"Oliver","roster_proj":"109.05","out":"","questionable":""},
+{"week":"7","gm":"Jan","roster_proj":"77.10","out":"","questionable":""},
+{"week":"7","gm":"Eero","roster_proj":"106.30","out":"","questionable":""},
+{"week":"7","gm":"Peetu","roster_proj":"110.35","out":"","questionable":""},
+{"week":"7","gm":"Jose","roster_proj":"116.17","out":"","questionable":""},
+{"week":"8","gm":"Allu","roster_proj":"120.25","out":"Egbuka","questionable":"Tuten"},
+{"week":"8","gm":"Jussi","roster_proj":"93.92","out":"A.J. Brown, Etienne (IR)","questionable":"Hunter Henry, Loop"},
+{"week":"8","gm":"Joel","roster_proj":"124.04","out":"Stribling (IR), Croskey-Merritt (IR)","questionable":"Watson"},
+{"week":"8","gm":"Niko","roster_proj":"120.65","out":"Carnell Tate","questionable":""},
+{"week":"8","gm":"Juho","roster_proj":"123.71","out":"","questionable":"Deebo Samuel"},
+{"week":"8","gm":"Anton","roster_proj":"115.09","out":"DeVonta Smith","questionable":"Jeremiyah Love"},
+{"week":"8","gm":"Makkis","roster_proj":"142.22","out":"","questionable":"McCaffrey"},
+{"week":"8","gm":"Oliver","roster_proj":"125.87","out":"Noel (IR)","questionable":"Montgomery"},
+{"week":"8","gm":"Jan","roster_proj":"112.82","out":"","questionable":"Skattebo"},
+{"week":"8","gm":"Eero","roster_proj":"93.76","out":"Breece Hall, Lamar Jackson, Monangai","questionable":"Stafford"},
+{"week":"8","gm":"Peetu","roster_proj":"130.33","out":"Shaheed, Tyson (IR)","questionable":"Mike Evans, DJ Moore, Michael Wilson"},
+{"week":"8","gm":"Jose","roster_proj":"101.63","out":"Davante Adams (IR), Pittman (IR)","questionable":"Jakobi Meyers"}
 ],
 "live_2026":[
 
@@ -531,7 +571,32 @@
 {"week":"7","gm":"Jan","kind":"Waiver","added":"Omar Cooper Jr.","dropped":"Pat Freiermuth","bid":"14"},
 {"week":"7","gm":"Jose","kind":"Waiver","added":"DeMario Douglas","dropped":"Romeo Doubs","bid":"12"},
 {"week":"7","gm":"Peetu","kind":"Waiver","added":"Titans D/ST","dropped":"Ravens D/ST","bid":"0"},
-{"week":"7","gm":"Jan","kind":"Free agent","added":"Kyler Murray","dropped":"TreVeyon Henderson","bid":"0"}
+{"week":"7","gm":"Jan","kind":"Free agent","added":"Kyler Murray","dropped":"TreVeyon Henderson","bid":"0"},
+{"week":"8","gm":"Peetu","kind":"Free agent","added":"Jordyn Tyson","dropped":"","bid":"0"},
+{"week":"8","gm":"Peetu","kind":"Waiver","added":"Commanders D/ST","dropped":"Titans D/ST","bid":"1"},
+{"week":"8","gm":"Jussi","kind":"Waiver","added":"Hunter Henry","dropped":"Tyler Higbee","bid":"3"},
+{"week":"8","gm":"Jussi","kind":"Waiver","added":"Rams D/ST","dropped":"Panthers D/ST","bid":"3"},
+{"week":"8","gm":"Eero","kind":"Free agent","added":"Tez Johnson","dropped":"Bam Knight","bid":"0"},
+{"week":"8","gm":"Peetu","kind":"Waiver","added":"Kirk Cousins","dropped":"Christian Kirk","bid":"4"},
+{"week":"8","gm":"Jan","kind":"Waiver","added":"Emanuel Wilson","dropped":"Kenny Gainwell","bid":"12"},
+{"week":"8","gm":"Jan","kind":"Free agent","added":"Kenny Gainwell","dropped":"Marvin Harrison Jr.","bid":"0"},
+{"week":"8","gm":"Peetu","kind":"Waiver","added":"Caleb Douglas","dropped":"Chimere Dike","bid":"5"},
+{"week":"8","gm":"Joel","kind":"Free agent","added":"Corey Kiner","dropped":"RJ Harvey","bid":"0"},
+{"week":"8","gm":"Eero","kind":"Free agent","added":"Bears D/ST","dropped":"49ers D/ST","bid":"0"},
+{"week":"8","gm":"Jussi","kind":"Waiver","added":"Ryan Flournoy","dropped":"Kendre Miller","bid":"4"},
+{"week":"8","gm":"Joel","kind":"Free agent","added":"Harold Fannin Jr.","dropped":"Josh Downs","bid":"0"},
+{"week":"8","gm":"Niko","kind":"Waiver","added":"Buccaneers D/ST","dropped":"Jets D/ST","bid":"1"},
+{"week":"8","gm":"Oliver","kind":"Free agent","added":"Geno Smith","dropped":"Bryce Young","bid":"0"},
+{"week":"8","gm":"Niko","kind":"Free agent","added":"Ja'Kobi Lane","dropped":"Evan McPherson","bid":"0"},
+{"week":"8","gm":"Juho","kind":"Waiver","added":"Bengals D/ST","dropped":"Chiefs D/ST","bid":"4"},
+{"week":"8","gm":"Oliver","kind":"Waiver","added":"Tyler Bass","dropped":"Dominic Zvada","bid":"1"},
+{"week":"8","gm":"Makkis","kind":"Free agent","added":"Chad Ryland","dropped":"Khalil Shakir","bid":"0"},
+{"week":"8","gm":"Niko","kind":"Free agent","added":"Chiefs D/ST","dropped":"Buccaneers D/ST","bid":"0"},
+{"week":"8","gm":"Jan","kind":"Free agent","added":"Dallas Goedert","dropped":"Kyler Murray","bid":"0"},
+{"week":"8","gm":"Juho","kind":"Waiver","added":"Seth McGowan","dropped":"Emanuel Wilson","bid":"13"},
+{"week":"8","gm":"Allu","kind":"Waiver","added":"Brenton Strange","dropped":"Juwan Johnson","bid":"0"},
+{"week":"8","gm":"Peetu","kind":"Free agent","added":"Tory Horton","dropped":"Najee Harris","bid":"0"},
+{"week":"8","gm":"Jan","kind":"Free agent","added":"Packers D/ST","dropped":"Texans D/ST","bid":"0"}
 ],
 "gm_moves":[
 {"season":"2014","gm":"Allu","waivers":"","free_agents":"","trades":"","faab":"","draft_pts":"1820"},
@@ -649,17 +714,17 @@
 {"season":"2025","gm":"Niko","waivers":"26","free_agents":"26","trades":"0","faab":"100","draft_pts":"2263"},
 {"season":"2025","gm":"Oliver","waivers":"19","free_agents":"43","trades":"0","faab":"100","draft_pts":"2053"},
 {"season":"2025","gm":"Peetu","waivers":"17","free_agents":"19","trades":"0","faab":"87","draft_pts":"2005"},
-{"season":"2026","gm":"Allu","waivers":"7","free_agents":"6","trades":"1","faab":"40","draft_pts":"864"},
-{"season":"2026","gm":"Anton","waivers":"12","free_agents":"16","trades":"0","faab":"69","draft_pts":"871"},
-{"season":"2026","gm":"Eero","waivers":"4","free_agents":"6","trades":"0","faab":"30","draft_pts":"700"},
-{"season":"2026","gm":"Jan","waivers":"4","free_agents":"9","trades":"0","faab":"57","draft_pts":"693"},
-{"season":"2026","gm":"Joel","waivers":"7","free_agents":"4","trades":"0","faab":"24","draft_pts":"978"},
-{"season":"2026","gm":"Jose","waivers":"3","free_agents":"3","trades":"0","faab":"33","draft_pts":"815"},
-{"season":"2026","gm":"Juho","waivers":"8","free_agents":"4","trades":"0","faab":"37","draft_pts":"785"},
-{"season":"2026","gm":"Jussi","waivers":"6","free_agents":"9","trades":"0","faab":"60","draft_pts":"588"},
-{"season":"2026","gm":"Makkis","waivers":"2","free_agents":"3","trades":"0","faab":"41","draft_pts":"1186"},
-{"season":"2026","gm":"Niko","waivers":"18","free_agents":"9","trades":"0","faab":"55","draft_pts":"838"},
-{"season":"2026","gm":"Oliver","waivers":"7","free_agents":"2","trades":"0","faab":"96","draft_pts":"935"},
-{"season":"2026","gm":"Peetu","waivers":"12","free_agents":"9","trades":"1","faab":"53","draft_pts":"827"}
+{"season":"2026","gm":"Allu","waivers":"8","free_agents":"6","trades":"1","faab":"40","draft_pts":"997"},
+{"season":"2026","gm":"Anton","waivers":"12","free_agents":"16","trades":"0","faab":"69","draft_pts":"956"},
+{"season":"2026","gm":"Eero","waivers":"4","free_agents":"8","trades":"0","faab":"30","draft_pts":"779"},
+{"season":"2026","gm":"Jan","waivers":"5","free_agents":"12","trades":"0","faab":"69","draft_pts":"765"},
+{"season":"2026","gm":"Joel","waivers":"7","free_agents":"6","trades":"0","faab":"24","draft_pts":"1065"},
+{"season":"2026","gm":"Jose","waivers":"3","free_agents":"3","trades":"0","faab":"33","draft_pts":"902"},
+{"season":"2026","gm":"Juho","waivers":"10","free_agents":"4","trades":"0","faab":"54","draft_pts":"900"},
+{"season":"2026","gm":"Jussi","waivers":"9","free_agents":"9","trades":"0","faab":"70","draft_pts":"673"},
+{"season":"2026","gm":"Makkis","waivers":"2","free_agents":"4","trades":"0","faab":"41","draft_pts":"1390"},
+{"season":"2026","gm":"Niko","waivers":"19","free_agents":"11","trades":"0","faab":"56","draft_pts":"957"},
+{"season":"2026","gm":"Oliver","waivers":"8","free_agents":"3","trades":"0","faab":"97","draft_pts":"1080"},
+{"season":"2026","gm":"Peetu","waivers":"15","free_agents":"11","trades":"1","faab":"63","draft_pts":"950"}
 ]
 }
