@@ -585,6 +585,82 @@ html.bc-noscroll { overflow: hidden; }
 .bc[data-theme="light"] .bc-log-tools select { background: #fff; }
 .bc-avail { font-family: var(--bc-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--bc-dim); }
 @media (max-width: 760px) { .bc-bracket { grid-template-columns: minmax(0, 1fr); } .bc-draft-grid, .bc-sb { grid-template-columns: minmax(0, 1fr); } }
+
+/* ===== v10: hidden fix, headline banner, tap for more ===== */
+.bc [hidden] { display: none !important; }
+
+.bc-hl { --hl: var(--bc-red); position: relative; border: 1px solid color-mix(in srgb, var(--hl) 40%, transparent); border-radius: 16px; overflow: hidden;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--hl) 17%, transparent), var(--bc-s1) 62%); transition: border-color .3s, background .3s; }
+.bc:not([data-page="week"]) .bc-hl { display: none; }
+.bc-hl-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.bc-hl-track::-webkit-scrollbar { display: none; }
+.bc-hl-slide { flex: 0 0 100%; scroll-snap-align: start; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 18px; align-items: center; padding: 22px 24px 56px; min-width: 0; box-sizing: border-box; }
+.bc-hl-pic { grid-row: 1 / span 3; align-self: start; margin-top: 4px; }
+.bc-hl-pic .bc-badge { width: 56px; height: 56px; font-size: 16px; }
+.bc-hl-pic .bc-hl-icon { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: color-mix(in srgb, var(--bc-gold) 18%, transparent); border: 1px solid color-mix(in srgb, var(--bc-gold) 70%, transparent); color: var(--bc-gold); font-family: var(--bc-disp); font-weight: 700; font-size: 24px; }
+.bc-hl-tag { justify-self: start; font-size: 12px; font-weight: 600; line-height: 1; padding: 5px 10px; border-radius: 99px; background: var(--tag, var(--bc-red)); color: #0b0c0f; margin-bottom: 10px; }
+.bc-hl-title { margin: 0; font-family: var(--bc-disp); font-size: 28px; font-weight: 700; line-height: 1.16; letter-spacing: -.02em; color: var(--bc-fg); text-wrap: balance; }
+.bc-hl-dek { margin: 8px 0 0; font-size: 16px; line-height: 1.45; color: color-mix(in srgb, var(--bc-fg) 72%, transparent); }
+.bc-hl-nav { position: absolute; left: 24px; right: 16px; bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.bc-hl-dots { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-width: 0; }
+.bc-hl-dots button { width: 16px; height: 4px; border: 0; padding: 0; border-radius: 2px; background: var(--bc-line2); cursor: pointer; transition: width .2s, background .2s; }
+.bc-hl-dots button[aria-current="true"] { width: 30px; background: var(--bc-fg); }
+.bc-hl-count { font-size: 12px; color: var(--bc-muted); }
+.bc-hl-arrow { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--bc-line2); background: var(--bc-s2); color: var(--bc-fg); font-size: 18px; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0 0 2px; }
+.bc-hl-arrow:hover { border-color: var(--bc-fg); }
+@media (max-width: 620px) {
+  .bc-hl { border-radius: 14px; }
+  .bc-hl-slide { padding: 18px 16px 52px; column-gap: 14px; }
+  .bc-hl-pic .bc-badge, .bc-hl-pic .bc-hl-icon { width: 42px; height: 42px; font-size: 13px; }
+  .bc-hl-pic .bc-hl-icon { font-size: 19px; }
+  .bc-hl-title { font-size: 22px; }
+  .bc-hl-dek { font-size: 15px; }
+  .bc-hl-nav { left: 16px; right: 12px; bottom: 12px; }
+  .bc-hl-arrow { width: 30px; height: 30px; font-size: 16px; }
+  .bc-hl-dots { flex-wrap: nowrap; gap: 4px; }
+  .bc-hl-dots button { width: 9px; flex: none; }
+  .bc-hl-dots button[aria-current="true"] { width: 20px; }
+}
+
+/* matchup cards: names, projections, win bar and one plain line; the rest on tap */
+.bc-pv:not(.live) .bc-pv-k, .bc-pv:not(.live) .bc-pv-pct, .bc-pv-rec { display: none; }
+.bc-pv { padding: 12px 14px 12px; }
+.bc-pv-nm { font-size: 15px; }
+.bc-pv-proj { font-size: 19px; }
+.bc-pv-bar { height: 4px; margin-top: 9px; }
+.bc-pv-cap { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; font-size: 13px; color: var(--bc-muted); }
+.bc-pv-cap b { color: var(--bc-fg); font-weight: 600; }
+.bc-pv-cap .bc-pv-chev { color: var(--bc-dim); transition: transform .2s; }
+.bc-pv.open .bc-pv-chev { transform: rotate(180deg); }
+.bc-pv-x { font-size: 13px; }
+
+/* power rankings: rank, name, score and the write-up; details on tap */
+#pr-legend { display: none; }
+.bc-pr { cursor: pointer; }
+.bc-pr-more { display: none; gap: 4px; }
+.bc-pr.open .bc-pr-more { display: grid; }
+.bc-pr.open { background: var(--bc-s2); border-color: var(--bc-line2); }
+.bc .bc-pr.open .bc-pr-nums { display: flex; }
+.bc .bc-pr.open .bc-d2 { display: inline; }
+.bc-pr-blurb { font-size: 14px; color: color-mix(in srgb, var(--bc-fg) 78%, transparent); margin-top: 4px; }
+.bc-pr-tog { justify-self: start; margin-top: 2px; font-size: 12.5px; color: var(--bc-muted); }
+.bc-pr-tog::after { content: " ▾"; display: inline-block; transition: transform .2s; }
+.bc-pr.open .bc-pr-tog::after { transform: rotate(180deg); }
+.bc-pr-who .bc-who { font-size: 16px; }
+.bc-pr-score b { font-size: 20px; }
+
+/* phone tables: hidden columns open under the row on tap */
+.bc-table .bc-chev { display: none; }
+.bc-table tr.bc-drow td { background: var(--bc-s2); padding: 10px 12px 12px; }
+.bc-dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; text-align: left; }
+.bc-dl > div { display: grid; gap: 2px; min-width: 0; }
+.bc-dl .k { font-size: 12px; color: var(--bc-muted); }
+.bc-dl .v { font-size: 14px; color: var(--bc-fg); white-space: normal; }
+@media (max-width: 620px) {
+  .bc-table.bc-has-d tbody tr:not(.bc-drow) { cursor: pointer; }
+  .bc-table.bc-has-d .bc-chev { display: table-cell; width: 14px; padding-left: 0; color: var(--bc-dim); font-size: 12px; text-align: right; }
+  .bc-table.bc-has-d tr.bc-open .bc-chev { color: var(--bc-fg); }
+}
 </style>
 
 
@@ -595,10 +671,10 @@ html.bc-noscroll { overflow: hidden; }
     <div class="bc-top-r"><div class="bc-chip"><i class="bc-dot"></i><span>Through week</span><b id="bc-week" data-source="weekly_trophies_2026" data-field="week">…</b><span>· 2026</span><span class="bc-upd" id="bc-upd" data-source="meta_2026"></span></div><label class="bc-me-pick"><span>My team</span><select id="me-pick" aria-label="My team"><option value="">Pick</option></select></label><button type="button" class="bc-rules-btn bc-theme-btn" id="theme-btn" aria-label="Switch between light and dark">Light</button><button type="button" class="bc-rules-btn" id="open-rules">Rules</button></div>
   </div>
 
-  <div class="bc-ticker" id="ticker">
-    <div class="bc-ticker-label">Latest</div>
-    <div class="bc-ticker-track"><div class="bc-ticker-run" id="ticker-run" data-source="fine_log weekly_trophies_2026 fines_by_gm purse_by_week"></div></div>
-  </div>
+  <section class="bc-hl" id="hl" aria-roledescription="carousel" aria-label="Headlines" data-source="fine_log weekly_trophies_2026 fines_by_gm purse_by_week">
+    <div class="bc-hl-track" id="hl-track"></div>
+    <div class="bc-hl-nav"><div class="bc-hl-dots" id="hl-dots"></div><span class="bc-hl-count" id="hl-count"></span><button type="button" class="bc-hl-arrow" id="hl-prev" aria-label="Previous headline">‹</button><button type="button" class="bc-hl-arrow" id="hl-next" aria-label="Next headline">›</button></div>
+  </section>
 
   <section class="bc-hero" id="hero">
     <div class="bc-stat bc-purse" style="--accent: var(--bc-gold)">
@@ -633,10 +709,6 @@ html.bc-noscroll { overflow: hidden; }
     <section class="bc-seg">
       <div class="bc-seg-h"><h2 id="preview-title">Up next</h2><p id="preview-sub">Tap a matchup for the details</p></div>
       <div class="bc-pv-grid" id="preview-cards" data-source="schedule_2026 preview_2026 results_2026"></div>
-    </section>
-    <section class="bc-seg">
-      <div class="bc-seg-h"><h2 id="wh-title">This week in SPPJ history</h2><p>Same week, every season since 2014</p></div>
-      <div class="bc-awards" id="week-hist" data-source="games"></div>
     </section>
     <section class="bc-seg">
       <div class="bc-seg-h"><h2 id="week-title">Week recap</h2><p>Scores, awards and who paid</p></div>
@@ -1667,6 +1739,7 @@ dash.calc('fines_ledger', {
   const signedInt = (v) => (v > 0 ? '+' : '') + v;
   const eur = (v) => v + '€';
   const sortState = {};
+  const PHONE = window.matchMedia('(max-width: 620px)');
   const PAGES = ['week', 'fines', 'trophies', 'standings', 'history', 'records', 'rivals', 'playoffs', 'draft'];
   const state = {week: null, q: '', season: '', page: 'week'};
   const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1746,6 +1819,8 @@ dash.calc('fines_ledger', {
     });
     const thead = tbl.querySelector('thead'), tbody = tbl.querySelector('tbody');
     thead.replaceChildren(); tbody.replaceChildren();
+    const hasD = cols.some((c) => c.d);
+    tbl.classList.toggle('bc-has-d', hasD);
     const tr = document.createElement('tr');
     cols.forEach((c) => {
       const th = document.createElement('th');
@@ -1762,6 +1837,7 @@ dash.calc('fines_ledger', {
       });
       th.appendChild(b); tr.appendChild(th);
     });
+    if (hasD) tr.appendChild(el('th', 'bc-chev'));
     thead.appendChild(tr);
     sorted.forEach((r) => {
       const row = document.createElement('tr');
@@ -1778,6 +1854,18 @@ dash.calc('fines_ledger', {
         if (c.cell && v != null) c.cell(td, v, r);
         row.appendChild(td);
       });
+      if (hasD) {
+        row.appendChild(el('td', 'bc-chev', '▾'));
+        row.addEventListener('click', (ev) => {
+          if (!PHONE.matches || ev.target.closest('button, a, select, input, .bc-gmcell, .bc-badge, .bc-who')) return;
+          const nx = row.nextElementSibling;
+          if (nx && nx.classList.contains('bc-drow')) { nx.remove(); row.classList.remove('bc-open'); return; }
+          const dr = el('tr', 'bc-drow'); const td = el('td'); td.colSpan = cols.filter((c) => !c.d).length + 1;
+          const dl = el('div', 'bc-dl');
+          cols.forEach((c, ci) => { if (!c.d) return; const cell = row.children[ci]; const it = el('div'); const v = el('span', 'v'); v.append(...[...cell.childNodes].map((n) => n.cloneNode(true))); if (!v.textContent.trim()) v.textContent = '–'; it.append(el('span', 'k', c.label), v); dl.append(it); });
+          td.append(dl); dr.append(td); row.after(dr); row.classList.add('bc-open');
+        });
+      }
       tbody.appendChild(row);
     });
   }
@@ -1841,7 +1929,7 @@ dash.calc('fines_ledger', {
     const ticks = y.ticks(5);
     svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', left).attr('x2', W - right).attr('y1', (t) => y(t)).attr('y2', (t) => y(t)).attr('stroke', 'rgba(255,255,255,.05)');
     svg.append('g').selectAll('text').data(ticks).join('text').attr('x', left - 6).attr('y', (t) => y(t) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', '#6b7180').text((t) => t + '€');
-    svg.append('g').selectAll('text').data(rows).join('text').attr('x', (r) => x(r.week) + x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', '#6b7180').text((r) => (x.bandwidth() > 34 ? 'Week ' : 'W') + r.week);
+    svg.append('g').selectAll('text').data(rows).join('text').attr('x', (r) => x(r.week) + x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', '#6b7180').text((r) => (x.bandwidth() > 34 ? 'Week ' : x.step() < 30 ? '' : 'W') + r.week);
     const defs = svg.append('defs');
     const grad = (id, stops) => { const g = defs.append('linearGradient').attr('id', id).attr('x1', 0).attr('x2', 1).attr('y1', 0).attr('y2', 0); stops.forEach(([o, c]) => g.append('stop').attr('offset', o).attr('stop-color', c)); };
     grad('bc-g-bronze', [[0, '#5a4214'], [0.35, '#a47a26'], [0.5, '#d2a64a'], [0.65, '#8f6a1f'], [1, '#4a360f']]);
@@ -1853,7 +1941,8 @@ dash.calc('fines_ledger', {
       if (r.proj) g.attr('opacity', 0.32);
       g.append('rect').attr('x', bx).attr('y', y(r.entry_eur)).attr('width', bw).attr('height', y(0) - y(r.entry_eur)).attr('rx', 2).attr('fill', 'rgba(233,196,106,.16)');
       if (r.fines_to_date_eur > 0) g.append('rect').attr('x', bx).attr('y', y(r.purse_eur)).attr('width', bw).attr('height', Math.max(1, y(r.entry_eur) - y(r.purse_eur) - 2)).attr('rx', 2).attr('fill', '#e9c46a');
-      if (!r.proj || r.week === rows[rows.length - 1].week) g.append('text').attr('x', bx + bw / 2).attr('y', y(r.purse_eur) - 7).attr('text-anchor', 'middle').attr('font-size', 12).attr('font-weight', 600).attr('fill', r.proj ? '#8d93a0' : '#e9c46a').text((r.proj ? '≈' : '') + eur(r.purse_eur));
+      const crowd = x.step() < 40, lastReal = rows.filter((q) => !q.proj).slice(-1)[0];
+      if (crowd ? (r === lastReal || (r.proj && r.week === rows[rows.length - 1].week)) : (!r.proj || r.week === rows[rows.length - 1].week)) g.append('text').attr('x', bx + bw / 2).attr('y', y(r.purse_eur) - 7).attr('text-anchor', 'middle').attr('font-size', 12).attr('font-weight', 600).attr('fill', r.proj ? '#8d93a0' : '#e9c46a').text((r.proj ? '≈' : '') + eur(r.purse_eur));
       g.append('rect').attr('x', bx - 4).attr('y', top).attr('width', bw + 8).attr('height', H - bottom - top).attr('fill', 'transparent')
         .on('mousemove', (ev) => {
           tip.style('opacity', 1).html('');
@@ -1923,25 +2012,69 @@ dash.calc('fines_ledger', {
 
   const latest = (rows) => rows.reduce((a, b) => (Number(b.week) > Number(a.week) ? b : a));
 
-  function drawTicker() {
+  const HL = {i: 0, n: 0, timer: null, pause: 0, wired: false};
+  function drawHeadlines() {
     const fl = dash.data('fine_log'), wt = dash.data('weekly_trophies_2026'), fb = dash.data('fines_by_gm'), pb = dash.data('purse_by_week');
-    const run = document.getElementById('ticker-run');
+    const track = document.getElementById('hl-track');
     if (fl.status !== 'ok' || wt.status !== 'ok' || fb.status !== 'ok' || pb.status !== 'ok' || !wt.data.length || !fb.data.length || !pb.data.length) return;
     const last = latest(wt.data), wk = String(last.week);
     const top = fb.data.reduce((a, b) => (b.total_eur > a.total_eur ? b : a));
     const p = latest(pb.data);
-    const items = [
-      `Week ${wk} final. ${last.most_points_gm} drops ${f2(Number(last.most_points))} and everyone else just watched.`,
-      `${last.least_points_gm} limps home with ${f2(Number(last.least_points))} in week ${wk}. Rough.`,
-      `Coach of the week ${wk}: ${last.coach_gm}. Somebody can actually set a lineup.`,
-      `GM move of week ${wk}: ${last.gm_move_gm} picked up ${last.gm_move_player} and got ${f2(Number(last.gm_move_pts))}.`,
-      ...fl.data.filter((f) => f.week === wk).map(fineLine),
-      `Most wanted: ${top.gm} owes ${eur(top.total_eur)} and counting.`,
-      `The winner's purse is up to ${eur(p.purse_eur)}. Every fine makes the champion richer.`
-    ];
-    const list = reduced ? items : items.concat(items);
-    run.replaceChildren(...list.map((t) => el('span', null, t)));
-    if (!reduced) { run.style.setProperty('--bc-dur', Math.max(40, items.length * 7) + 's'); run.classList.add('go'); }
+    const C = {red: 'var(--bc-red)', fine: '#ff6b7a', gold: 'var(--bc-gold)', green: 'var(--bc-green)', blue: 'var(--bc-blue)'};
+    const n2 = (v) => f2(Number(v));
+    const items = [];
+    const sameBlow = last.blowout_gm && last.blowout_gm === last.most_points_gm;
+    items.push({tag: 'Week ' + wk, c: C.red, gm: last.most_points_gm,
+      title: sameBlow ? `${last.most_points_gm} drops ${n2(last.most_points)} and buries ${last.blown_out_gm} by ${n2(last.blowout_margin)}` : `${last.most_points_gm} drops ${n2(last.most_points)}`,
+      dek: sameBlow ? `Most points of week ${wk} and the biggest blowout of the week.` : `Most points of week ${wk}. Everyone else just watched.`});
+    if (last.blowout_gm && !sameBlow) items.push({tag: 'Blowout', c: C.red, gm: last.blowout_gm, title: `${last.blowout_gm} buries ${last.blown_out_gm} by ${n2(last.blowout_margin)}`, dek: `Biggest blowout of week ${wk}.`});
+    if (last.top_player) items.push({tag: 'Top player', c: C.gold, gm: last.top_player_gm, title: `${last.top_player} goes for ${n2(last.top_player_pts)}`, dek: `Top player of week ${wk}, +1 trophy point for ${last.top_player_gm}.`});
+    fl.data.filter((f) => f.week === wk).forEach((f) => {
+      const pts = f2(f.points), e = eur(f.fine_eur);
+      let title = `${f.gm}: ${f.type}`, dek = `${e} into the purse.`;
+      if (f.type === 'Unfilled roster') { title = `${f.gm} started ${f.player}, who never played`; dek = `${e} for the empty jersey.`; }
+      else if (f.type === 'Goose egg') { title = `${f.player} hands ${f.gm} a ${pts}`; dek = `Goose egg. ${e} into the purse.`; }
+      else if (f.type === 'Double goose egg') { title = `${f.player} goes ${pts} for ${f.gm}`; dek = `Negative points. ${e} into the purse.`; }
+      else if (f.type === 'Bench over 50 in a loss') { title = `${f.gm} left ${pts} on the bench and still lost`; dek = `${e} for the coaching clinic.`; }
+      items.push({tag: 'Fine ' + e, c: C.fine, gm: f.gm, title, dek});
+    });
+    items.push({tag: 'Low score', c: C.blue, gm: last.least_points_gm, title: `${last.least_points_gm} limps home with ${n2(last.least_points)}`, dek: `Lowest score of week ${wk}. Rough.`});
+    if (last.gm_move_player) items.push({tag: 'GM move', c: C.green, gm: last.gm_move_gm, title: `${last.gm_move_gm} picked up ${last.gm_move_player} and got ${n2(last.gm_move_pts)}`, dek: `GM move of week ${wk}, +1 trophy point.`});
+    if (last.coach_gm) items.push({tag: 'Coach', c: C.gold, gm: last.coach_gm, title: `${last.coach_gm} is coach of the week`, dek: `${last.coach_lineup_pct}% lineup${last.coach_bench_pts !== '' && last.coach_bench_pts != null ? ', ' + n2(last.coach_bench_pts) + ' left on the bench' : ''}. Somebody can actually set a lineup.`});
+    items.push({tag: 'Most wanted', c: C.fine, gm: top.gm, title: `${top.gm} owes ${eur(top.total_eur)} and counting`, dek: 'Top of the fines table.'});
+    items.push({tag: 'Purse', c: C.gold, gm: null, title: `The winner's purse is up to ${eur(p.purse_eur)}`, dek: `+${eur(p.week_fines_eur)} in week ${p.week}. Every fine makes the champion richer.`});
+
+    const box = document.getElementById('hl');
+    track.replaceChildren(...items.map((it, k) => {
+      const sl = el('article', 'bc-hl-slide'); sl.setAttribute('role', 'group'); sl.setAttribute('aria-roledescription', 'slide'); sl.setAttribute('aria-label', `${k + 1} of ${items.length}`);
+      const pic = el('div', 'bc-hl-pic');
+      if (it.gm) pic.append(badge(it.gm)); else pic.append(el('span', 'bc-hl-icon', '€'));
+      const tag = el('span', 'bc-hl-tag', it.tag); tag.style.setProperty('--tag', it.c);
+      sl.append(pic, tag, el('h2', 'bc-hl-title', it.title), el('p', 'bc-hl-dek', it.dek));
+      return sl;
+    }));
+    const dots = document.getElementById('hl-dots');
+    dots.replaceChildren(...items.map((it, k) => { const b = el('button'); b.type = 'button'; b.setAttribute('aria-label', 'Headline ' + (k + 1)); b.addEventListener('click', () => { HL.pause = Date.now(); go(k); }); return b; }));
+    HL.n = items.length; HL.items = items;
+    const mark = (k) => {
+      HL.i = k;
+      [...dots.children].forEach((b, j) => b.setAttribute('aria-current', String(j === k)));
+      document.getElementById('hl-count').textContent = `${k + 1}/${items.length}`;
+      box.style.setProperty('--hl', items[k].c);
+    };
+    const go = (k) => { const w = track.clientWidth; if (!w) return; k = (k + HL.n) % HL.n; track.scrollTo({left: k * w, behavior: reduced ? 'auto' : 'smooth'}); mark(k); };
+    HL.go = go;
+    mark(Math.min(HL.i, items.length - 1));
+    track.scrollLeft = HL.i * track.clientWidth;
+    if (!HL.wired) {
+      HL.wired = true;
+      let t = null;
+      track.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(() => { const w = track.clientWidth; if (w) { const k = Math.round(track.scrollLeft / w); if (k !== HL.i) { HL.i = k; [...dots.children].forEach((b, j) => b.setAttribute('aria-current', String(j === k))); document.getElementById('hl-count').textContent = `${k + 1}/${HL.n}`; box.style.setProperty('--hl', HL.items[k].c); } } }, 80); }, {passive: true});
+      ['pointerdown', 'touchstart', 'focusin', 'wheel'].forEach((ev) => track.addEventListener(ev, () => { HL.pause = Date.now(); }, {passive: true}));
+      document.getElementById('hl-prev').addEventListener('click', () => { HL.pause = Date.now(); HL.go(HL.i - 1); });
+      document.getElementById('hl-next').addEventListener('click', () => { HL.pause = Date.now(); HL.go(HL.i + 1); });
+      HL.timer = setInterval(() => { if (Date.now() - (HL.pause || 0) > 8000 && !document.hidden && track.clientWidth) HL.go(HL.i + 1); }, 5000);
+    }
   }
 
   function drawHero() {
@@ -2797,6 +2930,7 @@ dash.calc('fines_ledger', {
     rs.data.forEach((r) => { (ppg[r.gm] || (ppg[r.gm] = [])).push(r.pts); });
     const avg = (g) => d3.mean(ppg[g] || [0]);
     const hasProj = pvWeek === week;
+    document.getElementById('preview-sub').textContent = (hasProj ? 'ESPN projections' : 'Season averages') + '. Tap a matchup for more';
     const lvAll = dash.data('live_2026');
     const liveRows = lvAll.status === 'ok' ? lvAll.data.filter((x) => Number(x.week) === week) : [];
     if (liveRows.length) {
@@ -2805,7 +2939,6 @@ dash.calc('fines_ledger', {
       document.getElementById('preview-title').textContent = (allFinal ? 'Final: week ' : 'Live: week ') + week;
       document.getElementById('preview-sub').textContent = at ? 'Scores as of ' + at.toLocaleString('en-GB', {weekday: 'short', hour: '2-digit', minute: '2-digit'}) : 'Live scores';
     }
-    drawWeekHist(week);
     box.replaceChildren(...games.map((m) => {
       const p = pvRows.find((r) => Number(r.week) === week && ((r.a === m.a && r.b === m.b) || (r.a === m.b && r.b === m.a)));
       const flip = p && p.a !== m.a;
@@ -2840,14 +2973,22 @@ dash.calc('fines_ledger', {
       };
       const bar = el('div', 'bc-pv-bar'); const fa = el('i'); fa.style.width = (prob * 100).toFixed(1) + '%'; bar.append(fa);
       const x = el('div', 'bc-pv-x');
-      const fr = (g) => { const d = el('div', 'bc-pv-form'); d.append(el('span', null, g + ' form'), formChips(g, 5)); return d; };
+      const fr = (g) => { const d = el('div', 'bc-pv-form'); d.append(el('span', null, g + (st[g] ? ` ${st[g].record}, ${ordShort(st[g].rank)}` : '') + ' · form'), formChips(g, 5)); return d; };
       x.append(fr(m.a), fr(m.b));
       if (ser && ser.last) x.append(el('div', null, `Last met week ${ser.last.week}, ${ser.last.season}: ${f2(ser.last.ap)}–${f2(ser.last.bp)}`));
       if (p && p.line) x.append(el('p', null, p.line));
       const vsBtn = el('button', 'bc-pv-more', 'Full head to head'); vsBtn.type = 'button';
       vsBtn.addEventListener('click', (ev) => { ev.stopPropagation(); hist.vsA = m.a; hist.vsB = m.b; show('rivals', true); document.getElementById('page-rivals').scrollIntoView({block: 'start'}); });
       x.append(vsBtn);
-      c.append(k, row(m.a, pa, prob, la), row(m.b, pb, 1 - prob, lb), bar, x);
+      const cap = el('div', 'bc-pv-cap');
+      const fav = prob >= 0.5 ? m.a : m.b, fp = Math.round(Math.max(prob, 1 - prob) * 100);
+      const odds = el('span');
+      if (isFinal) odds.append(el('b', null, la > lb ? m.a + ' won' : la < lb ? m.b + ' won' : 'Tie'));
+      else if (fp <= 55) odds.append(el('b', null, 'Coin flip'), document.createTextNode(lv ? ' right now' : ''));
+      else odds.append(el('b', null, fav + ' ' + fp + '%'), document.createTextNode(lv ? ' to win from here' : ' to win'));
+      const right = el('span'); right.append(document.createTextNode(lead + ' '), el('span', 'bc-pv-chev', '▾'));
+      cap.append(odds, right);
+      c.append(k, row(m.a, pa, prob, la), row(m.b, pb, 1 - prob, lb), bar, cap, x);
       const toggle = () => { const on = !c.classList.contains('open'); c.classList.toggle('open', on); c.setAttribute('aria-expanded', String(on)); };
       c.addEventListener('click', (ev) => { if (ev.target.closest('.bc-who, .bc-badge, .bc-pv-more')) return; toggle(); });
       c.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); } });
@@ -3115,21 +3256,27 @@ dash.calc('fines_ledger', {
       row.style.setProperty('--gm', gmColor(r.gm));
       const mv = el('span', 'bc-pr-mv ' + (r.move > 0 ? 'up' : r.move < 0 ? 'down' : 'flat'), r.prev_rank == null ? 'NEW' : r.move > 0 ? '▲' + r.move : r.move < 0 ? '▼' + Math.abs(r.move) : '–');
       const rk = el('div', 'bc-pr-rank'); rk.append(el('b', null, String(r.rank)), mv);
-      const who = el('div', 'bc-pr-who'); const w = el('div', 'bc-who'); w.append(badge(r.gm), el('span', null, r.gm), szn(r.gm)); who.append(w);
+      const who = el('div', 'bc-pr-who'); const w = el('div', 'bc-who'); w.append(badge(r.gm), el('span', null, r.gm)); who.append(w);
+      const more = el('div', 'bc-pr-more');
       const meta = el('div', 'bc-pr-meta');
       meta.append(el('span', null, r.record), formChips(r.gm, 3));
       if (r.roster_proj != null) meta.append(el('span', null, 'Next wk proj ' + f1(r.roster_proj)));
       if (r.next_opps) meta.append(el('span', 'bc-d2', 'Next: ' + r.next_opps));
-      who.append(meta);
-      if (r.out || r.questionable) { const inj = el('div', 'bc-pr-inj'); if (r.out) inj.append(el('span', 'out', 'Out: ' + r.out)); if (r.questionable) inj.append(el('span', 'q', 'Questionable: ' + r.questionable)); who.append(inj); }
+      more.append(meta);
+      if (r.out || r.questionable) { const inj = el('div', 'bc-pr-inj'); if (r.out) inj.append(el('span', 'out', 'Out: ' + r.out)); if (r.questionable) inj.append(el('span', 'q', 'Questionable: ' + r.questionable)); more.append(inj); }
       const bar = el('div', 'bc-pr-bar');
       const tip = [];
       PARTS.forEach(([k, label, c, wgt]) => { if (r[k] == null) return; const i = el('i'); i.style.width = r[k] + '%'; i.style.background = c; bar.append(i); tip.push(`${label} ${f1(r[k])} of ${wgt}`); });
       bar.title = tip.join(' · ');
       const nums = el('div', 'bc-pr-nums');
       PARTS.forEach(([k, label, c, wgt]) => { if (r[k] == null) return; const s = el('span'); const d = el('i'); d.style.background = c; s.append(d, document.createTextNode(label + ' '), el('b', null, f1(r[k]))); nums.append(s); });
-      who.append(bar, nums);
+      more.append(bar, nums);
       if (r.blurb) who.append(el('p', 'bc-pr-blurb', r.blurb));
+      who.append(more, el('span', 'bc-pr-tog', 'Details'));
+      row.tabIndex = 0; row.setAttribute('role', 'button'); row.setAttribute('aria-expanded', 'false');
+      const tg = () => { const on = row.classList.toggle('open'); row.setAttribute('aria-expanded', String(on)); row.querySelector('.bc-pr-tog').textContent = on ? 'Less' : 'Details'; };
+      row.addEventListener('click', (ev) => { if (ev.target.closest('.bc-badge, .bc-who')) return; tg(); });
+      row.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); tg(); } });
       const sc = el('div', 'bc-pr-score'); sc.append(el('b', null, f1(r.score)), el('span', null, 'of 100'));
       row.append(rk, who, sc);
       return row;
@@ -3329,7 +3476,9 @@ dash.calc('fines_ledger', {
   function show(p, push) {
     if (!PAGES.includes(p)) p = 'week';
     state.page = p;
+    document.querySelector('.bc').dataset.page = p;
     PAGES.forEach((q) => { document.getElementById('page-' + q).hidden = q !== p; });
+    if (p === 'week' && HL.go && HL.n) requestAnimationFrame(() => { const t = document.getElementById('hl-track'); t.scrollLeft = HL.i * t.clientWidth; });
     tabBtns.forEach((b) => { const on = b.dataset.page === p; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
     if (push) { try { history.replaceState(null, '', '#' + p); } catch (e) { /* sandboxed frame */ } }
     DRAW[p]();
@@ -3362,7 +3511,7 @@ dash.calc('fines_ledger', {
 
   dash.onData(() => {
     drawHero();
-    drawTicker();
+    drawHeadlines();
     drawUpdated();
     DRAW[state.page]();
   });
